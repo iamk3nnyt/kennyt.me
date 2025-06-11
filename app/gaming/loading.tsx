@@ -77,27 +77,20 @@ export default function GamingLoading() {
       <section className="mx-auto mb-16 max-w-2xl">
         <h2 className="mb-6 text-xl font-semibold text-white">Main Heroes</h2>
         <div className="flex gap-8 overflow-x-auto p-0.5">
-          {heroes.map((hero) => (
+          {[...Array(6)].map((_, i) => (
             <div
-              key={hero.name}
+              key={i}
               className="group relative h-[420px] max-w-xs min-w-[280px] flex-shrink-0 overflow-hidden rounded-2xl shadow-lg"
             >
-              <AppImage
-                src={hero.image}
-                alt={`${hero.name} hero splash art`}
-                className="absolute inset-0"
-              />
+              {/* Shimmer background */}
+              <div className="absolute inset-0 bg-[#18181B]" />
               {/* Overlay */}
               <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
               {/* Content */}
               <div className="relative z-20 flex h-full flex-col justify-end p-6">
                 <div className="mb-2">
-                  <div className="text-2xl font-bold text-white drop-shadow-lg">
-                    {hero.name}
-                  </div>
-                  <div className="text-xs font-medium tracking-wide text-blue-200 uppercase drop-shadow">
-                    {hero.role} • {hero.specialty}
-                  </div>
+                  <div className="shimmer mb-2 h-8 w-32 rounded-lg" />
+                  <div className="shimmer h-4 w-48 rounded-lg" />
                 </div>
               </div>
               {/* Card border effect */}

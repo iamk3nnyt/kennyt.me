@@ -7,6 +7,14 @@ export interface SeasonHistory extends BaseDocument {
   season: string;
 }
 
+export interface Hero extends BaseDocument {
+  name: string;
+  role: string;
+  specialty: string;
+  image: string;
+  order: number;
+}
+
 export interface MLBBStats extends BaseDocument {
   matches: number;
   winRate: number;
