@@ -1,0 +1,98 @@
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Generated files
+*.generated.*
+*.min.js
+*.min.css
+*.tsbuildinfo
+next-env.d.ts
+database.types.ts
+tsconfig.json
+
+# Cache
+.cache/
+.npm/
+.temp/
+.pnp/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# Environment files
+.env*
+!.env.example
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+supabase/.temp/
+supabase/migrations/
+*.sql
+
+# Binary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.svg
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.pem
+public/
+
+# Misc
+.DS_Store
+Thumbs.db
+coverage/
+.vercel/
+.turbo/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+types.ts
+
+# Config files that should maintain their format
+.eslintrc*
+.prettierrc
+.prettierignore
+.editorconfig
+.gitignore
+renovate.json
+.vscode/settings.json
+postcss.config.mjs
+next.config.ts
+
+# Next.js specific
+app/favicon.ico
+app/robots.ts
+app/sitemap/
+app/sitemap.xml/

@@ -1,0 +1,29 @@
+{
+  // Terminal settings
+  "terminal.integrated.splitCwd": "initial",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+  // Editor settings
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Code actions on save
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.fixAll.eslint": "always"
+  },
+
+  // Prettier settings
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": false,
+
+  // Language-specific settings
+  "[javascript][typescript][javascriptreact][typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Recommended extensions
+  "recommendations": ["esbenp.prettier-vscode", "bradlc.vscode-tailwindcss"]
+}
