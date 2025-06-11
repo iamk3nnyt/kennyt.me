@@ -1,14 +1,3 @@
-export const projects = [
-  {
-    title: "Company website",
-    link: "https://www.ketryon.com/",
-  },
-  {
-    title: "Personal Website",
-    link: "https://www.kennyt.me/",
-  },
-];
-
 export const seasons = [
   {
     period: "2025/03 - 2025/06",

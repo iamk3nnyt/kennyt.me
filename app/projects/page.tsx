@@ -1,7 +1,20 @@
 import { AppImage } from "@/components/app-image";
-import { projects } from "@/constants";
+import { ReadOperations } from "@/lib/db/read";
+import client from "@/lib/mongodb";
+import { Project } from "@/types/project";
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<Project>(db, "projects");
+
+  const projects = await readOps.findMany(
+    {},
+    {
+      projection: { _id: 0, title: 1, link: 1 },
+      sort: { title: -1 }, // Sort by title in descending order
+    },
+  );
+
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">
       <section className="mx-auto mb-16 max-w-2xl">
