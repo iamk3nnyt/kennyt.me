@@ -1,32 +1,28 @@
-"use client";
-
-import type { BlogPost } from "@/app/api/blog/route";
 import { AppImage } from "@/components/app-image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import client from "@/lib/mongodb";
+import { ReadOperations } from "@/lib/db/read";
+import { Article } from "@/types/blog";
 
-export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default async function BlogPage() {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<Article>(db, "blog_posts");
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch("/api/blog");
-        if (!response.ok) {
-          throw new Error("Failed to fetch blog posts");
-        }
-        const data = await response.json();
-        setPosts(data);
-      } catch (error) {
-        console.error("Error fetching blog posts:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+  const posts = await readOps.findMany(
+    {},
+    {
+      projection: {
+        _id: 0,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
+        readTime: 1,
+        tags: 1,
+      },
+      sort: { date: -1 }, // Sort by date in descending order
+    },
+  );
 
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">
@@ -40,16 +36,7 @@ export default function BlogPage() {
 
       <section className="mx-auto mb-16 max-w-2xl">
         <h2 className="mb-6 text-xl font-semibold text-white">Articles</h2>
-        {isLoading ? (
-          <div className="space-y-4">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex items-center gap-2 py-2">
-                <div className="shimmer size-5 shrink-0 rounded" />
-                <div className="shimmer h-5 w-full rounded" />
-              </div>
-            ))}
-          </div>
-        ) : posts.length === 0 ? (
+        {posts.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
             <div className="mb-4 text-4xl">✍️</div>
             <h3 className="mb-2 text-lg font-medium text-white">
