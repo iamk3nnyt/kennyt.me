@@ -95,12 +95,7 @@ export default function GamingPage() {
     // Fetch season history
     const fetchSeasons = async () => {
       try {
-        const response = await fetch("/api/gaming/seasons");
-        if (!response.ok) {
-          throw new Error("Failed to fetch season history");
-        }
-        const data = await response.json();
-        setSeasons(data);
+        setSeasons([]);
       } catch (error) {
         console.error("Error fetching season history:", error);
       } finally {
@@ -109,7 +104,7 @@ export default function GamingPage() {
     };
 
     fetchSeasons();
-  }, [stats]);
+  }, []);
 
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">

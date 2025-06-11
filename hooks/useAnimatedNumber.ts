@@ -1,60 +1,77 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * A custom React hook that creates a smooth animation between two numbers.
+ * Uses requestAnimationFrame for optimal performance and implements an easeOutQuart easing function.
+ *
+ * @param target - The target number to animate to
+ * @param duration - The duration of the animation in milliseconds (default: 1000ms)
+ * @param useDecimals - Whether to preserve decimal places in the animation (default: false)
+ * @returns An object containing the current animated value
+ */
 export function useAnimatedNumber(
-  targetValue: number | string,
+  target: number,
   duration: number = 1000,
   useDecimals: boolean = false,
 ) {
-  const [current, setCurrent] = useState(targetValue);
-  const frameRef = useRef<number | undefined>(undefined);
-  const startTimeRef = useRef<number | undefined>(undefined);
-  const startValueRef = useRef<number | undefined>(undefined);
+  // Current animated value that will be displayed
+  const [current, setCurrent] = useState(0);
+
+  // Refs to store animation state that persists between renders
+  const startTime = useRef<number | null>(null); // Timestamp when animation started
+  const startValue = useRef<number>(0); // Initial value when animation started
+  const animationFrame = useRef<number | undefined>(undefined); // Animation frame ID for cleanup
 
   useEffect(() => {
-    // If the value is a string (like percentage), don't animate
-    if (typeof targetValue === "string") {
-      setCurrent(targetValue);
-      return;
-    }
+    // Skip animation if target is already reached
+    if (target === current) return;
 
-    const startValue =
-      typeof startValueRef.current === "number"
-        ? startValueRef.current
-        : targetValue;
-    const startTime = performance.now();
-    const endValue = targetValue;
+    const animate = (timestamp: number) => {
+      // Initialize animation state on first frame
+      if (!startTime.current) {
+        startTime.current = timestamp;
+        startValue.current = current;
+      }
 
-    startTimeRef.current = startTime;
-    startValueRef.current = startValue;
+      // Calculate animation progress (0 to 1)
+      const progress = Math.min((timestamp - startTime.current) / duration, 1);
 
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Easing function for smooth animation
+      // Apply easeOutQuart easing function for smooth deceleration
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentValue = startValue + (endValue - startValue) * easeOutQuart;
 
-      // Only use decimals if specified
+      // Calculate new value based on progress and easing
+      const newValue =
+        startValue.current + (target - startValue.current) * easeOutQuart;
+
+      // Update current value, preserving decimals if specified
       setCurrent(
-        useDecimals
-          ? Number(currentValue.toFixed(2))
-          : Math.round(currentValue),
+        useDecimals ? Number(newValue.toFixed(2)) : Math.round(newValue),
       );
 
+      // Continue animation if not complete
       if (progress < 1) {
-        frameRef.current = requestAnimationFrame(animate);
+        animationFrame.current = requestAnimationFrame(animate);
+      } else {
+        // Ensure final value is exact target
+        setCurrent(
+          useDecimals ? Number(target.toFixed(2)) : Math.round(target),
+        );
+        startTime.current = null;
       }
     };
 
-    frameRef.current = requestAnimationFrame(animate);
+    // Start animation
+    animationFrame.current = requestAnimationFrame(animate);
 
+    // Cleanup: cancel animation frame on unmount or when dependencies change
     return () => {
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current);
+      if (animationFrame.current) {
+        cancelAnimationFrame(animationFrame.current);
       }
     };
-  }, [targetValue, duration, useDecimals]);
+  }, [target, duration, useDecimals]);
 
   return { current };
 }
