@@ -1,9 +1,10 @@
 import { CreateOperations } from "@/lib/db/create";
+import { DeleteOperations } from "@/lib/db/delete";
 import client from "@/lib/mongodb";
 import { TimelineEntry } from "@/types/timeline";
 import { NextResponse } from "next/server";
 
-const seedTimeline: Omit<TimelineEntry, keyof TimelineEntry>[] = [
+const seed = [
   {
     company: "Ketryon",
     role: "Founder & Engineer",
@@ -33,16 +34,23 @@ const seedTimeline: Omit<TimelineEntry, keyof TimelineEntry>[] = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<TimelineEntry>(db, "timeline");
+    const deleteOps = new DeleteOperations<TimelineEntry>(db, "timeline");
 
     // Clear existing entries
-    await db.collection("timeline").deleteMany({});
+    await deleteOps.deleteMany({});
 
     // Insert new entries
-    const result = await createOps.createMany(seedTimeline);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Timeline seeded successfully",

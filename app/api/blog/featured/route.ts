@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const db = client.db("kennyt");
-    const readOps = new ReadOperations<FeaturedArticle>(db, "blog_posts");
+    const readOps = new ReadOperations<FeaturedArticle>(db, "articles");
 
     // Get featured articles, sorted by date
     const featuredArticles = await readOps.findMany(

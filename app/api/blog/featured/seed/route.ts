@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
+import { DeleteOperations } from "@/lib/db/delete";
+import client from "@/lib/mongodb";
 import { FeaturedArticle } from "@/types/blog";
-import { BaseDocument } from "@/lib/db/types";
+import { NextResponse } from "next/server";
 
-const seedArticles: Omit<FeaturedArticle, keyof BaseDocument>[] = [
+const seed = [
   {
     slug: "building-modern-web-apps",
     title: "Building Modern Web Applications",
@@ -31,16 +31,23 @@ const seedArticles: Omit<FeaturedArticle, keyof BaseDocument>[] = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
-    const createOps = new CreateOperations<FeaturedArticle>(db, "blog_posts");
+    const createOps = new CreateOperations<FeaturedArticle>(db, "articles");
+    const deleteOps = new DeleteOperations<FeaturedArticle>(db, "articles");
 
     // Clear existing featured articles
-    await db.collection("blog_posts").deleteMany({ featured: true });
+    await deleteOps.deleteMany({ featured: true });
 
     // Insert new featured articles
-    const result = await createOps.createMany(seedArticles);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Successfully seeded featured articles",

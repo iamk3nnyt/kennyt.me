@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { ReadOperations } from "@/lib/db/read";
+import client from "@/lib/mongodb";
 import { TimelineEntry } from "@/types/timeline";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
@@ -19,9 +19,6 @@ export async function GET() {
           description: 1,
           startDate: 1,
           endDate: 1,
-          location: 1,
-          skills: 1,
-          achievements: 1,
         },
         sort: { startDate: -1 }, // Sort by start date in descending order
       },
