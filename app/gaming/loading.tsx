@@ -1,9 +1,4 @@
 import { AppImage } from "@/components/app-image";
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
-import { SeasonHistory } from "@/types/gaming";
-import { Crown } from "lucide-react";
-import { Stats } from "./components";
 
 const heroes = [
   {
@@ -50,18 +45,7 @@ const heroes = [
   },
 ];
 
-export default async function GamingPage() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<SeasonHistory>(db, "mlbb_seasons");
-
-  const seasons = await readOps.findMany(
-    {},
-    {
-      projection: { _id: 0, period: 1, rank: 1, hero: 1, season: 1 },
-      sort: { period: -1 }, // Sort by period in descending order
-    },
-  );
-
+export default function GamingLoading() {
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">
       <section className="mx-auto mb-16 max-w-2xl">
@@ -74,7 +58,21 @@ export default async function GamingPage() {
         </p>
       </section>
 
-      <Stats />
+      <section className="mx-auto mb-16 max-w-2xl">
+        <h2 className="mb-6 text-xl font-semibold text-white">MLBB Stats</h2>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-start gap-2 rounded-2xl border border-[#232326] bg-[#18181B] p-5 shadow-sm"
+            >
+              <div className="mb-2 h-9 w-9 rounded-lg bg-blue-500/10" />
+              <div className="shimmer h-8 w-16 rounded-lg" />
+              <div className="shimmer h-4 w-20 rounded-lg" />
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mx-auto mb-16 max-w-2xl">
         <h2 className="mb-6 text-xl font-semibold text-white">Main Heroes</h2>
@@ -113,40 +111,23 @@ export default async function GamingPage() {
         <h2 className="mb-6 text-xl font-semibold text-white">
           Season History
         </h2>
-        {seasons.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
-            <div className="mb-4 text-4xl">🏆</div>
-            <h3 className="mb-2 text-lg font-medium text-white">
-              No Season History
-            </h3>
-            <p className="text-sm text-[#B0B0B0]">
-              My competitive journey hasn&apos;t begun. I&apos;ll track my rank
-              progression and achievements here, from Epic to Mythic and beyond.
-            </p>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4">
-            {seasons.map((season) => (
-              <div
-                key={season.period}
-                className="group flex flex-col gap-4 rounded-xl border border-[#232326] bg-[#18181B] p-4 transition-colors hover:bg-[#1E1E21] sm:flex-row sm:items-center"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
-                  <Crown className="h-5 w-5" />
+        <div className="space-y-4">
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="group flex flex-col gap-4 rounded-xl border border-[#232326] bg-[#18181B] p-4 transition-colors hover:bg-[#1E1E21] sm:flex-row sm:items-center"
+            >
+              <div className="shimmer h-10 w-10 rounded-lg" />
+              <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-2">
+                  <div className="shimmer h-5 w-32 rounded-lg" />
+                  <div className="shimmer h-4 w-24 rounded-lg" />
                 </div>
-                <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex flex-col">
-                    <div className="font-medium text-white">
-                      {season.season} - {season.rank}
-                    </div>
-                    <div className="text-sm text-[#B0B0B0]">{season.hero}</div>
-                  </div>
-                  <div className="text-sm text-[#B0B0B0]">{season.period}</div>
-                </div>
+                <div className="shimmer h-4 w-24 rounded-lg" />
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
