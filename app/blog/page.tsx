@@ -67,7 +67,7 @@ export default function BlogPage() {
               <li key={post.slug} className="flex items-center gap-2 py-2">
                 <span className="relative size-5 shrink-0">
                   <AppImage
-                    src="https://www.google.com/s2/favicons?domain=ktranish.dev&sz=64"
+                    src="https://www.google.com/s2/favicons?domain=kennyt.me&sz=64"
                     alt={post.title + " favicon"}
                     className="h-full w-full"
                   />

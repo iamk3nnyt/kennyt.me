@@ -20,20 +20,20 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Kenny Tran – Full Stack Developer, Founder, Writer",
   description:
-    "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on ktranish.dev.",
-  metadataBase: new URL("https://www.ktranish.dev"),
+    "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
+  metadataBase: new URL("https://www.kennyt.me"),
   alternates: {
     canonical: "./",
     languages: {
-      "en-US": "https://www.ktranish.dev",
+      "en-US": "https://www.kennyt.me",
     },
   },
   openGraph: {
     title: "Kenny Tran – Full Stack Developer, Founder, Writer",
     description:
-      "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on ktranish.dev.",
+      "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
     url: "./",
-    siteName: "ktranish.dev",
+    siteName: "kennyt.me",
     images: [
       {
         url: "/og.png",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kenny Tran – Full Stack Developer, Founder, Writer",
     description:
-      "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on ktranish.dev.",
+      "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
     images: ["/og.png"],
   },
   robots: {
@@ -90,11 +90,11 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Kenny Tran",
-              url: "https://www.ktranish.dev",
+              url: "https://www.kennyt.me",
               sameAs: [
-                "https://twitter.com/ktranish",
-                "https://github.com/ktranish",
-                "https://linkedin.com/in/ktranish",
+                "https://twitter.com/itsk3nny_",
+                "https://github.com/iamk3nnyt",
+                "https://linkedin.com/in/itsk3nny",
               ],
               jobTitle: "Full Stack Developer, Founder, Writer",
               email: "kenny@ketryon.com",
@@ -127,8 +127,8 @@ export default function RootLayout({
               />
             </svg>
           </a>
-          © {new Date().getFullYear()} ktranish.dev. Built with Next.js &
-          Tailwind CSS.
+          © {new Date().getFullYear()} kennyt.me. Built with Next.js & Tailwind
+          CSS.
         </footer>
       </body>
     </html>

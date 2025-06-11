@@ -10,7 +10,7 @@ This project follows the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUC
 
 ### 1. Reporting Issues
 
-- Search [existing issues](https://github.com/ktranish/kennyt.me/issues) before opening a new one.
+- Search [existing issues](https://github.com/iamk3nnyt/kennyt.me/issues) before opening a new one.
 - Provide a clear and descriptive title and as much relevant information as possible.
 - Include steps to reproduce, expected behavior, and screenshots if applicable.
 

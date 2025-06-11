@@ -1,4 +1,4 @@
-# ktranish.dev
+# kennyt.me
 
 A modern, personal portfolio and blog for Kenny Tran – full stack developer, founder, and writer. Explore projects, articles, and more, all built with Next.js, TypeScript, and Tailwind CSS.
 
@@ -35,8 +35,8 @@ A modern, personal portfolio and blog for Kenny Tran – full stack developer, f
 
 Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting issues or pull requests.
 
-- [Open an Issue](https://github.com/ktranish/ktranish.dev/issues)
-- [Submit a Pull Request](https://github.com/ktranish/ktranish.dev/pulls)
+- [Open an Issue](https://github.com/iamk3nnyt/kennyt.me/issues)
+- [Submit a Pull Request](https://github.com/iamk3nnyt/kennyt.me/pulls)
 
 ---
 
@@ -44,8 +44,8 @@ Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.m
 
 1. **Clone the repo:**
    ```sh
-   git clone https://github.com/ktranish/ktranish.dev.git
-   cd ktranish.dev
+   git clone https://github.com/iamk3nnyt/kennyt.me.git
+   cd kennyt.me
    ```
 2. **Install dependencies:**
    ```sh

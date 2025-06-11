@@ -14,17 +14,17 @@ export default function AboutPage() {
   const socialLinks = [
     {
       name: "GitHub",
-      url: "https://github.com/ktranish",
+      url: "https://github.com/iamk3nnyt",
       icon: "https://www.google.com/s2/favicons?domain=github.com&sz=64",
     },
     {
       name: "Twitter",
-      url: "https://twitter.com/ktranish",
+      url: "https://twitter.com/itsk3nny_",
       icon: "https://www.google.com/s2/favicons?domain=twitter.com&sz=64",
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/ktranish",
+      url: "https://linkedin.com/in/itsk3nny",
       icon: "https://www.google.com/s2/favicons?domain=linkedin.com&sz=64",
     },
     {
