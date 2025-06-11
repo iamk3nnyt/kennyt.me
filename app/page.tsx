@@ -106,11 +106,11 @@ async function Featured() {
 
   const posts = await readOps.findMany(
     { featured: true },
-    { projection: { _id: 0, slug: 1, title: 1, excerpt: 1, date: 1 } },
+    {
+      projection: { _id: 0, slug: 1, title: 1, excerpt: 1, date: 1 },
+      sort: { date: -1 }, // Sort by date in descending order
+    },
   );
-
-  // Sort by date in descending order
-  posts.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">

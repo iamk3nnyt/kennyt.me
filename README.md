@@ -29,6 +29,98 @@ A modern, personal portfolio and blog for Kenny Tran – full stack developer, f
 - **SEO:** Next.js Metadata API, Open Graph, Twitter Card, JSON-LD
 - **Other:** Lucide Icons, Google Favicon API
 
+## 💾 Data Layer
+
+The application uses a type-safe data layer built with MongoDB and TypeScript. The data layer is organized into the following components:
+
+### Core Types
+
+```typescript
+interface BaseDocument {
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface ReadOptions {
+  projection?: Record<string, number>;
+  sort?: Record<string, 1 | -1>;
+}
+```
+
+### Operations
+
+- **Create:** `CreateOperations<T extends BaseDocument>`
+- **Read:** `ReadOperations<T extends BaseDocument>`
+- **Update:** `UpdateOperations<T extends BaseDocument>`
+- **Delete:** `DeleteOperations<T extends BaseDocument>`
+
+### Blog Types
+
+```typescript
+interface FeaturedArticle extends BaseDocument {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: Date;
+  featured: boolean;
+}
+```
+
+## 🔌 API Endpoints
+
+### Featured Articles
+
+#### Get Featured Articles
+
+```bash
+curl http://localhost:3000/api/blog/featured
+```
+
+Response:
+
+```json
+[
+  {
+    "slug": "building-modern-web-apps",
+    "title": "Building Modern Web Applications",
+    "excerpt": "A comprehensive guide...",
+    "date": "2024-01-15T00:00:00.000Z"
+  }
+]
+```
+
+#### Seed Featured Articles
+
+```bash
+curl -X POST http://localhost:3000/api/blog/featured/seed
+```
+
+Response:
+
+```json
+{
+  "message": "Successfully seeded featured articles",
+  "count": 3,
+  "articles": [...]
+}
+```
+
+#### Delete All Featured Articles
+
+```bash
+curl -X DELETE http://localhost:3000/api/blog/featured/delete
+```
+
+Response:
+
+```json
+{
+  "message": "Successfully deleted all featured articles",
+  "deletedCount": 3
+}
+```
+
 ---
 
 ## 📝 Contributing

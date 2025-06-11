@@ -8,6 +8,7 @@ export interface BaseDocument extends Document {
 
 export interface ReadOptions {
   projection?: Record<string, number>;
+  sort?: Record<string, 1 | -1>;
 }
 
 export interface UpdateOptions {
