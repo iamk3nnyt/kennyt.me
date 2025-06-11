@@ -7,12 +7,21 @@ export interface BaseDocument extends Document {
 }
 
 export interface ReadOptions {
-  projection?: Record<string, number>;
+  projection?: Record<string, 0 | 1>;
   sort?: Record<string, 1 | -1>;
+  limit?: number;
+}
+
+export interface CreateOptions {
+  // Add any create-specific options here
 }
 
 export interface UpdateOptions {
-  upsert?: boolean;
+  // Add any update-specific options here
+}
+
+export interface DeleteOptions {
+  // Add any delete-specific options here
 }
 
 export interface PaginationOptions {

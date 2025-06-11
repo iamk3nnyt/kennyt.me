@@ -1,35 +1,38 @@
-import client from "@/lib/mongodb";
 import { NextResponse } from "next/server";
+import client from "@/lib/mongodb";
+import { ReadOperations } from "@/lib/db/read";
+import { Transaction } from "@/types/finance";
 
-export interface Transaction {
-  date: string;
-  category: string;
-  description: string;
-  amount: number;
-}
-
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const limit = 10;
+    const { searchParams } = new URL(request.url);
+    const month = searchParams.get("month");
+    const year = searchParams.get("year");
 
-    const db = client.db("ktranish");
-    const collection = db.collection<Transaction>("finance_transactions");
+    const db = client.db("kennyt");
+    const readOps = new ReadOperations<Transaction>(db, "transactions");
 
-    const transactions = await collection
-      .find({})
-      .sort({ date: -1 })
-      .limit(limit + 1)
-      .toArray();
+    const query: Record<string, any> = {};
+    if (month && year) {
+      query.month = parseInt(month);
+      query.year = parseInt(year);
+    }
 
-    const hasMore = transactions.length > limit;
-    const nextCursor = hasMore ? transactions[limit - 1].date : null;
-    const items = hasMore ? transactions.slice(0, limit) : transactions;
-
-    return NextResponse.json({
-      transactions: items,
-      nextCursor,
-      hasMore,
+    const transactions = await readOps.findMany(query, {
+      projection: {
+        _id: 1,
+        amount: 1,
+        category: 1,
+        description: 1,
+        date: 1,
+        type: 1,
+        month: 1,
+        year: 1,
+      },
+      sort: { date: -1 },
     });
+
+    return NextResponse.json({ transactions });
   } catch (error) {
     console.error("Error fetching transactions:", error);
     return NextResponse.json(
