@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function Error({
   error,
@@ -31,12 +32,20 @@ export default function Error({
           <p className="mb-6 text-sm text-[#B0B0B0]">
             {error.message || "An unexpected error occurred"}
           </p>
-          <button
-            onClick={reset}
-            className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"
-          >
-            Try Again
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={reset}
+              className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"
+            >
+              Try Again
+            </button>
+            <Link
+              href="/"
+              className="rounded-lg border border-[#232326] bg-[#18181B] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#232326]"
+            >
+              Go back home
+            </Link>
+          </div>
         </div>
       </section>
     </main>
