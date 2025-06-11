@@ -101,26 +101,14 @@ function Featured() {
 }
 
 function Techstack() {
-  const techstack = [
-    { name: "Editor", value: "VS Code" },
-    { name: "Terminal", value: "Oh My Zsh" },
-    { name: "Framework", value: "Next.js" },
-    { name: "Language", value: "TypeScript" },
-    { name: "UI", value: "Tailwind CSS" },
-    { name: "Hosting", value: "Vercel" },
-    { name: "Version Control", value: "Git & GitHub" },
-    { name: "Database", value: "MongoDB" },
-  ];
   return (
     <section className="mx-auto mb-16 max-w-2xl">
       <h2 className="mb-6 text-xl font-semibold text-white">Tech stack</h2>
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {techstack.map((item, idx) => (
-          <li key={idx} className="rounded-lg bg-[#18181B] p-4">
-            <span className="block text-sm text-[#B0B0B0]">{item.name}</span>
-            <span className="block text-lg font-medium text-white">
-              {item.value}
-            </span>
+        {[...Array(8)].map((_, i) => (
+          <li key={i} className="rounded-lg bg-[#18181B] p-4">
+            <div className="shimmer mb-1 h-4 w-16 rounded" />
+            <div className="shimmer h-6 w-24 rounded" />
           </li>
         ))}
       </ul>
