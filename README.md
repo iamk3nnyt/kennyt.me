@@ -99,6 +99,106 @@ The application implements a robust error handling system using Next.js 13+ erro
 
 For more information about Next.js error handling, refer to the [official documentation](https://nextjs.org/docs/app/getting-started/error-handling).
 
+## API Security
+
+### Generating a Secure Secret
+
+You can generate a secure secret using Node.js's crypto module. Here are a few methods:
+
+1. **Using Node.js (Recommended)**
+
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+   ```
+
+   This generates a 32-byte (256-bit) random hex string.
+
+2. **Using OpenSSL**
+
+   ```bash
+   openssl rand -hex 32
+   ```
+
+   This also generates a 32-byte random hex string.
+
+3. **Using Python**
+   ```bash
+   python3 -c "import secrets; print(secrets.token_hex(32))"
+   ```
+   This generates a 32-byte random hex string using Python's secrets module.
+
+The generated secret should be stored in your `.env.local` file:
+
+```env
+SECRET=your-generated-secret-here
+```
+
+### Protected Endpoints
+
+Certain API endpoints require a secret header for security. These endpoints are used for seeding and deleting data, and should only be accessible in development or through secure means.
+
+#### Required Header
+
+```http
+x-secret: <your-secret>
+```
+
+The secret value should match the `SECRET` environment variable.
+
+#### Protected Endpoints
+
+1. **Seed Endpoints**
+
+   - `POST /api/gaming/heroes/seed`
+   - `POST /api/room/seed`
+   - `POST /api/tech/seed`
+
+2. **Delete Endpoints**
+   - `DELETE /api/gaming/heroes/delete`
+   - `DELETE /api/room/delete`
+   - `DELETE /api/tech/delete`
+
+#### Example Usage
+
+```bash
+# Seeding data
+curl -X POST http://localhost:3000/api/gaming/heroes/seed \
+  -H "x-secret: your-secret-here"
+
+# Deleting data
+curl -X DELETE http://localhost:3000/api/gaming/heroes/delete \
+  -H "x-secret: your-secret-here"
+```
+
+#### Error Responses
+
+If the secret header is missing or incorrect, the API will return a 403 Forbidden response:
+
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+### Security Best Practices
+
+1. **Environment Variables**
+
+   - Store the secret in `.env.local` for development
+   - Use a secure secret management system in production
+   - Never commit secrets to version control
+
+2. **Request Validation**
+
+   - Always validate the secret header
+   - Use HTTPS in production
+   - Consider implementing rate limiting
+
+3. **Error Handling**
+   - Return appropriate status codes
+   - Don't expose sensitive information in error messages
+   - Log security-related events
+
 ---
 
 ## 📝 Contributing

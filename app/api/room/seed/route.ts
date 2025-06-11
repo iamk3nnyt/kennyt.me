@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
 import { RoomItem } from "@/types/room";
+import { BaseDocument } from "@/lib/db/types";
 
-const seedRoomItems: Omit<RoomItem, keyof RoomItem>[] = [
+const seedRoomItems: Omit<RoomItem, keyof BaseDocument>[] = [
   // Peripherals
   { name: "Razer Basilisk V3", category: "peripherals", order: 1 },
   {
@@ -53,26 +54,31 @@ const seedRoomItems: Omit<RoomItem, keyof RoomItem>[] = [
   { name: "Fitbit Inspire 3", category: "wearables", order: 1 },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<RoomItem>(db, "room_items");
 
-    // Clear existing room items
+    // Clear existing items
     await db.collection("room_items").deleteMany({});
 
-    // Insert new room items
+    // Insert new items
     const result = await createOps.createMany(seedRoomItems);
 
     return NextResponse.json({
-      message: "Room setup seeded successfully",
+      message: "Room items seeded successfully",
       count: result.length,
-      items: result,
     });
   } catch (error) {
-    console.error("Error seeding room setup:", error);
+    console.error("Error seeding room items:", error);
     return NextResponse.json(
-      { error: "Failed to seed room setup" },
+      { error: "Failed to seed room items" },
       { status: 500 },
     );
   }
