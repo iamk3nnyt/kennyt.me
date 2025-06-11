@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Kenny Tran – Full Stack Developer, Founder, Writer",
+  title: "Kenny Tran - Full Stack Developer, Founder, Writer",
   description:
     "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
   metadataBase: new URL("https://www.kennyt.me"),
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Kenny Tran – Full Stack Developer, Founder, Writer",
+    title: "Kenny Tran - Full Stack Developer, Founder, Writer",
     description:
       "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
     url: "./",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Kenny Tran – Full Stack Developer, Founder, Writer",
+        alt: "Kenny Tran - Full Stack Developer, Founder, Writer",
       },
     ],
     locale: "en_US",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kenny Tran – Full Stack Developer, Founder, Writer",
+    title: "Kenny Tran - Full Stack Developer, Founder, Writer",
     description:
       "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
     images: ["/og.png"],
