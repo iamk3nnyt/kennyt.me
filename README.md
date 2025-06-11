@@ -152,6 +152,19 @@ Response:
 }
 ```
 
+## Loading States
+
+The application implements progressive loading states using Next.js's built-in loading UI feature. Each page has a corresponding `loading.tsx` file that shows a loading state while the page content is being fetched.
+
+This approach provides a better user experience by:
+
+- Showing static content immediately
+- Using shimmer effects to indicate loading states
+- Maintaining layout stability during loading
+- Reducing perceived loading time
+
+For more information about loading states in Next.js, see the [official documentation](https://nextjs.org/docs/app/api-reference/file-conventions/loading).
+
 ---
 
 ## 📝 Contributing
