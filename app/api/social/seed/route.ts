@@ -52,6 +52,12 @@ const seedSocialLinks: Omit<SocialLink, keyof SocialLink>[] = [
     icon: "https://www.google.com/s2/favicons?domain=fiverr.com&sz=64",
     order: 8,
   },
+  {
+    name: "Hackernews",
+    url: "https://news.ycombinator.com/user?id=itsk3nny",
+    icon: "https://www.google.com/s2/favicons?domain=ycombinator.com&sz=64",
+    order: 8,
+  },
 ];
 
 export async function POST() {
