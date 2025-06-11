@@ -1,19 +1,11 @@
 export const projects = [
   {
-    title: "Biohub.fyi",
-    link: "https://www.biohub.fyi/",
-  },
-  {
-    title: "Webarc.day",
-    link: "https://www.webarc.day/",
-  },
-  {
-    title: "Ketryon.com",
+    title: "Company website",
     link: "https://www.ketryon.com/",
   },
   {
-    title: "Personal Blog",
-    link: "https://www.ktranish.dev/",
+    title: "Personal Website",
+    link: "https://www.kennyt.me/",
   },
 ];
 
