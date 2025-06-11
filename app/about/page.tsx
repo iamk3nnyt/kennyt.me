@@ -39,7 +39,7 @@ export default function AboutPage() {
     },
     {
       name: "Indiehackers",
-      url: "https://www.indiehackers.com/ktranish",
+      url: "https://www.indiehackers.com/itsk3nny",
       icon: "https://www.google.com/s2/favicons?domain=indiehackers.com&sz=64",
     },
     {
