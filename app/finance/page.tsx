@@ -197,9 +197,9 @@ export default function FinancePage() {
               No Transactions Recorded
             </h3>
             <p className="text-sm text-[#B0B0B0]">
-              My financial tracking hasn't begun. I'll record my income and
-              expenses here, with each transaction helping me maintain a clear
-              overview of my finances.
+              My financial tracking hasn&apos;t begun. I&apos;ll record my
+              income and expenses here, with each transaction helping me
+              maintain a clear overview of my finances.
             </p>
           </div>
         ) : (

@@ -109,7 +109,7 @@ export default function GamingPage() {
     };
 
     fetchSeasons();
-  }, []);
+  }, [stats]);
 
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">
@@ -213,7 +213,7 @@ export default function GamingPage() {
               No Season History
             </h3>
             <p className="text-sm text-[#B0B0B0]">
-              My competitive journey hasn't begun. I'll track my rank
+              My competitive journey hasn&apos;t begun. I&apos;ll track my rank
               progression and achievements here, from Epic to Mythic and beyond.
             </p>
           </div>

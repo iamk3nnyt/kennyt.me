@@ -8,10 +8,8 @@ export interface Transaction {
   amount: number;
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-    const cursor = searchParams.get("cursor");
     const limit = 10;
 
     const db = client.db("ktranish");

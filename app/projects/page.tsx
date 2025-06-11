@@ -7,7 +7,7 @@ export default function ProjectsPage() {
       <section className="mx-auto mb-16 max-w-2xl">
         <h2 className="mb-6 text-xl font-semibold text-white">Showcase</h2>
         <p className="mb-8 text-[#B0B0B0]">
-          A selection of projects and products I've designed, built, or
+          A selection of projects and products I&apos;ve designed, built, or
           contributed to. Each project reflects my passion for clean design,
           robust engineering, and modern web technologies.
         </p>
@@ -22,9 +22,9 @@ export default function ProjectsPage() {
               No Projects Showcased
             </h3>
             <p className="text-sm text-[#B0B0B0]">
-              My portfolio of projects hasn't been curated yet. I'll share my
-              work in design, engineering, and web technologies here, with each
-              project reflecting my passion for clean solutions.
+              My portfolio of projects hasn&apos;t been curated yet. I&apos;ll
+              share my work in design, engineering, and web technologies here,
+              with each project reflecting my passion for clean solutions.
             </p>
           </div>
         ) : (

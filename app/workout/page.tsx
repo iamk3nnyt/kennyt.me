@@ -84,9 +84,9 @@ export default function WorkoutPage() {
               No Activities Recorded
             </h3>
             <p className="text-sm text-[#B0B0B0]">
-              My fitness journey hasn't begun. I'll track my strength training,
-              cardio, and flexibility work here, with each session bringing me
-              closer to better health.
+              My fitness journey hasn&apos;t begun. I&apos;ll track my strength
+              training, cardio, and flexibility work here, with each session
+              bringing me closer to better health.
             </p>
           </div>
         ) : (

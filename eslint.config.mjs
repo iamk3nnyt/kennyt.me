@@ -29,9 +29,7 @@ const eslintConfig = [
         Object.keys(jsxA11y.rules)
           .filter(
             (rule) =>
-              rule !== "label-has-for" &&
               rule !== "accessible-emoji" &&
-              rule !== "label-has-associated-control" &&
               rule !== "control-has-associated-label",
           )
           .map((rule) => [`jsx-a11y/${rule}`, "error"]),

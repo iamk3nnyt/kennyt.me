@@ -34,7 +34,7 @@ export default function BlogPage() {
         <h2 className="mb-6 text-xl font-semibold text-white">Writtings</h2>
         <p className="mb-8 text-[#B0B0B0]">
           Thoughts, tutorials, and stories on design, development, and the
-          creative process. Here you'll find my latest articles and essays.
+          creative process. Here you&apos;ll find my latest articles and essays.
         </p>
       </section>
 
@@ -56,9 +56,9 @@ export default function BlogPage() {
               No Articles Written
             </h3>
             <p className="text-sm text-[#B0B0B0]">
-              My writing journey hasn't begun. I'll share my thoughts on design,
-              development, and the creative process here, with each article
-              bringing new insights.
+              My writing journey hasn&apos;t begun. I&apos;ll share my thoughts
+              on design, development, and the creative process here, with each
+              article bringing new insights.
             </p>
           </div>
         ) : (

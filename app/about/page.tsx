@@ -106,10 +106,10 @@ export default function AboutPage() {
       <section className="mx-auto mb-16 max-w-2xl">
         <h2 className="mb-6 text-xl font-semibold text-white">Biography</h2>
         <p className="mb-8 text-[#B0B0B0]">
-          I'm Kenny, a full stack developer, designer, and founder passionate
-          about building beautiful, performant web experiences. I love working
-          at the intersection of design and engineering, and I'm always
-          exploring new technologies and creative projects.
+          I&apos;m Kenny, a full stack developer, designer, and founder
+          passionate about building beautiful, performant web experiences. I
+          love working at the intersection of design and engineering, and
+          I&apos;m always exploring new technologies and creative projects.
         </p>
       </section>
 
@@ -148,9 +148,9 @@ export default function AboutPage() {
               No Bookmarks Saved
             </h3>
             <p className="text-sm text-[#B0B0B0]">
-              My collection of useful tools and resources hasn't been curated
-              yet. I'll share my favorite tools, articles, and resources here,
-              with each bookmark bringing value to my workflow.
+              My collection of useful tools and resources hasn&apos;t been
+              curated yet. I&apos;ll share my favorite tools, articles, and
+              resources here, with each bookmark bringing value to my workflow.
             </p>
           </div>
         ) : (
@@ -182,7 +182,7 @@ export default function AboutPage() {
         <h2 className="mb-6 text-xl font-semibold text-white">Room Setup</h2>
         <p className="mb-8 text-[#B0B0B0]">
           My workspace is carefully curated with high-quality peripherals and
-          equipment to ensure optimal productivity and comfort. Here's a
+          equipment to ensure optimal productivity and comfort. Here&apos;s a
           detailed breakdown of my setup.
         </p>
         <div className="space-y-8">

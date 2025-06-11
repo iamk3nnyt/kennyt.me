@@ -91,7 +91,7 @@ export default function HomePage() {
       <section className="mx-auto mb-16 max-w-2xl">
         <h2 className="mb-6 text-xl font-semibold text-white">Work Timeline</h2>
         <ol className="relative border-l border-[#232326]">
-          {workTimeline.map((job, idx) => (
+          {workTimeline.map((job) => (
             <li key={job.company} className="mb-10 ml-4">
               <div className="absolute -left-1.5 mt-2 h-3 w-3 rounded-full border-2 border-[#232326] bg-blue-500" />
               <h3 className="text-lg font-semibold text-white">
@@ -136,9 +136,9 @@ export default function HomePage() {
               No Featured Articles
             </h3>
             <p className="text-sm text-[#B0B0B0]">
-              My featured articles haven't been selected yet. I'll share my best
-              thoughts on design, development, and the creative process here,
-              with each article bringing new insights.
+              My featured articles haven&apos;t been selected yet. I&apos;ll
+              share my best thoughts on design, development, and the creative
+              process here, with each article bringing new insights.
             </p>
           </div>
         ) : (
