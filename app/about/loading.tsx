@@ -59,50 +59,17 @@ function Bookmarks() {
 }
 
 function Room() {
-  const room = {
-    peripherals: {
-      icon: Headphones,
-      items: [
-        "Razer Basilisk V3",
-        "Razer Mouse Pad Goliathus Extended Chroma",
-        "Razer Cynosa V2",
-        "Logitech Brio 100",
-        "Andersson Model ORH-C3000 Headset",
-      ],
-    },
-    computers: {
-      icon: Laptop,
-      items: ["Ideapad Pro 5 (AMD Ryzen 7)", "Desire2 Laptop Stand"],
-    },
-    display: {
-      icon: Monitor,
-      items: ['LG UltraGear 34GP63AP-B 34" 3440 x 1440 (UltraWide) HDMI 160Hz'],
-    },
-    audio: {
-      icon: Headphones,
-      items: ["Jabra Elite Speaker"],
-    },
-    mobile: {
-      icon: Smartphone,
-      items: ["iPhone 15", "Samsung Wireless Charger Trio"],
-    },
-    gaming: {
-      icon: Gamepad2,
-      items: ["Nintendo Switch"],
-    },
-    furniture: {
-      icon: Sofa,
-      items: [
-        "Mittzon Skrivbord 160x80",
-        "Snarum RBN 120x200 Medium Fast/Beige",
-        "2x Aloe Vera Konstväxt, 17 cm",
-      ],
-    },
-    wearables: {
-      icon: Watch,
-      items: ["Fitbit Inspire 3"],
-    },
-  };
+  const categories = [
+    "peripherals",
+    "computers",
+    "display",
+    "audio",
+    "mobile",
+    "gaming",
+    "furniture",
+    "wearables",
+  ];
+
   return (
     <section className="mx-auto mb-16 max-w-2xl">
       <h2 className="mb-6 text-xl font-semibold text-white">Room Setup</h2>
@@ -112,19 +79,19 @@ function Room() {
         detailed breakdown of my setup.
       </p>
       <div className="space-y-8">
-        {Object.entries(room).map(([category, { icon: Icon, items }]) => (
+        {categories.map((category) => (
           <div key={category}>
-            <h3 className="mb-4 flex items-center gap-2 text-lg font-medium text-white capitalize">
-              <Icon className="h-5 w-5" />
-              {category}
-            </h3>
+            <div className="mb-4 flex items-center gap-2">
+              <div className="shimmer size-5 shrink-0 rounded" />
+              <div className="shimmer h-6 w-24 rounded" />
+            </div>
             <ul className="grid gap-3 sm:grid-cols-2">
-              {items.map((item) => (
+              {[...Array(4)].map((_, i) => (
                 <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
+                  key={i}
+                  className="flex items-center gap-3 rounded-lg bg-[#18181B] p-4"
                 >
-                  <span className="text-sm text-[#B0B0B0]">{item}</span>
+                  <div className="shimmer h-5 w-full rounded" />
                 </li>
               ))}
             </ul>

@@ -2,6 +2,7 @@ import { AppImage } from "@/components/app-image";
 import { ReadOperations } from "@/lib/db/read";
 import client from "@/lib/mongodb";
 import { Bookmark } from "@/types/bookmark";
+import { RoomItem } from "@/types/room";
 import { SocialLink } from "@/types/social";
 import {
   Gamepad2,
@@ -136,51 +137,41 @@ async function Bookmarks() {
   );
 }
 
-function Room() {
-  const room = {
-    peripherals: {
-      icon: Headphones,
-      items: [
-        "Razer Basilisk V3",
-        "Razer Mouse Pad Goliathus Extended Chroma",
-        "Razer Cynosa V2",
-        "Logitech Brio 100",
-        "Andersson Model ORH-C3000 Headset",
-      ],
+const categoryIcons = {
+  peripherals: Headphones,
+  computers: Laptop,
+  display: Monitor,
+  audio: Headphones,
+  mobile: Smartphone,
+  gaming: Gamepad2,
+  furniture: Sofa,
+  wearables: Watch,
+} as const;
+
+async function Room() {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<RoomItem>(db, "room_items");
+
+  const items = await readOps.findMany(
+    {},
+    {
+      projection: { _id: 0, name: 1, category: 1 },
+      sort: { category: 1, order: 1 },
     },
-    computers: {
-      icon: Laptop,
-      items: ["Ideapad Pro 5 (AMD Ryzen 7)", "Desire2 Laptop Stand"],
+  );
+
+  // Group items by category
+  const categories = items.reduce(
+    (acc: Record<string, RoomItem[]>, item: RoomItem) => {
+      if (!acc[item.category]) {
+        acc[item.category] = [];
+      }
+      acc[item.category].push(item);
+      return acc;
     },
-    display: {
-      icon: Monitor,
-      items: ['LG UltraGear 34GP63AP-B 34" 3440 x 1440 (UltraWide) HDMI 160Hz'],
-    },
-    audio: {
-      icon: Headphones,
-      items: ["Jabra Elite Speaker"],
-    },
-    mobile: {
-      icon: Smartphone,
-      items: ["iPhone 15", "Samsung Wireless Charger Trio"],
-    },
-    gaming: {
-      icon: Gamepad2,
-      items: ["Nintendo Switch"],
-    },
-    furniture: {
-      icon: Sofa,
-      items: [
-        "Mittzon Skrivbord 160x80",
-        "Snarum RBN 120x200 Medium Fast/Beige",
-        "2x Aloe Vera Konstväxt, 17 cm",
-      ],
-    },
-    wearables: {
-      icon: Watch,
-      items: ["Fitbit Inspire 3"],
-    },
-  };
+    {},
+  );
+
   return (
     <section className="mx-auto mb-16 max-w-2xl">
       <h2 className="mb-6 text-xl font-semibold text-white">Room Setup</h2>
@@ -189,26 +180,48 @@ function Room() {
         equipment to ensure optimal productivity and comfort. Here&apos;s a
         detailed breakdown of my setup.
       </p>
-      <div className="space-y-8">
-        {Object.entries(room).map(([category, { icon: Icon, items }]) => (
-          <div key={category}>
-            <h3 className="mb-4 flex items-center gap-2 text-lg font-medium text-white capitalize">
-              <Icon className="h-5 w-5" />
-              {category}
-            </h3>
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {items.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
-                >
-                  <span className="text-sm text-[#B0B0B0]">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+      {Object.keys(categories).length === 0 ? (
+        <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
+          <div className="mb-4 text-4xl">🏠</div>
+          <h3 className="mb-2 text-lg font-medium text-white">
+            No Room Setup Added
+          </h3>
+          <p className="text-sm text-[#B0B0B0]">
+            My room setup hasn&apos;t been added yet. I&apos;ll share my
+            workspace details here, including the equipment, peripherals, and
+            furniture that make up my productive environment.
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {(Object.entries(categories) as [string, RoomItem[]][]).map(
+            ([category, items]) => {
+              const Icon =
+                categoryIcons[category as keyof typeof categoryIcons];
+              return (
+                <div key={category}>
+                  <h3 className="mb-4 flex items-center gap-2 text-lg font-medium text-white capitalize">
+                    <Icon className="h-5 w-5" />
+                    {category}
+                  </h3>
+                  <ul className="grid gap-3 sm:grid-cols-2">
+                    {items.map((item: RoomItem) => (
+                      <li
+                        key={item.name}
+                        className="flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
+                      >
+                        <span className="text-sm text-[#B0B0B0]">
+                          {item.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            },
+          )}
+        </div>
+      )}
     </section>
   );
 }
