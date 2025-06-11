@@ -1,42 +1,44 @@
+import { ReadOperations } from "@/lib/db/read";
+import client from "@/lib/mongodb";
+import { Article } from "@/types/blog";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-// Example static data for demonstration
-const articles = [
-  {
-    slug: "crafting-design-system",
-    title: "Crafting a design system for a multiplanetary future",
-    date: "September 5, 2022",
-    excerpt:
-      "Most companies try to stay ahead of the curve when it comes to visual design. For Planetaria we needed to create a brand that would still inspire us 100 years from now when humanity has spread across our entire solar system.",
-    content: `
-      <p>Most companies try to stay ahead of the curve when it comes to visual design. For Planetaria we needed to create a brand that would still inspire us 100 years from now when humanity has spread across our entire solar system.</p>
-      <h2>Why a Design System?</h2>
-      <p>A design system is more than a set of UI components. It's a shared language for teams to build consistent, scalable products. For a multiplanetary future, this consistency is even more important.</p>
-      <ul>
-        <li>Unified branding across platforms</li>
-        <li>Reusable components for rapid development</li>
-        <li>Accessibility and performance at scale</li>
-      </ul>
-      <p>By investing in a robust design system, we ensure our products are ready for the challenges of tomorrow.</p>
-    `,
-    image: "/og.png",
-  },
-];
+async function getArticle(slug: string) {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<Article>(db, "blog_posts");
+
+  const article = await readOps.findOne(
+    { slug },
+    {
+      projection: {
+        _id: 1,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
+        content: 1,
+        image: 1,
+      },
+    },
+  );
+
+  return article;
+}
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
-  const slug = (await params).slug;
-  const article = articles.find((a) => a.slug === slug);
+  const article = await getArticle(params.slug);
   if (!article) {
     return {
       title: "Article Not Found",
       description: "The requested article could not be found.",
     };
   }
+
   return {
     title: article.title,
     description: article.excerpt,
@@ -60,11 +62,9 @@ export async function generateMetadata({
 export default async function BlogArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const slug = (await params).slug;
-
-  const article = articles.find((a) => a.slug === slug);
+  const article = await getArticle(params.slug);
   if (!article) return notFound();
 
   return (
