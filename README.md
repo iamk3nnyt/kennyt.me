@@ -33,39 +33,12 @@ A modern, personal portfolio and blog for Kenny Tran – full stack developer, f
 
 The application uses a type-safe data layer built with MongoDB and TypeScript. The data layer is organized into the following components:
 
-### Core Types
-
-```typescript
-interface BaseDocument {
-  _id: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-interface ReadOptions {
-  projection?: Record<string, number>;
-  sort?: Record<string, 1 | -1>;
-}
-```
-
 ### Operations
 
 - **Create:** `CreateOperations<T extends BaseDocument>`
 - **Read:** `ReadOperations<T extends BaseDocument>`
 - **Update:** `UpdateOperations<T extends BaseDocument>`
 - **Delete:** `DeleteOperations<T extends BaseDocument>`
-
-### Blog Types
-
-```typescript
-interface FeaturedArticle extends BaseDocument {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: Date;
-  featured: boolean;
-}
-```
 
 ## 🔌 API Endpoints
 
@@ -118,6 +91,64 @@ Response:
 {
   "message": "Successfully deleted all featured articles",
   "deletedCount": 3
+}
+```
+
+### Bookmarks
+
+#### Get Bookmarks
+
+```bash
+curl http://localhost:3000/api/bookmarks
+```
+
+Response:
+
+```json
+[
+  {
+    "name": "Next.js Documentation",
+    "url": "https://nextjs.org/docs",
+    "icon": "https://www.google.com/s2/favicons?domain=nextjs.org&sz=64"
+  }
+]
+```
+
+#### Seed Bookmarks
+
+```bash
+curl -X POST http://localhost:3000/api/bookmarks/seed
+```
+
+Response:
+
+```json
+{
+  "message": "Successfully seeded bookmarks",
+  "count": 5,
+  "bookmarks": [
+    {
+      "name": "Next.js Documentation",
+      "url": "https://nextjs.org/docs",
+      "icon": "https://www.google.com/s2/favicons?domain=nextjs.org&sz=64"
+    }
+    // ... more bookmarks
+  ]
+}
+```
+
+#### Delete All Bookmarks
+
+```bash
+curl -X DELETE http://localhost:3000/api/bookmarks/delete
+```
+
+Response:
+
+```json
+{
+  "message": "Successfully deleted all bookmarks",
+  "deletedCount": 5
 }
 ```
 

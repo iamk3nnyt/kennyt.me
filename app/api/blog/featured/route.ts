@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { ReadOperations } from "@/lib/db/read";
+import client from "@/lib/mongodb";
 import { FeaturedArticle } from "@/types/blog";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
@@ -11,11 +11,11 @@ export async function GET() {
     // Get featured articles, sorted by date
     const featuredArticles = await readOps.findMany(
       { featured: true },
-      { projection: { _id: 0, slug: 1, title: 1, excerpt: 1, date: 1 } },
+      {
+        projection: { _id: 0, slug: 1, title: 1, excerpt: 1, date: 1 },
+        sort: { date: -1 },
+      },
     );
-
-    // Sort by date in descending order
-    featuredArticles.sort((a, b) => b.date.getTime() - a.date.getTime());
 
     return NextResponse.json(featuredArticles);
   } catch (error) {

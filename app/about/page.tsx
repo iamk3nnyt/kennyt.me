@@ -1,5 +1,4 @@
 import { AppImage } from "@/components/app-image";
-import { ToolItem } from "@/types";
 import {
   Gamepad2,
   Headphones,
@@ -9,9 +8,26 @@ import {
   Sofa,
   Watch,
 } from "lucide-react";
+import client from "@/lib/mongodb";
+import { ReadOperations } from "@/lib/db/read";
+import { Bookmark } from "@/types/bookmark";
 
-export default function AboutPage() {
-  const socialLinks = [
+function Intro() {
+  return (
+    <section className="mx-auto mb-16 max-w-2xl">
+      <h2 className="mb-6 text-xl font-semibold text-white">Biography</h2>
+      <p className="mb-8 text-[#B0B0B0]">
+        I&apos;m Kenny, a full stack developer, designer, and founder passionate
+        about building beautiful, performant web experiences. I love working at
+        the intersection of design and engineering, and I&apos;m always
+        exploring new technologies and creative projects.
+      </p>
+    </section>
+  );
+}
+
+function Connect() {
+  const socials = [
     {
       name: "GitHub",
       url: "https://github.com/iamk3nnyt",
@@ -53,10 +69,91 @@ export default function AboutPage() {
       icon: "https://www.google.com/s2/favicons?domain=fiverr.com&sz=64",
     },
   ];
+  return (
+    <section className="mx-auto mb-16 max-w-2xl">
+      <h2 className="mb-4 text-xl font-semibold text-white">Connect</h2>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+        {socials.map((link, idx) => (
+          <a
+            key={idx}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="group flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
+          >
+            <span className="relative size-6">
+              <AppImage
+                src={link.icon}
+                alt={`${link.name} icon`}
+                className="h-full w-full"
+              />
+            </span>
+            <span className="text-sm text-[#B0B0B0] group-hover:text-white">
+              {link.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
 
-  const tools: ToolItem[] = [];
+async function Bookmarks() {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<Bookmark>(db, "bookmarks");
 
-  const roomSetup = {
+  const bookmarks = await readOps.findMany(
+    {},
+    {
+      projection: { _id: 0, name: 1, url: 1, icon: 1 },
+      sort: { name: 1 }, // Sort alphabetically by name
+    },
+  );
+
+  return (
+    <section className="mx-auto mb-16 max-w-2xl">
+      <h2 className="mb-6 text-xl font-semibold text-white">Bookmarks</h2>
+      {bookmarks.length === 0 ? (
+        <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
+          <div className="mb-4 text-4xl">🔖</div>
+          <h3 className="mb-2 text-lg font-medium text-white">
+            No Bookmarks Saved
+          </h3>
+          <p className="text-sm text-[#B0B0B0]">
+            My collection of useful tools and resources hasn&apos;t been curated
+            yet. I&apos;ll share my favorite tools, articles, and resources
+            here, with each bookmark bringing value to my workflow.
+          </p>
+        </div>
+      ) : (
+        <ul className="mb-8 divide-y divide-[#232326]">
+          {bookmarks.map((item) => (
+            <li key={item.url} className="flex items-center gap-2 py-2">
+              <div className="relative size-5 shrink-0">
+                <AppImage
+                  src={item.icon}
+                  alt={item.name}
+                  className="h-full w-full"
+                />
+              </div>
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:underline"
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function Room() {
+  const room = {
     peripherals: {
       icon: Headphones,
       items: [
@@ -100,114 +197,45 @@ export default function AboutPage() {
       items: ["Fitbit Inspire 3"],
     },
   };
+  return (
+    <section className="mx-auto mb-16 max-w-2xl">
+      <h2 className="mb-6 text-xl font-semibold text-white">Room Setup</h2>
+      <p className="mb-8 text-[#B0B0B0]">
+        My workspace is carefully curated with high-quality peripherals and
+        equipment to ensure optimal productivity and comfort. Here&apos;s a
+        detailed breakdown of my setup.
+      </p>
+      <div className="space-y-8">
+        {Object.entries(room).map(([category, { icon: Icon, items }]) => (
+          <div key={category}>
+            <h3 className="mb-4 flex items-center gap-2 text-lg font-medium text-white capitalize">
+              <Icon className="h-5 w-5" />
+              {category}
+            </h3>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {items.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
+                >
+                  <span className="text-sm text-[#B0B0B0]">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
+export default function AboutPage() {
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">
-      <section className="mx-auto mb-16 max-w-2xl">
-        <h2 className="mb-6 text-xl font-semibold text-white">Biography</h2>
-        <p className="mb-8 text-[#B0B0B0]">
-          I&apos;m Kenny, a full stack developer, designer, and founder
-          passionate about building beautiful, performant web experiences. I
-          love working at the intersection of design and engineering, and
-          I&apos;m always exploring new technologies and creative projects.
-        </p>
-      </section>
-
-      <section className="mx-auto mb-16 max-w-2xl">
-        <h2 className="mb-4 text-xl font-semibold text-white">Connect</h2>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
-            >
-              <span className="relative size-6">
-                <AppImage
-                  src={link.icon}
-                  alt={`${link.name} icon`}
-                  className="h-full w-full"
-                />
-              </span>
-              <span className="text-sm text-[#B0B0B0] group-hover:text-white">
-                {link.name}
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto mb-16 max-w-2xl">
-        <h2 className="mb-6 text-xl font-semibold text-white">Bookmarks</h2>
-        {tools.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
-            <div className="mb-4 text-4xl">🔖</div>
-            <h3 className="mb-2 text-lg font-medium text-white">
-              No Bookmarks Saved
-            </h3>
-            <p className="text-sm text-[#B0B0B0]">
-              My collection of useful tools and resources hasn&apos;t been
-              curated yet. I&apos;ll share my favorite tools, articles, and
-              resources here, with each bookmark bringing value to my workflow.
-            </p>
-          </div>
-        ) : (
-          <ul className="mb-8 divide-y divide-[#232326]">
-            {tools.map((item) => (
-              <li key={item.url} className="flex items-center gap-2 py-2">
-                <div className="relative size-5 shrink-0">
-                  <AppImage
-                    src={item.icon}
-                    alt={item.name}
-                    className="h-full w-full"
-                  />
-                </div>
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:underline"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <section className="mx-auto mb-16 max-w-2xl">
-        <h2 className="mb-6 text-xl font-semibold text-white">Room Setup</h2>
-        <p className="mb-8 text-[#B0B0B0]">
-          My workspace is carefully curated with high-quality peripherals and
-          equipment to ensure optimal productivity and comfort. Here&apos;s a
-          detailed breakdown of my setup.
-        </p>
-        <div className="space-y-8">
-          {Object.entries(roomSetup).map(
-            ([category, { icon: Icon, items }]) => (
-              <div key={category}>
-                <h3 className="mb-4 flex items-center gap-2 text-lg font-medium text-white capitalize">
-                  <Icon className="h-5 w-5" />
-                  {category}
-                </h3>
-                <ul className="grid gap-3 sm:grid-cols-2">
-                  {items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
-                    >
-                      <span className="text-sm text-[#B0B0B0]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ),
-          )}
-        </div>
-      </section>
+      <Intro />
+      <Connect />
+      <Bookmarks />
+      <Room />
     </main>
   );
 }
