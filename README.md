@@ -53,6 +53,52 @@ This approach provides a better user experience by:
 
 For more information about loading states in Next.js, see the [official documentation](https://nextjs.org/docs/app/api-reference/file-conventions/loading).
 
+## Error Handling
+
+The application implements a robust error handling system using Next.js 13+ error handling features:
+
+### Global Error Page
+
+- Located at `app/error.tsx`
+- Handles runtime errors in the application
+- Provides user-friendly error messages
+- Includes "Try Again" and "Go back home" options
+- Logs errors to console (can be extended to error reporting services)
+
+### Not Found Page
+
+- Located at `app/not-found.tsx`
+- Handles 404 errors for non-existent routes
+- Consistent styling with error page
+- Clear navigation back to homepage
+
+### API Error Handling
+
+- All API routes include try-catch blocks
+- Standardized error response format:
+  ```typescript
+  {
+    error: string;
+    message: string;
+  }
+  ```
+- HTTP status codes for different error types:
+  - 400: Bad Request
+  - 401: Unauthorized
+  - 403: Forbidden
+  - 404: Not Found
+  - 500: Internal Server Error
+
+### Error Handling Best Practices
+
+1. **Server Components**: Errors in server components are caught by the nearest error boundary
+2. **Client Components**: Use try-catch blocks for client-side error handling
+3. **API Routes**: Implement proper error handling and status codes
+4. **Type Safety**: Use TypeScript for compile-time error prevention
+5. **Error Logging**: Console logging for development, can be extended to production logging services
+
+For more information about Next.js error handling, refer to the [official documentation](https://nextjs.org/docs/app/getting-started/error-handling).
+
 ---
 
 ## 📝 Contributing
