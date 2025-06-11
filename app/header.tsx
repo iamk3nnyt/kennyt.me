@@ -2,9 +2,9 @@
 
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { AppImage } from "./app-image";
+import { AppImage } from "../components/app-image";
 
-const headerContent = {
+const header = {
   "/": {
     title: "Kenny Tran",
     subtitle: "Full stack developer, founder, and writer.",
@@ -35,17 +35,16 @@ const headerContent = {
   },
 };
 
-export function AnimatedHeader() {
+export function Header() {
   const pathname = usePathname();
-  type HeaderKey = keyof typeof headerContent;
-  const validPath = (Object.keys(headerContent) as HeaderKey[]).includes(
-    pathname as HeaderKey,
+  const content = (Object.keys(header) as (keyof typeof header)[]).includes(
+    pathname as keyof typeof header,
   )
-    ? (pathname as HeaderKey)
+    ? (pathname as keyof typeof header)
     : "/";
-  const { title, subtitle } = headerContent[validPath];
+  const { title, subtitle } = header[content];
   return (
-    <header className="mx-auto mb-6 min-h-[84px] max-w-2xl pt-12">
+    <header className="mx-auto w-full max-w-2xl">
       <div className="mb-6">
         <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-blue-500">
           <AppImage

@@ -1,20 +1,20 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import {
+  Briefcase,
+  Dumbbell,
+  FileText,
+  Gamepad2,
+  Home,
+  User,
+  Wallet,
+} from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Home,
-  User,
-  Briefcase,
-  FileText,
-  Gamepad2,
-  Dumbbell,
-  Wallet,
-} from "lucide-react";
 
-const navLinks = [
+const navigation = [
   { href: "/", label: "Home", icon: Home },
   { href: "/about", label: "About", icon: User },
   { href: "/projects", label: "Projects", icon: Briefcase },
@@ -27,8 +27,8 @@ const navLinks = [
 export function Navigation() {
   const pathname = usePathname();
   return (
-    <nav className="relative mx-auto flex max-w-2xl gap-4 text-sm text-[#B0B0B0]">
-      {navLinks.map((link) => {
+    <nav className="relative mx-auto flex w-full max-w-2xl gap-4 text-sm text-[#B0B0B0]">
+      {navigation.map((link) => {
         const isActive = pathname === link.href;
         return (
           <div key={link.href} className="relative">

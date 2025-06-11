@@ -1,5 +1,5 @@
-import { AnimatedHeader } from "@/components/animated-header";
-import { Navigation } from "@/components/navigation";
+import { Header } from "@/app/header";
+import { Navigation } from "@/app/navigation";
 import { cn } from "@/lib/utils";
 import type { Metadata, Viewport } from "next";
 import { Sora } from "next/font/google";
@@ -103,8 +103,8 @@ export default function RootLayout({
         />
       </head>
       <body className={cn("bg-[#111113] text-[#F3F3F3]", sora.className)}>
-        <div className="px-4">
-          <AnimatedHeader />
+        <div className="flex flex-col gap-y-6 px-4 pt-12">
+          <Header />
           <Navigation />
         </div>
         {children}
