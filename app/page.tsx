@@ -107,6 +107,7 @@ function Techstack() {
     { name: "UI", value: "Tailwind CSS" },
     { name: "Hosting", value: "Vercel" },
     { name: "Version Control", value: "Git & GitHub" },
+    { name: "Database", value: "MongoDB" },
   ];
   return (
     <section className="mx-auto mb-16 max-w-2xl">
