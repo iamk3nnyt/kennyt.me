@@ -5,14 +5,16 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } },
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
+    const slug = (await params).slug;
+
     const db = client.db("kennyt");
     const readOps = new ReadOperations<Article>(db, "blog_posts");
 
     const article = await readOps.findOne(
-      { slug: params.slug },
+      { slug },
       {
         projection: {
           _id: 1,
