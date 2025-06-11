@@ -24,71 +24,18 @@ function Intro() {
 }
 
 function Connect() {
-  const socials = [
-    {
-      name: "GitHub",
-      url: "https://github.com/iamk3nnyt",
-      icon: "https://www.google.com/s2/favicons?domain=github.com&sz=64",
-    },
-    {
-      name: "Twitter",
-      url: "https://twitter.com/itsk3nny_",
-      icon: "https://www.google.com/s2/favicons?domain=twitter.com&sz=64",
-    },
-    {
-      name: "LinkedIn",
-      url: "https://linkedin.com/in/itsk3nny",
-      icon: "https://www.google.com/s2/favicons?domain=linkedin.com&sz=64",
-    },
-    {
-      name: "Dribbble",
-      url: "https://dribbble.com/itsk3nny",
-      icon: "https://www.google.com/s2/favicons?domain=dribbble.com&sz=64",
-    },
-    {
-      name: "YouTube",
-      url: "https://youtube.com/@iamk3nnyt",
-      icon: "https://www.google.com/s2/favicons?domain=youtube.com&sz=64",
-    },
-    {
-      name: "Indiehackers",
-      url: "https://www.indiehackers.com/itsk3nny",
-      icon: "https://www.google.com/s2/favicons?domain=indiehackers.com&sz=64",
-    },
-    {
-      name: "Upwork",
-      url: "https://www.upwork.com/freelancers/~019a5657f93b409619",
-      icon: "https://www.google.com/s2/favicons?domain=upwork.com&sz=64",
-    },
-    {
-      name: "Fiverr",
-      url: "https://www.fiverr.com/ktra99",
-      icon: "https://www.google.com/s2/favicons?domain=fiverr.com&sz=64",
-    },
-  ];
   return (
     <section className="mx-auto mb-16 max-w-2xl">
       <h2 className="mb-4 text-xl font-semibold text-white">Connect</h2>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-        {socials.map((link, idx) => (
-          <a
-            key={idx}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="group flex items-center gap-3 rounded-lg bg-[#18181B] p-4 transition-colors hover:bg-[#232326]"
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-3 rounded-lg bg-[#18181B] p-4"
           >
-            <span className="relative size-6">
-              <AppImage
-                src={link.icon}
-                alt={`${link.name} icon`}
-                className="h-full w-full"
-              />
-            </span>
-            <span className="text-sm text-[#B0B0B0] group-hover:text-white">
-              {link.name}
-            </span>
-          </a>
+            <div className="shimmer size-6 shrink-0 rounded" />
+            <div className="shimmer h-5 w-20 rounded" />
+          </div>
         ))}
       </div>
     </section>
