@@ -1,6 +1,8 @@
 import { AppImage } from "@/components/app-image";
+import { ReadOperations } from "@/lib/db/read";
+import client from "@/lib/mongodb";
 import { cn } from "@/lib/utils";
-import { PostItem } from "@/types";
+import { FeaturedArticle } from "@/types/blog";
 import Link from "next/link";
 
 function Gallery() {
@@ -98,8 +100,18 @@ function Timeline() {
   );
 }
 
-function Featured() {
-  const posts: PostItem[] = [];
+async function Featured() {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<FeaturedArticle>(db, "blog_posts");
+
+  const posts = await readOps.findMany(
+    { featured: true },
+    { projection: { _id: 0, slug: 1, title: 1, excerpt: 1, date: 1 } },
+  );
+
+  // Sort by date in descending order
+  posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+
   return (
     <section className="mx-auto mb-16 max-w-2xl">
       <h2 className="mb-6 text-xl font-semibold text-white">
@@ -127,7 +139,11 @@ function Featured() {
                 </Link>
               </h3>
               <time className="mb-2 block text-xs text-[#88888C]">
-                {post.date}
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </time>
               <p className="mb-2 text-[#B0B0B0]">{post.excerpt}</p>
               <Link
