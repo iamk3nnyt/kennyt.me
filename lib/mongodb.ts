@@ -1,5 +1,9 @@
 import { MongoClient } from "mongodb";
 
+/**
+ * @see https://github.com/vercel/next.js/blob/canary/examples/with-mongodb/lib/mongodb.ts
+ */
+
 if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
 }
