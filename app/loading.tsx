@@ -49,46 +49,23 @@ function Gallery() {
 }
 
 function Timeline() {
-  const timeline = [
-    {
-      company: "Ketryon",
-      role: "Founder & Engineer",
-      period: "2025/04 - Present",
-      description:
-        "Building digital products and leading engineering for client and internal projects.",
-    },
-    {
-      company: "Mynewsdesk",
-      role: "Full Stack Developer",
-      period: "2024/10 - 2025/04",
-      description:
-        "Worked on maintaining their platform and assisted in production site migration.",
-    },
-    {
-      company: "Etteplan",
-      role: "Software Engineer",
-      period: "2024/03 - 2024/08",
-      description:
-        "Participated as a consultant where I contributed by helping to resolve both internal and visual bugs",
-    },
-  ];
   return (
     <section className="mx-auto mb-16 max-w-2xl">
       <h2 className="mb-6 text-xl font-semibold text-white">Work Timeline</h2>
       <ol className="relative border-l border-[#232326]">
-        {timeline.map((job, idx) => (
+        {[...Array(3)].map((_, idx) => (
           <li key={idx} className="mb-10 ml-4">
-            <div className="absolute -left-1.5 mt-2 h-3 w-3 rounded-full border-2 border-[#232326] bg-blue-500" />
-            <h3 className="text-lg font-semibold text-white">
-              {job.role}{" "}
-              <span className="font-normal text-[#B0B0B0]">
-                @ {job.company}
-              </span>
-            </h3>
-            <span className="mb-1 block text-xs text-[#88888C]">
-              {job.period}
-            </span>
-            <p className="text-[#B0B0B0]">{job.description}</p>
+            <div className="absolute -left-1.5 mt-2 h-3 w-3 rounded-full border-2 border-[#232326] bg-[#232326]" />
+            <div className="mb-1">
+              <div className="shimmer h-6 w-48 rounded" />
+            </div>
+            <div className="mb-2">
+              <div className="shimmer h-4 w-32 rounded" />
+            </div>
+            <div className="mb-2">
+              <div className="shimmer h-4 w-full rounded" />
+              <div className="shimmer mt-2 h-4 w-2/3 rounded" />
+            </div>
           </li>
         ))}
       </ol>

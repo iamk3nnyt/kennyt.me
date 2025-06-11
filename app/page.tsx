@@ -3,6 +3,7 @@ import { ReadOperations } from "@/lib/db/read";
 import client from "@/lib/mongodb";
 import { cn } from "@/lib/utils";
 import { FeaturedArticle } from "@/types/blog";
+import { TimelineEntry } from "@/types/timeline";
 import Link from "next/link";
 
 function Gallery() {
@@ -52,50 +53,61 @@ function Gallery() {
   );
 }
 
-function Timeline() {
-  const timeline = [
+async function Timeline() {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<TimelineEntry>(db, "timeline");
+
+  const entries = await readOps.findMany(
+    {},
     {
-      company: "Ketryon",
-      role: "Founder & Engineer",
-      period: "2025/04 - Present",
-      description:
-        "Building digital products and leading engineering for client and internal projects.",
+      projection: {
+        _id: 0,
+        company: 1,
+        role: 1,
+        period: 1,
+        description: 1,
+        location: 1,
+        skills: 1,
+        achievements: 1,
+      },
+      sort: { startDate: -1 },
     },
-    {
-      company: "Mynewsdesk",
-      role: "Full Stack Developer",
-      period: "2024/10 - 2025/04",
-      description:
-        "Worked on maintaining their platform and assisted in production site migration.",
-    },
-    {
-      company: "Etteplan",
-      role: "Software Engineer",
-      period: "2024/03 - 2024/08",
-      description:
-        "Participated as a consultant where I contributed by helping to resolve both internal and visual bugs",
-    },
-  ];
+  );
+
   return (
     <section className="mx-auto mb-16 max-w-2xl">
       <h2 className="mb-6 text-xl font-semibold text-white">Work Timeline</h2>
-      <ol className="relative border-l border-[#232326]">
-        {timeline.map((job, idx) => (
-          <li key={idx} className="mb-10 ml-4">
-            <div className="absolute -left-1.5 mt-2 h-3 w-3 rounded-full border-2 border-[#232326] bg-blue-500" />
-            <h3 className="text-lg font-semibold text-white">
-              {job.role}{" "}
-              <span className="font-normal text-[#B0B0B0]">
-                @ {job.company}
+      {entries.length === 0 ? (
+        <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
+          <div className="mb-4 text-4xl">💼</div>
+          <h3 className="mb-2 text-lg font-medium text-white">
+            No Work Experience
+          </h3>
+          <p className="text-sm text-[#B0B0B0]">
+            My work experience hasn&apos;t been added yet. I&apos;ll share my
+            professional journey here, including my roles, achievements, and the
+            skills I&apos;ve developed along the way.
+          </p>
+        </div>
+      ) : (
+        <ol className="relative border-l border-[#232326]">
+          {entries.map((job, idx) => (
+            <li key={idx} className="mb-10 ml-4">
+              <div className="absolute -left-1.5 mt-2 h-3 w-3 rounded-full border-2 border-[#232326] bg-blue-500" />
+              <h3 className="text-lg font-semibold text-white">
+                {job.role}{" "}
+                <span className="font-normal text-[#B0B0B0]">
+                  @ {job.company}
+                </span>
+              </h3>
+              <span className="mb-1 block text-xs text-[#88888C]">
+                {job.period}
               </span>
-            </h3>
-            <span className="mb-1 block text-xs text-[#88888C]">
-              {job.period}
-            </span>
-            <p className="text-[#B0B0B0]">{job.description}</p>
-          </li>
-        ))}
-      </ol>
+              <p className="mb-2 text-[#B0B0B0]">{job.description}</p>
+            </li>
+          ))}
+        </ol>
+      )}
     </section>
   );
 }

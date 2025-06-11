@@ -20,18 +20,18 @@ export default function FinanceLoading() {
           My Spending Timeline
         </h2>
         <ol className="relative border-l border-[#232326]">
-          {[...Array(5)].map((_, i) => (
-            <li key={i} className="mb-10 ml-4">
-              <div className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full border-2 border-[#232326] bg-blue-500" />
-              <div className="flex items-center justify-between">
-                <span className="shimmer h-4 w-24 rounded-lg" />
-                <span className="shimmer h-4 w-20 rounded-lg" />
+          {[...Array(5)].map((_, idx) => (
+            <li key={idx} className="mb-10 ml-4">
+              <div className="absolute -left-1.5 mt-2 h-3 w-3 rounded-full border-2 border-[#232326] bg-[#232326]" />
+              <div className="mb-1">
+                <div className="shimmer h-6 w-48 rounded" />
               </div>
-              <div className="mt-1">
-                <div className="shimmer h-5 w-32 rounded-lg" />
+              <div className="mb-2">
+                <div className="shimmer h-4 w-32 rounded" />
               </div>
-              <div className="mt-1">
-                <div className="shimmer h-4 w-48 rounded-lg" />
+              <div className="mb-2">
+                <div className="shimmer h-4 w-full rounded" />
+                <div className="shimmer mt-2 h-4 w-2/3 rounded" />
               </div>
             </li>
           ))}
