@@ -141,16 +141,13 @@ This project is [MIT licensed](./LICENSE).
 
 - [ ] Add search functionality for blog posts
 - [ ] Implement pagination for blog posts list
-- [ ] Add dark/light theme toggle
 - [ ] Create an RSS feed for blog posts
 - [ ] Add social media sharing buttons
-- [ ] Implement blog post categories and tags
 - [ ] Add a newsletter subscription system
 
 ### Security
 
 - [ ] Add rate limiting for API endpoints
-- [ ] Set up proper CORS policies
 - [ ] Implement proper input validation
 - [ ] Add proper security headers
 - [ ] Set up proper backup strategy
