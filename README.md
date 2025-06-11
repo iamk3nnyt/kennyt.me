@@ -1,7 +1,5 @@
 # ktranish.dev
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
-
 A modern, personal portfolio and blog for Kenny Tran – full stack developer, founder, and writer. Explore projects, articles, and more, all built with Next.js, TypeScript, and Tailwind CSS.
 
 ---
@@ -66,16 +64,3 @@ Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.m
 ## 📄 License
 
 This project is [MIT licensed](./LICENSE).
-
----
-
-## 🙏 Acknowledgements
-
-- [Contributor Covenant](https://www.contributor-covenant.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Next.js](https://nextjs.org/)
-- [Lucide Icons](https://lucide.dev/)
-
----
-
-> Made with ❤️ by Kenny Tran and the ktranish.dev community
