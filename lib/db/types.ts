@@ -12,18 +12,6 @@ export interface ReadOptions {
   limit?: number;
 }
 
-export interface CreateOptions {
-  // Add any create-specific options here
-}
-
-export interface UpdateOptions {
-  // Add any update-specific options here
-}
-
-export interface DeleteOptions {
-  // Add any delete-specific options here
-}
-
 export interface PaginationOptions {
   page: number;
   limit: number;

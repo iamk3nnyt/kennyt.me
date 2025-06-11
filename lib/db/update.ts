@@ -1,5 +1,10 @@
-import { Collection, Db } from "mongodb";
-import { BaseDocument, QueryFilter, UpdateData, UpdateOptions } from "./types";
+import {
+  Collection,
+  Db,
+  FindOneAndUpdateOptions,
+  UpdateOptions,
+} from "mongodb";
+import { BaseDocument, QueryFilter, UpdateData } from "./types";
 
 export class UpdateOperations<T extends BaseDocument> {
   private collection: Collection<T>;
@@ -61,7 +66,7 @@ export class UpdateOperations<T extends BaseDocument> {
   async findOneAndUpdate(
     filter: QueryFilter<T>,
     update: UpdateData<T>,
-    options: UpdateOptions = {},
+    options: FindOneAndUpdateOptions = {},
   ): Promise<T | null> {
     const now = new Date();
     const updateWithTimestamp = {
@@ -74,7 +79,10 @@ export class UpdateOperations<T extends BaseDocument> {
     const result = await this.collection.findOneAndUpdate(
       filter,
       updateWithTimestamp,
-      { ...options, returnDocument: "after" },
+      {
+        ...options,
+        returnDocument: "after",
+      },
     );
 
     return result?.value as T | null;
