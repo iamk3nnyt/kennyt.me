@@ -29,12 +29,12 @@ export default function AboutPage() {
     },
     {
       name: "Dribbble",
-      url: "https://dribbble.com/ktranish",
+      url: "https://dribbble.com/itsk3nny",
       icon: "https://www.google.com/s2/favicons?domain=dribbble.com&sz=64",
     },
     {
       name: "YouTube",
-      url: "https://youtube.com/@ktranish",
+      url: "https://youtube.com/@iamk3nnyt",
       icon: "https://www.google.com/s2/favicons?domain=youtube.com&sz=64",
     },
     {
