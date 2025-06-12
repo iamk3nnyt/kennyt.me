@@ -1,12 +1,12 @@
 import { AppImage } from "@/components/app-image";
-import Link from "next/link";
-import client from "@/lib/mongodb";
 import { ReadOperations } from "@/lib/db/read";
+import client from "@/lib/mongodb";
 import { Article } from "@/types/blog";
+import Link from "next/link";
 
 export default async function BlogPage() {
   const db = client.db("kennyt");
-  const readOps = new ReadOperations<Article>(db, "blog_posts");
+  const readOps = new ReadOperations<Article>(db, "articles");
 
   const posts = await readOps.findMany(
     {},

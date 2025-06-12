@@ -1,9 +1,15 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { DeleteOperations } from "@/lib/db/delete";
+import client from "@/lib/mongodb";
 import { WorkoutActivity } from "@/types/workout";
+import { NextResponse } from "next/server";
 
-export async function DELETE() {
+export async function DELETE(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const deleteOps = new DeleteOperations<WorkoutActivity>(db, "workouts");

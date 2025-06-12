@@ -1,10 +1,9 @@
 import { CreateOperations } from "@/lib/db/create";
-import { BaseDocument } from "@/lib/db/types";
 import client from "@/lib/mongodb";
 import { Hero } from "@/types/gaming";
 import { NextResponse } from "next/server";
 
-const seedHeroes: Omit<Hero, keyof BaseDocument>[] = [
+const seed = [
   {
     name: "Aurora",
     role: "Mage",
@@ -70,7 +69,7 @@ export async function POST(request: Request) {
     await db.collection("mlbb_heroes").deleteMany({});
 
     // Insert new heroes
-    const result = await createOps.createMany(seedHeroes);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Heroes seeded successfully",

@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 
 async function getArticle(slug: string) {
   const db = client.db("kennyt");
-  const readOps = new ReadOperations<Article>(db, "blog_posts");
+  const readOps = new ReadOperations<Article>(db, "articles");
 
   const article = await readOps.findOne(
     { slug },

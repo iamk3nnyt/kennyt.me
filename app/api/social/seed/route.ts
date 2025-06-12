@@ -1,9 +1,10 @@
 import { CreateOperations } from "@/lib/db/create";
+import { DeleteOperations } from "@/lib/db/delete";
 import client from "@/lib/mongodb";
 import { SocialLink } from "@/types/social";
 import { NextResponse } from "next/server";
 
-const seedSocialLinks: Omit<SocialLink, keyof SocialLink>[] = [
+const seed = [
   {
     name: "GitHub",
     url: "https://github.com/iamk3nnyt",
@@ -60,16 +61,23 @@ const seedSocialLinks: Omit<SocialLink, keyof SocialLink>[] = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<SocialLink>(db, "social_links");
+    const deleteOps = new DeleteOperations<SocialLink>(db, "social_links");
 
     // Clear existing links
-    await db.collection("social_links").deleteMany({});
+    await deleteOps.deleteMany({});
 
     // Insert new links
-    const result = await createOps.createMany(seedSocialLinks);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Social links seeded successfully",

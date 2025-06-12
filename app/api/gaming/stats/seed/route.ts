@@ -1,18 +1,23 @@
 import { CreateOperations } from "@/lib/db/create";
 import { DeleteOperations } from "@/lib/db/delete";
-import { BaseDocument } from "@/lib/db/types";
 import client from "@/lib/mongodb";
 import { MLBBStats } from "@/types/gaming";
 import { NextResponse } from "next/server";
 
-const seedStats: Omit<MLBBStats, keyof BaseDocument> = {
+const seed = {
   matches: 3525,
   winRate: 51.04,
   mvp: 253,
   lastUpdated: new Date(),
 };
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<MLBBStats>(db, "mlbb_stats");
@@ -22,7 +27,7 @@ export async function POST() {
     await deleteOps.deleteMany({});
 
     // Insert new stats
-    const result = await createOps.createOne(seedStats);
+    const result = await createOps.createOne(seed);
 
     return NextResponse.json({
       message: "MLBB stats seeded successfully",

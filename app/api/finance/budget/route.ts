@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { ReadOperations } from "@/lib/db/read";
+import client from "@/lib/mongodb";
 import { BudgetStats } from "@/types/finance";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {

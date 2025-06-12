@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
+import { DeleteOperations } from "@/lib/db/delete";
+import client from "@/lib/mongodb";
 import { RoomItem } from "@/types/room";
-import { BaseDocument } from "@/lib/db/types";
+import { NextResponse } from "next/server";
 
-const seedRoomItems: Omit<RoomItem, keyof BaseDocument>[] = [
+const seed = [
   // Peripherals
   { name: "Razer Basilisk V3", category: "peripherals", order: 1 },
   {
@@ -64,12 +64,13 @@ export async function POST(request: Request) {
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<RoomItem>(db, "room_items");
+    const deleteOps = new DeleteOperations<RoomItem>(db, "room_items");
 
     // Clear existing items
-    await db.collection("room_items").deleteMany({});
+    await deleteOps.deleteMany({});
 
     // Insert new items
-    const result = await createOps.createMany(seedRoomItems);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Room items seeded successfully",

@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
+import { DeleteOperations } from "@/lib/db/delete";
+import client from "@/lib/mongodb";
 import { TechStack } from "@/types/tech";
-import { BaseDocument } from "@/lib/db/types";
+import { NextResponse } from "next/server";
 
-const seedTechStack: Omit<TechStack, keyof BaseDocument>[] = [
+const seed = [
   { name: "Editor", value: "VS Code", order: 1 },
   { name: "Terminal", value: "Oh My Zsh", order: 2 },
   { name: "Framework", value: "Next.js", order: 3 },
@@ -25,12 +25,13 @@ export async function POST(request: Request) {
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<TechStack>(db, "tech_stack");
+    const deleteOps = new DeleteOperations<TechStack>(db, "tech_stack");
 
     // Clear existing items
-    await db.collection("tech_stack").deleteMany({});
+    await deleteOps.deleteMany({});
 
     // Insert new items
-    const result = await createOps.createMany(seedTechStack);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Tech stack seeded successfully",

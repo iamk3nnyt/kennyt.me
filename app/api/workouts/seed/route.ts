@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
+import { DeleteOperations } from "@/lib/db/delete";
+import client from "@/lib/mongodb";
 import { WorkoutActivity } from "@/types/workout";
-import { BaseDocument } from "@/lib/db/types";
+import { NextResponse } from "next/server";
 
-const seedWorkouts: Omit<WorkoutActivity, keyof BaseDocument>[] = [
+const seed = [
   {
     title: "Upper Body Strength",
     description:
@@ -40,16 +40,23 @@ const seedWorkouts: Omit<WorkoutActivity, keyof BaseDocument>[] = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<WorkoutActivity>(db, "workouts");
+    const deleteOps = new DeleteOperations<WorkoutActivity>(db, "workouts");
 
     // Clear existing workouts
-    await db.collection("workouts").deleteMany({});
+    await deleteOps.deleteMany({});
 
     // Insert new workouts
-    const result = await createOps.createMany(seedWorkouts);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       success: true,

@@ -115,7 +115,7 @@ async function Timeline() {
 
 async function Featured() {
   const db = client.db("kennyt");
-  const readOps = new ReadOperations<FeaturedArticle>(db, "blog_posts");
+  const readOps = new ReadOperations<FeaturedArticle>(db, "articles");
 
   const posts = await readOps.findMany(
     { featured: true },

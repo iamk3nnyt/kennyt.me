@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
+import { DeleteOperations } from "@/lib/db/delete";
+import client from "@/lib/mongodb";
 import { Bookmark } from "@/types/bookmark";
-import { BaseDocument } from "@/lib/db/types";
+import { NextResponse } from "next/server";
 
-const seedBookmarks: Omit<Bookmark, keyof BaseDocument>[] = [
+const seed = [
   {
     name: "Next.js Documentation",
     url: "https://nextjs.org/docs",
@@ -32,16 +32,23 @@ const seedBookmarks: Omit<Bookmark, keyof BaseDocument>[] = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<Bookmark>(db, "bookmarks");
+    const deleteOps = new DeleteOperations<Bookmark>(db, "bookmarks");
 
     // Clear existing bookmarks
-    await db.collection("bookmarks").deleteMany({});
+    await deleteOps.deleteMany({});
 
     // Insert new bookmarks
-    const result = await createOps.createMany(seedBookmarks);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Successfully seeded bookmarks",

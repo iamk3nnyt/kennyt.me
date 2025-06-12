@@ -1,14 +1,13 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
 import { DeleteOperations } from "@/lib/db/delete";
+import client from "@/lib/mongodb";
 import { Transaction } from "@/types/finance";
-import { BaseDocument } from "@/lib/db/types";
+import { NextResponse } from "next/server";
 
 const currentMonth = new Date().toLocaleString("default", { month: "long" });
 const currentYear = new Date().getFullYear();
 
-const seedTransactions: Omit<Transaction, keyof BaseDocument>[] = [
+const seed = [
   {
     amount: -45.99,
     category: "Groceries",
@@ -56,7 +55,13 @@ const seedTransactions: Omit<Transaction, keyof BaseDocument>[] = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<Transaction>(db, "transactions");
@@ -69,7 +74,7 @@ export async function POST() {
     } as Partial<Transaction>);
 
     // Insert new transactions
-    const result = await createOps.createMany(seedTransactions);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Transactions seeded successfully",

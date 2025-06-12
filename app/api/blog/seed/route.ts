@@ -1,58 +1,68 @@
 import { CreateOperations } from "@/lib/db/create";
-import { BaseDocument } from "@/lib/db/types";
+import { DeleteOperations } from "@/lib/db/delete";
 import client from "@/lib/mongodb";
 import { Article } from "@/types/blog";
 import { NextResponse } from "next/server";
 
-const seedPosts: Omit<Article, keyof BaseDocument>[] = [
+const seed = [
   {
-    slug: "building-a-type-safe-data-layer",
-    title: "Building a Type-Safe Data Layer with MongoDB and TypeScript",
+    slug: "crafting-design-system",
+    title: "Crafting a design system for a multiplanetary future",
+    date: "September 5, 2022",
     excerpt:
-      "Learn how to create a robust, type-safe data layer using MongoDB and TypeScript, ensuring type safety and better developer experience.",
-    content: "Full content here...",
-    date: new Date().toISOString(),
-    featured: true,
-    readTime: 8,
-    tags: ["typescript", "mongodb", "database", "backend"],
-    imageUrl: "/blog/data-layer.png",
+      "Most companies try to stay ahead of the curve when it comes to visual design. For Planetaria we needed to create a brand that would still inspire us 100 years from now when humanity has spread across our entire solar system.",
+    content: `
+      <p>Most companies try to stay ahead of the curve when it comes to visual design. For Planetaria we needed to create a brand that would still inspire us 100 years from now when humanity has spread across our entire solar system.</p>
+      <h2>Why a Design System?</h2>
+      <p>A design system is more than a set of UI components. It's a shared language for teams to build consistent, scalable products. For a multiplanetary future, this consistency is even more important.</p>
+      <ul>
+        <li>Unified branding across platforms</li>
+        <li>Reusable components for rapid development</li>
+        <li>Accessibility and performance at scale</li>
+      </ul>
+      <p>By investing in a robust design system, we ensure our products are ready for the challenges of tomorrow.</p>
+    `,
+    image: "/og.png",
   },
   {
-    slug: "nextjs-loading-states",
-    title: "Implementing Progressive Loading States in Next.js",
+    slug: "building-ai-applications",
+    title: "Building AI Applications with Next.js and OpenAI",
+    date: "March 15, 2023",
     excerpt:
-      "A deep dive into implementing loading states in Next.js applications, focusing on user experience and performance optimization.",
-    content: "Full content here...",
-    date: new Date().toISOString(),
-    featured: true,
-    readTime: 6,
-    tags: ["nextjs", "react", "frontend", "performance"],
-    imageUrl: "/blog/loading-states.png",
-  },
-  {
-    slug: "tailwind-css-best-practices",
-    title: "Tailwind CSS Best Practices for Modern Web Applications",
-    excerpt:
-      "Explore best practices and patterns for using Tailwind CSS in modern web applications, from component design to responsive layouts.",
-    content: "Full content here...",
-    date: new Date().toISOString(),
-    featured: false,
-    readTime: 5,
-    tags: ["tailwind", "css", "frontend", "design"],
-    imageUrl: "/blog/tailwind.png",
+      "Learn how to build powerful AI applications using Next.js and OpenAI's API. This guide covers everything from setting up your project to implementing advanced AI features.",
+    content: `
+      <p>Artificial Intelligence is transforming how we build applications. With Next.js and OpenAI, we can create powerful AI-driven experiences that were once only possible in science fiction.</p>
+      <h2>Getting Started</h2>
+      <p>Setting up an AI application requires careful consideration of both frontend and backend architecture. Here's how we can structure our application for optimal performance and user experience.</p>
+      <ul>
+        <li>Setting up Next.js with TypeScript</li>
+        <li>Integrating OpenAI's API</li>
+        <li>Building a responsive UI</li>
+        <li>Implementing error handling</li>
+      </ul>
+      <p>By following these steps, you'll have a solid foundation for building AI-powered applications.</p>
+    `,
+    image: "/ai-app.png",
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
-    const createOps = new CreateOperations<Article>(db, "blog_posts");
+    const createOps = new CreateOperations<Article>(db, "articles");
+    const deleteOps = new DeleteOperations<Article>(db, "articles");
 
     // Clear existing posts
-    await db.collection("blog_posts").deleteMany({});
+    await deleteOps.deleteMany({});
 
     // Insert new posts
-    const result = await createOps.createMany(seedPosts);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Successfully seeded blog posts",

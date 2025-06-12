@@ -1,10 +1,9 @@
-import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
 import { CreateOperations } from "@/lib/db/create";
+import client from "@/lib/mongodb";
 import { SeasonHistory } from "@/types/gaming";
-import { BaseDocument } from "@/lib/db/types";
+import { NextResponse } from "next/server";
 
-const seedSeasons: Omit<SeasonHistory, keyof BaseDocument>[] = [
+const seed = [
   {
     period: "2025/03 - 2025/06",
     rank: "Mythical Honor",
@@ -31,7 +30,13 @@ const seedSeasons: Omit<SeasonHistory, keyof BaseDocument>[] = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
     const db = client.db("kennyt");
     const createOps = new CreateOperations<SeasonHistory>(db, "mlbb_seasons");
@@ -40,7 +45,7 @@ export async function POST() {
     await db.collection("mlbb_seasons").deleteMany({});
 
     // Insert new seasons
-    const result = await createOps.createMany(seedSeasons);
+    const result = await createOps.createMany(seed);
 
     return NextResponse.json({
       message: "Successfully seeded season history",
