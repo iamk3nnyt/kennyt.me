@@ -1,7 +1,7 @@
 import { AppImage } from "@/components/app-image";
 import { getArticles } from "@/lib/data/blog";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
   const posts = await getArticles();

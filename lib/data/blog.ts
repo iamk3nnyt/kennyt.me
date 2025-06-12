@@ -20,6 +20,7 @@ export async function getArticles(filter: Filter<Article> = {}) {
       excerpt: 1,
       date: 1,
       image: 1,
+      content: 1,
     },
     sort: { date: -1 },
   });
@@ -164,7 +165,37 @@ export async function deleteAllFeaturedArticles() {
   return deleteOps.deleteMany({});
 }
 
-// Helper functions
+export async function getPaginatedArticles(page: number, limit: number) {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<Article>(db, "articles");
+
+  return readOps.findPaginated(
+    {},
+    {
+      page,
+      limit,
+      sort: { date: -1 },
+    },
+    {
+      projection: {
+        _id: 0,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
+        image: 1,
+      },
+    },
+  );
+}
+
+export async function getArticleCount() {
+  const db = client.db("kennyt");
+  const readOps = new ReadOperations<Article>(db, "articles");
+
+  return readOps.count({});
+}
+
 export async function getArticlesByDateRange(
   startDate: string,
   endDate: string,
