@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "Successfully seeded projects",
       count: result.length,
-      projects: result,
+      items: result,
     });
   } catch (error) {
     console.error("Error seeding projects:", error);

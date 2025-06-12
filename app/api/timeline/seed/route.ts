@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "Successfully seeded timeline entries",
       count: result.length,
-      entries: result,
+      items: result,
     });
   } catch (error) {
     console.error("Error seeding timeline:", error);

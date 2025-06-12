@@ -1,8 +1,7 @@
 import { AppImage } from "@/components/app-image";
 import { getBookmarks } from "@/lib/data/bookmarks";
+import { getRoomItems } from "@/lib/data/room";
 import { getSocialLinks } from "@/lib/data/social";
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
 import { RoomItem } from "@/types/room";
 import {
   Gamepad2,
@@ -131,16 +130,7 @@ const categoryIcons = {
 } as const;
 
 async function Room() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<RoomItem>(db, "room_items");
-
-  const items = await readOps.findMany(
-    {},
-    {
-      projection: { _id: 0, name: 1, category: 1 },
-      sort: { category: 1, order: 1 },
-    },
-  );
+  const items = await getRoomItems();
 
   // Group items by category
   const categories = items.reduce(

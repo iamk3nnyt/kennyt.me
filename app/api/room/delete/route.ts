@@ -1,6 +1,4 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { RoomItem } from "@/types/room";
+import { deleteAllRoomItems } from "@/lib/data/room";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
@@ -11,10 +9,7 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<RoomItem>(db, "room_items");
-
-    const result = await deleteOps.deleteMany({});
+    const result = await deleteAllRoomItems();
 
     return NextResponse.json({
       message: "Room setup deleted successfully",

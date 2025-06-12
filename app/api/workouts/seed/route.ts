@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "Successfully seeded workouts",
       count: result.length,
-      workouts: result,
+      items: result,
     });
   } catch (error) {
     console.error("Error seeding workouts:", error);

@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "Successfully seeded social links",
       count: result.length,
-      links: result,
+      items: result,
     });
   } catch (error) {
     console.error("Error seeding social links:", error);
