@@ -57,7 +57,6 @@ The project uses lint-staged to automatically format code with Prettier before c
 2. **Current Configuration**
 
    ```json
-   // package.json
    {
      "lint-staged": {
        "*.{ts,tsx,js,jsx,json,md}": "prettier --write"
