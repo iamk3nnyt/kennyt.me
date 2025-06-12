@@ -93,20 +93,6 @@ The application implements a robust error handling system using Next.js 13+ erro
     message: string;
   }
   ```
-- HTTP status codes for different error types:
-  - 400: Bad Request
-  - 401: Unauthorized
-  - 403: Forbidden
-  - 404: Not Found
-  - 500: Internal Server Error
-
-### Error Handling Best Practices
-
-1. **Server Components**: Errors in server components are caught by the nearest error boundary
-2. **Client Components**: Use try-catch blocks for client-side error handling
-3. **API Routes**: Implement proper error handling and status codes
-4. **Type Safety**: Use TypeScript for compile-time error prevention
-5. **Error Logging**: Console logging for development, can be extended to production logging services
 
 For more information about Next.js error handling, refer to the [official documentation](https://nextjs.org/docs/app/getting-started/error-handling).
 
