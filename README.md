@@ -183,26 +183,6 @@ If the secret header is missing or incorrect, the API will return a 403 Forbidde
   "error": "Unauthorized"
 }
 ```
-
-### Security Best Practices
-
-1. **Environment Variables**
-
-   - Store the secret in `.env.local` for development
-   - Use a secure secret management system in production
-   - Never commit secrets to version control
-
-2. **Request Validation**
-
-   - Always validate the secret header
-   - Use HTTPS in production
-   - Consider implementing rate limiting
-
-3. **Error Handling**
-   - Return appropriate status codes
-   - Don't expose sensitive information in error messages
-   - Log security-related events
-
 ---
 
 ## 📝 Contributing
