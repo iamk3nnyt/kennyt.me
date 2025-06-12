@@ -40,6 +40,57 @@ A modern, feature-rich portfolio template built with Next.js 15+ and TypeScript.
 - **SEO:** Next.js Metadata API, Open Graph, Twitter Card, JSON-LD
 - **Other:** Lucide Icons, Google Favicon API
 
+## 🔍 Code Quality
+
+The project uses lint-staged to automatically format code with Prettier before commits. This ensures consistent code style across the project. The setup is minimal but extensible, allowing you to add more complex code quality checks as needed.
+
+### Pre-commit Setup
+
+1. **Installation**
+
+   ```bash
+   pnpm install
+   ```
+
+   This will automatically set up lint-staged.
+
+2. **Current Configuration**
+
+   ```json
+   // package.json
+   {
+     "lint-staged": {
+       "*.{ts,tsx,js,jsx,json,md}": "prettier --write"
+     }
+   }
+   ```
+
+3. **Extending the Setup**
+   You can enhance the pre-commit checks by adding more tools to lint-staged. Common additions include:
+
+   - ESLint for code linting
+   - TypeScript type checking
+   - Unit tests
+   - Custom scripts
+
+   Example of an extended configuration:
+
+   ```json
+   {
+     "lint-staged": {
+       "*.{ts,tsx}": ["prettier --write", "eslint --fix", "tsc-files --noEmit"],
+       "*.{js,jsx}": ["prettier --write", "eslint --fix"],
+       "*.{json,md}": "prettier --write"
+     }
+   }
+   ```
+
+4. **Skipping Formatting**
+   ```bash
+   git commit -m "your message" --no-verify
+   ```
+   ⚠️ Use with caution - only skip checks when absolutely necessary.
+
 ## 💾 Data Layer
 
 The application uses a type-safe data layer built with MongoDB and TypeScript. The data layer is organized into two main components:
