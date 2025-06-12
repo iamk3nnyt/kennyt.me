@@ -1,27 +1,23 @@
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
-import { Transaction } from "@/types/finance";
+import { getTransactionsByDateRange } from "@/lib/data/finance";
 import { Stats } from "./components";
 
 export default async function FinancePage() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<Transaction>(db, "transactions");
+  // Get current month's start and end dates
+  const now = new Date();
+  const startOfMonth = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    1,
+  ).toISOString();
+  const endOfMonth = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    0,
+  ).toISOString();
 
-  const transactions = await readOps.findMany(
-    {},
-    {
-      projection: {
-        _id: 1,
-        amount: 1,
-        category: 1,
-        description: 1,
-        date: 1,
-        type: 1,
-        month: 1,
-        year: 1,
-      },
-      sort: { date: -1 },
-    },
+  const transactions = await getTransactionsByDateRange(
+    startOfMonth,
+    endOfMonth,
   );
 
   return (
@@ -60,7 +56,13 @@ export default async function FinancePage() {
               <li key={item._id} className="mb-10 ml-4">
                 <div className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full border-2 border-[#232326] bg-blue-500" />
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[#88888C]">{item.date}</span>
+                  <span className="text-sm text-[#88888C]">
+                    {new Date(item.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
                   <span
                     className={`text-sm font-semibold ${
                       item.type === "expense"

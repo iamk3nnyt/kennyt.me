@@ -1,6 +1,4 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { Transaction } from "@/types/finance";
+import { deleteAllTransactions } from "@/lib/data/finance";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
@@ -11,14 +9,11 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<Transaction>(db, "transactions");
-
-    const deletedCount = await deleteOps.deleteMany({});
+    const result = await deleteAllTransactions();
 
     return NextResponse.json({
       message: "Transactions deleted successfully",
-      deletedCount,
+      count: result,
     });
   } catch (error) {
     console.error("Error deleting transactions:", error);
