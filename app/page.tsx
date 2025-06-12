@@ -1,10 +1,10 @@
 import { AppImage } from "@/components/app-image";
+import { getTimelineEntries } from "@/lib/data/timeline";
 import { ReadOperations } from "@/lib/db/read";
 import client from "@/lib/mongodb";
 import { cn } from "@/lib/utils";
 import { FeaturedArticle } from "@/types/blog";
 import { TechStack } from "@/types/tech";
-import { TimelineEntry } from "@/types/timeline";
 import Link from "next/link";
 
 function Gallery() {
@@ -55,25 +55,14 @@ function Gallery() {
 }
 
 async function Timeline() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<TimelineEntry>(db, "timeline");
+  const twoYearsAgo = new Date();
+  twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
-  const entries = await readOps.findMany(
-    {},
-    {
-      projection: {
-        _id: 0,
-        company: 1,
-        role: 1,
-        period: 1,
-        description: 1,
-        location: 1,
-        skills: 1,
-        achievements: 1,
-      },
-      sort: { startDate: -1 },
+  const entries = await getTimelineEntries({
+    startDate: {
+      $gte: twoYearsAgo,
     },
-  );
+  });
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">

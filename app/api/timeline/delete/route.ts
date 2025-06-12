@@ -1,6 +1,4 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { TimelineEntry } from "@/types/timeline";
+import { deleteAllTimelineEntries } from "@/lib/data/timeline";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
@@ -11,10 +9,7 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<TimelineEntry>(db, "timeline");
-
-    const result = await deleteOps.deleteMany({});
+    const result = await deleteAllTimelineEntries();
 
     return NextResponse.json({
       message: "Timeline entries deleted successfully",
