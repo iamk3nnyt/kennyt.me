@@ -218,29 +218,3 @@ Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.m
 ## 📄 License
 
 This project is [MIT licensed](./LICENSE).
-
-## TODO List
-
-### Features
-
-- [ ] Add search functionality for blog posts
-- [ ] Implement pagination for blog posts list
-- [ ] Create an RSS feed for blog posts
-- [ ] Add social media sharing buttons
-- [ ] Add a newsletter subscription system
-
-### Security
-
-- [ ] Add rate limiting for API endpoints
-- [ ] Implement proper input validation
-- [ ] Add proper security headers
-- [ ] Set up proper backup strategy
-- [ ] Implement proper logging strategy
-
-### Technical Improvements
-
-- [ ] Add performance monitoring and analytics
-- [ ] Implement proper SEO meta tags
-- [ ] Add proper sitemap generation
-- [ ] Set up CI/CD pipeline
-- [ ] Add proper documentation for API endpoints
