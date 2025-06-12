@@ -1,8 +1,15 @@
 # kennyt.me
 
-A modern, personal portfolio and blog
+A modern, feature-rich portfolio template built with Next.js 15+ and TypeScript. This template serves as a starting point for developers looking to create their own personal portfolio website, featuring a blog, project showcase, and various interactive sections.
 
----
+## ✨ Why This Template?
+
+- **Production-Ready**: Built with best practices and modern web standards
+- **Fully Featured**: Includes blog, projects, tech stack, and more
+- **Type-Safe**: Built with TypeScript for better development experience
+- **Customizable**: Easy to modify and extend to fit your needs
+- **Well-Documented**: Comprehensive documentation and clear code structure
+- **Modern Stack**: Uses Next.js App Router, Tailwind CSS, and MongoDB
 
 ## 🚀 Features
 
@@ -183,6 +190,7 @@ If the secret header is missing or incorrect, the API will return a 403 Forbidde
   "error": "Unauthorized"
 }
 ```
+
 ---
 
 ## 📝 Contributing
