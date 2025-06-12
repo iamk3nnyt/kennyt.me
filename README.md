@@ -21,7 +21,8 @@ A modern, personal portfolio and blog for Kenny Tran – full stack developer, f
 
 <!-- Add screenshots here -->
 
-## ![screenshot](./public/og.png)
+![og](./public/og.png)
+![about](./public/about.png)
 
 ## 🛠️ Tech Stack
 
