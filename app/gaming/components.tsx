@@ -67,10 +67,10 @@ export function Stats() {
         }
         const data: MLBBStats = await response.json();
 
-        setStats([
-          { ...stats[0], value: data.matches },
-          { ...stats[1], value: data.winRate },
-          { ...stats[2], value: data.mvp },
+        setStats((prevStats) => [
+          { ...prevStats[0], value: data.matches },
+          { ...prevStats[1], value: data.winRate },
+          { ...prevStats[2], value: data.mvp },
         ]);
 
         setIsLoading(false);

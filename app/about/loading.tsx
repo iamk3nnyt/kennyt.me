@@ -1,14 +1,3 @@
-import { AppImage } from "@/components/app-image";
-import {
-  Gamepad2,
-  Headphones,
-  Laptop,
-  Monitor,
-  Smartphone,
-  Sofa,
-  Watch,
-} from "lucide-react";
-
 function Intro() {
   return (
     <section className="mx-auto mb-16 max-w-2xl">

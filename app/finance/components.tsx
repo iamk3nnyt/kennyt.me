@@ -113,12 +113,12 @@ export function Stats() {
         }
         const data: BudgetStats = await response.json();
 
-        setStats([
-          { ...stats[0], value: data.totalBudget },
-          { ...stats[1], value: data.totalSpent },
-          { ...stats[2], value: data.remaining },
-          { ...stats[3], value: data.netIncome },
-          { ...stats[4], value: data.transactionCount },
+        setStats((prevStats) => [
+          { ...prevStats[0], value: data.totalBudget },
+          { ...prevStats[1], value: data.totalSpent },
+          { ...prevStats[2], value: data.remaining },
+          { ...prevStats[3], value: data.netIncome },
+          { ...prevStats[4], value: data.transactionCount },
         ]);
 
         setCategoryTotals(data.categoryTotals);

@@ -1,28 +1,9 @@
 import { AppImage } from "@/components/app-image";
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
-import { Article } from "@/types/blog";
+import { getArticles } from "@/lib/data/blog";
 import Link from "next/link";
 
 export default async function BlogPage() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<Article>(db, "articles");
-
-  const posts = await readOps.findMany(
-    {},
-    {
-      projection: {
-        _id: 0,
-        slug: 1,
-        title: 1,
-        excerpt: 1,
-        date: 1,
-        readTime: 1,
-        tags: 1,
-      },
-      sort: { date: -1 }, // Sort by date in descending order
-    },
-  );
+  const posts = await getArticles();
 
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">

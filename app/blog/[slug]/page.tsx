@@ -1,28 +1,9 @@
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
-import { Article } from "@/types/blog";
+import { getArticleBySlug } from "@/lib/data/blog";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 async function getArticle(slug: string) {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<Article>(db, "articles");
-
-  const article = await readOps.findOne(
-    { slug },
-    {
-      projection: {
-        _id: 1,
-        slug: 1,
-        title: 1,
-        excerpt: 1,
-        date: 1,
-        content: 1,
-        image: 1,
-      },
-    },
-  );
-
+  const article = await getArticleBySlug(slug);
   return article;
 }
 

@@ -1,10 +1,8 @@
 import { AppImage } from "@/components/app-image";
+import { getFeaturedArticles } from "@/lib/data/blog";
 import { getTechStack } from "@/lib/data/tech";
 import { getTimelineEntries } from "@/lib/data/timeline";
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
 import { cn } from "@/lib/utils";
-import { FeaturedArticle } from "@/types/blog";
 import Link from "next/link";
 
 function Gallery() {
@@ -103,16 +101,7 @@ async function Timeline() {
 }
 
 async function Featured() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<FeaturedArticle>(db, "articles");
-
-  const posts = await readOps.findMany(
-    { featured: true },
-    {
-      projection: { _id: 0, slug: 1, title: 1, excerpt: 1, date: 1 },
-      sort: { date: -1 }, // Sort by date in descending order
-    },
-  );
+  const posts = await getFeaturedArticles();
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">
@@ -136,7 +125,7 @@ async function Featured() {
           {posts.map((post, index) => (
             <article key={post.slug} className={cn(index ? "py-6" : "pb-6")}>
               <h3 className="mb-1 text-2xl font-semibold text-white">
-                <Link href={`/${post.slug}`} className="hover:underline">
+                <Link href={`/blog/${post.slug}`} className="hover:underline">
                   {post.title}
                 </Link>
               </h3>
@@ -149,7 +138,7 @@ async function Featured() {
               </time>
               <p className="mb-2 text-[#B0B0B0]">{post.excerpt}</p>
               <Link
-                href={`/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="inline-block text-sm text-blue-400 transition hover:text-blue-300"
               >
                 Read more →
