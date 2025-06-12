@@ -6,6 +6,12 @@ import { GalleryShowcase } from "./components/gallery-showcase";
 import { NotFoundShowcase } from "./components/not-found-showcase";
 import { TimelineShowcase } from "./components/timeline-showcase";
 import { TechstackShowcase } from "./components/techstack-showcase";
+import { ConnectShowcase } from "./components/connect-showcase";
+import { BookmarksShowcase } from "./components/bookmarks-showcase";
+import { RoomShowcase } from "./components/room-showcase";
+import { FinanceStatsShowcase } from "./components/finance-stats-showcase";
+import { FinanceCategoriesShowcase } from "./components/finance-categories-showcase";
+import { FinanceTimelineShowcase } from "./components/finance-timeline-showcase";
 
 export const metadata: Metadata = {
   title: "Components - Kenny Tran's Component Library",
@@ -92,6 +98,12 @@ export default function ComponentsPage() {
             <TimelineShowcase />
             <FeaturedShowcase />
             <TechstackShowcase />
+            <ConnectShowcase />
+            <BookmarksShowcase />
+            <RoomShowcase />
+            <FinanceStatsShowcase />
+            <FinanceCategoriesShowcase />
+            <FinanceTimelineShowcase />
             <ErrorShowcase />
             <NotFoundShowcase />
           </div>

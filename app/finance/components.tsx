@@ -192,7 +192,7 @@ export function Stats() {
           {Object.entries(categoryTotals).map(([category, amount], idx) => (
             <div
               key={idx}
-              className="flex items-center justify-between rounded-xl border border-[#232326] bg-[#18181B] p-4"
+              className="flex flex-col gap-4 rounded-xl border border-[#232326] bg-[#18181B] p-4 sm:flex-row sm:items-center sm:justify-between"
             >
               <span className="text-sm font-medium text-[#B0B0B0] capitalize">
                 {category}
