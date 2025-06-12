@@ -32,7 +32,7 @@ export function FeaturedShowcase() {
       title="Featured"
       description="A component for displaying featured articles with titles, dates, excerpts, and read more links."
       demo={
-        <div className="p-4">
+        <div className="sm:p-4">
           <div className="divide-y divide-[#232326]">
             {posts.map((post, index) => (
               <article key={post.slug} className={cn(index ? "py-6" : "pb-6")}>

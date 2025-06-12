@@ -5,6 +5,7 @@ import { FeaturedShowcase } from "./components/featured-showcase";
 import { GalleryShowcase } from "./components/gallery-showcase";
 import { NotFoundShowcase } from "./components/not-found-showcase";
 import { TimelineShowcase } from "./components/timeline-showcase";
+import { TechstackShowcase } from "./components/techstack-showcase";
 
 export const metadata: Metadata = {
   title: "Components - Kenny Tran's Component Library",
@@ -90,6 +91,7 @@ export default function ComponentsPage() {
             <GalleryShowcase />
             <TimelineShowcase />
             <FeaturedShowcase />
+            <TechstackShowcase />
             <ErrorShowcase />
             <NotFoundShowcase />
           </div>
