@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import {
   Briefcase,
+  Code2,
   Dumbbell,
   FileText,
   Gamepad2,
@@ -22,6 +23,7 @@ const navigation = [
   { href: "/gaming", label: "Gaming", icon: Gamepad2 },
   { href: "/workout", label: "Workout", icon: Dumbbell },
   { href: "/finance", label: "Finance", icon: Wallet },
+  { href: "/components", label: "Components", icon: Code2 },
 ];
 
 export function Navigation() {

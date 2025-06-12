@@ -33,6 +33,10 @@ const header = {
     title: "Finance",
     subtitle: "Personal budget tracking and financial insights.",
   },
+  "/components": {
+    title: "Components",
+    subtitle: "Explore and reuse the components used in kennyt.me.",
+  },
 };
 
 export function Header() {
