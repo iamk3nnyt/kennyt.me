@@ -112,8 +112,6 @@ For more information about Next.js error handling, refer to the [official docume
 
 ## API Security
 
-### Generating a Secure Secret
-
 You can generate a secure secret using Node.js's crypto module. Here are a few methods:
 
 1. **Using Node.js (Recommended)**
