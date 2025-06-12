@@ -20,11 +20,11 @@ function getTypeColor(type: WorkoutActivity["type"]) {
 }
 
 export const metadata: Metadata = {
-  title: "Workout Journey - Kenny Tran's Fitness Activities",
+  title: "Workout - Kenny Tran's Fitness Activities",
   description:
     "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
   openGraph: {
-    title: "Workout Journey - Kenny Tran's Fitness Activities",
+    title: "Workout - Kenny Tran's Fitness Activities",
     description:
       "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
     url: "/workout",
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
         url: "/workout.png",
         width: 1200,
         height: 630,
-        alt: "Kenny Tran's Workout Journey",
+        alt: "Kenny Tran's Workout",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Workout Journey - Kenny Tran's Fitness Activities",
+    title: "Workout - Kenny Tran's Fitness Activities",
     description:
       "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
     images: ["/workout.png"],
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     "application/ld+json": JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebPage",
-      name: "Workout Journey - Kenny Tran's Fitness Activities",
+      name: "Workout - Kenny Tran's Fitness Activities",
       description:
         "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
       url: BASE_URL + "/workout",
