@@ -1,7 +1,9 @@
 import { BASE_URL } from "@/constants";
 import type { Metadata } from "next";
 import { ErrorShowcase } from "./components/error-showcase";
+import { GalleryShowcase } from "./components/gallery-showcase";
 import { NotFoundShowcase } from "./components/not-found-showcase";
+import { TimelineShowcase } from "./components/timeline-showcase";
 
 export const metadata: Metadata = {
   title: "Components - Kenny Tran's Component Library",
@@ -84,6 +86,8 @@ export default function ComponentsPage() {
             UI Components
           </h2>
           <div className="flex flex-col gap-y-6">
+            <GalleryShowcase />
+            <TimelineShowcase />
             <ErrorShowcase />
             <NotFoundShowcase />
           </div>
