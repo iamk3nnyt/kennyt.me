@@ -1,9 +1,9 @@
 import { AppImage } from "@/components/app-image";
 import { getBookmarks } from "@/lib/data/bookmarks";
+import { getSocialLinks } from "@/lib/data/social";
 import { ReadOperations } from "@/lib/db/read";
 import client from "@/lib/mongodb";
 import { RoomItem } from "@/types/room";
-import { SocialLink } from "@/types/social";
 import {
   Gamepad2,
   Headphones,
@@ -29,16 +29,7 @@ function Intro() {
 }
 
 async function Connect() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<SocialLink>(db, "social_links");
-
-  const socials = await readOps.findMany(
-    {},
-    {
-      projection: { _id: 0, name: 1, url: 1, icon: 1 },
-      sort: { order: 1 },
-    },
-  );
+  const socials = await getSocialLinks();
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">

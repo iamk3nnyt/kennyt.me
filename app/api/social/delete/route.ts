@@ -1,6 +1,4 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { SocialLink } from "@/types/social";
+import { deleteAllSocialLinks } from "@/lib/data/social";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
@@ -11,10 +9,7 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<SocialLink>(db, "social_links");
-
-    const result = await deleteOps.deleteMany({});
+    const result = await deleteAllSocialLinks();
 
     return NextResponse.json({
       message: "Social links deleted successfully",
