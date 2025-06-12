@@ -54,7 +54,7 @@ export function FinanceStatsShowcase() {
       description="A collection of financial metrics and statistics that provide insights into monthly budget, expenses, and overall financial health."
       demo={
         <div className="sm:p-4">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-xl font-semibold text-white">Monthly Budget</h2>
             <div className="flex items-center gap-2 text-sm text-[#B0B0B0]">
               <Calendar className="h-4 w-4" />
