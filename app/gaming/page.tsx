@@ -2,6 +2,74 @@ import { AppImage } from "@/components/app-image";
 import { getHeroes, getSeasonHistory } from "@/lib/data/gaming";
 import { Crown } from "lucide-react";
 import { Stats } from "./components";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Gaming - Kenny Tran's MLBB Journey",
+  description:
+    "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
+  openGraph: {
+    title: "Gaming - Kenny Tran's MLBB Journey",
+    description:
+      "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
+    url: "/gaming",
+    type: "website",
+    images: [
+      {
+        url: "/gaming.png",
+        width: 1200,
+        height: 630,
+        alt: "Kenny Tran's Mobile Legends: Bang Bang Journey",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gaming - Kenny Tran's MLBB Journey",
+    description:
+      "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
+    images: ["/gaming.png"],
+    creator: "@itsk3nny_",
+  },
+  alternates: {
+    canonical: "/gaming",
+  },
+  other: {
+    "application/ld+json": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Gaming - Kenny Tran's MLBB Journey",
+      description:
+        "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
+      url: "https://www.kennyt.me/gaming",
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: [],
+      },
+      author: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://www.kennyt.me/gaming",
+      },
+      about: {
+        "@type": "Game",
+        name: "Mobile Legends: Bang Bang",
+        genre: "MOBA",
+        publisher: "Moonton",
+        url: "https://m.mobilelegends.com",
+      },
+    }),
+  },
+};
 
 async function Heroes() {
   const heroes = await getHeroes();

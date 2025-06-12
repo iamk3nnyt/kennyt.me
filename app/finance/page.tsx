@@ -1,5 +1,76 @@
 import { getTransactionsByDateRange } from "@/lib/data/finance";
 import { Stats } from "./components";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Finance - Kenny Tran's Personal Finance Tracker",
+  description:
+    "Track my personal finances, including monthly budget allocation, spending patterns, and financial goals. I use this to maintain a clear overview of my expenses and income streams.",
+  openGraph: {
+    title: "Finance - Kenny Tran's Personal Finance Tracker",
+    description:
+      "Track my personal finances, including monthly budget allocation, spending patterns, and financial goals. I use this to maintain a clear overview of my expenses and income streams.",
+    url: "/finance",
+    type: "website",
+    images: [
+      {
+        url: "/finance.png",
+        width: 1200,
+        height: 630,
+        alt: "Kenny Tran's Personal Finance Tracker",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Finance - Kenny Tran's Personal Finance Tracker",
+    description:
+      "Track my personal finances, including monthly budget allocation, spending patterns, and financial goals. I use this to maintain a clear overview of my expenses and income streams.",
+    images: ["/finance.png"],
+    creator: "@itsk3nny_",
+  },
+  alternates: {
+    canonical: "/finance",
+  },
+  other: {
+    "application/ld+json": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Finance - Kenny Tran's Personal Finance Tracker",
+      description:
+        "Track my personal finances, including monthly budget allocation, spending patterns, and financial goals. I use this to maintain a clear overview of my expenses and income streams.",
+      url: "https://www.kennyt.me/finance",
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: [],
+      },
+      author: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://www.kennyt.me/finance",
+      },
+      about: {
+        "@type": "FinancialProduct",
+        name: "Personal Finance Tracker",
+        category: "Budget Management",
+        provider: {
+          "@type": "Person",
+          name: "Kenny Tran",
+          url: "https://www.kennyt.me/about",
+        },
+      },
+    }),
+  },
+};
 
 export default async function FinancePage() {
   // Get current month's start and end dates

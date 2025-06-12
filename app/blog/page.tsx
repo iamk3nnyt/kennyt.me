@@ -1,6 +1,113 @@
 import { AppImage } from "@/components/app-image";
 import { getArticles } from "@/lib/data/blog";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const posts = await getArticles();
+
+  return {
+    title: "Blog - Kenny Tran's Writings on Design & Development",
+    description:
+      "Explore my thoughts, tutorials, and stories on design, development, and the creative process. Here you'll find my latest articles and essays.",
+    openGraph: {
+      title: "Blog - Kenny Tran's Writings on Design & Development",
+      description:
+        "Explore my thoughts, tutorials, and stories on design, development, and the creative process. Here you'll find my latest articles and essays.",
+      url: "/blog",
+      type: "website",
+      images: [
+        {
+          url: "/blog.png",
+          width: 1200,
+          height: 630,
+          alt: "Kenny Tran's Blog - Design & Development",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Blog - Kenny Tran's Writings on Design & Development",
+      description:
+        "Explore my thoughts, tutorials, and stories on design, development, and the creative process. Here you'll find my latest articles and essays.",
+      images: ["/blog.png"],
+      creator: "@itsk3nny_",
+    },
+    alternates: {
+      canonical: "/blog",
+    },
+    other: {
+      "application/ld+json": JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        headline: "Kenny Tran's Blog",
+        description:
+          "Explore my thoughts, tutorials, and stories on design, development, and the creative process. Here you'll find my latest articles and essays.",
+        url: "https://www.kennyt.me/blog",
+        inLanguage: "en-US",
+        isAccessibleForFree: true,
+        isFamilyFriendly: true,
+        author: {
+          "@type": "Person",
+          name: "Kenny Tran",
+          url: "https://www.kennyt.me/about",
+        },
+        publisher: {
+          "@type": "Person",
+          name: "Kenny Tran",
+          url: "https://www.kennyt.me/about",
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": "https://www.kennyt.me/blog",
+        },
+        about: {
+          "@type": "Thing",
+          name: "Design & Development",
+          description:
+            "Articles and essays about design, development, and the creative process",
+        },
+        blogPosts: posts.map((post, index) => ({
+          "@type": "BlogPosting",
+          "@id": `https://www.kennyt.me/blog/${post.slug}`,
+          headline: post.title,
+          description: post.excerpt,
+          articleBody: post.content,
+          wordCount: post.content.split(/\s+/).length,
+          datePublished: post.date,
+          dateModified: post.date,
+          inLanguage: "en-US",
+          isAccessibleForFree: true,
+          isFamilyFriendly: true,
+          author: {
+            "@type": "Person",
+            name: "Kenny Tran",
+            url: "https://www.kennyt.me/about",
+          },
+          publisher: {
+            "@type": "Person",
+            name: "Kenny Tran",
+            url: "https://www.kennyt.me/about",
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://www.kennyt.me/blog/${post.slug}`,
+          },
+          image: post.image
+            ? {
+                "@type": "ImageObject",
+                url: post.image,
+                width: "1200",
+                height: "630",
+              }
+            : undefined,
+          position: index + 1,
+          keywords: ["design", "development", "web", "tutorial", "essay"],
+        })),
+      }),
+    },
+  };
+}
 
 export default async function BlogPage() {
   const posts = await getArticles();

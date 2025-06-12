@@ -12,6 +12,73 @@ import {
   Sofa,
   Watch,
 } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Kenny Tran - Full Stack Developer & Designer",
+  description:
+    "Learn more about Kenny Tran, a full stack developer, designer, and founder passionate about building beautiful, performant web experiences. Explore my workspace setup, social links, and bookmarks.",
+  openGraph: {
+    title: "About Kenny Tran - Full Stack Developer & Designer",
+    description:
+      "Learn more about Kenny Tran, a full stack developer, designer, and founder passionate about building beautiful, performant web experiences. Explore my workspace setup, social links, and bookmarks.",
+    url: "/about",
+    type: "profile",
+    images: [
+      {
+        url: "/about.png",
+        width: 1200,
+        height: 630,
+        alt: "Kenny Tran - Full Stack Developer & Designer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Kenny Tran - Full Stack Developer & Designer",
+    description:
+      "Learn more about Kenny Tran, a full stack developer, designer, and founder passionate about building beautiful, performant web experiences. Explore my workspace setup, social links, and bookmarks.",
+    images: ["/og.png"],
+    creator: "@itsk3nny_",
+  },
+  alternates: {
+    canonical: "/about",
+  },
+  other: {
+    "application/ld+json": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Kenny Tran",
+      url: "https://www.kennyt.me/about",
+      jobTitle: "Full Stack Developer, Designer, Founder",
+      description:
+        "Full stack developer, designer, and founder passionate about building beautiful, performant web experiences.",
+      worksFor: {
+        "@type": "Organization",
+        name: "Ketryon",
+        url: "https://ketryon.com",
+        description:
+          "A technology company focused on building innovative web solutions",
+        sameAs: ["https://twitter.com/ketryon", "https://github.com/ketryon"],
+      },
+      alumniOf: {
+        "@type": "Organization",
+        name: "Ketryon",
+        url: "https://ketryon.com",
+      },
+      image: {
+        "@type": "ImageObject",
+        url: "https://www.kennyt.me/avatar.png",
+        width: "400",
+        height: "400",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://www.kennyt.me/about",
+      },
+    }),
+  },
+};
 
 function Intro() {
   return (

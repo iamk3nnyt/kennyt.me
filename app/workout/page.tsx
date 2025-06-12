@@ -1,6 +1,7 @@
 import { getRecentWorkouts } from "@/lib/data/workouts";
 import { cn } from "@/lib/utils";
 import { WorkoutActivity } from "@/types/workout";
+import type { Metadata } from "next";
 
 function getTypeColor(type: WorkoutActivity["type"]) {
   switch (type) {
@@ -16,6 +17,66 @@ function getTypeColor(type: WorkoutActivity["type"]) {
       return "text-white";
   }
 }
+
+export const metadata: Metadata = {
+  title: "Workout Journey - Kenny Tran's Fitness Activities",
+  description:
+    "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
+  openGraph: {
+    title: "Workout Journey - Kenny Tran's Fitness Activities",
+    description:
+      "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
+    url: "/workout",
+    type: "website",
+    images: [
+      {
+        url: "/workout.png",
+        width: 1200,
+        height: 630,
+        alt: "Kenny Tran's Workout Journey",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Workout Journey - Kenny Tran's Fitness Activities",
+    description:
+      "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
+    images: ["/workout.png"],
+    creator: "@itsk3nny_",
+  },
+  alternates: {
+    canonical: "/workout",
+  },
+  other: {
+    "application/ld+json": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Workout Journey - Kenny Tran's Fitness Activities",
+      description:
+        "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
+      url: "https://www.kennyt.me/workout",
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: [],
+      },
+      author: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://www.kennyt.me/workout",
+      },
+    }),
+  },
+};
 
 export default async function WorkoutPage() {
   const activities = await getRecentWorkouts();

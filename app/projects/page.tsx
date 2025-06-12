@@ -1,5 +1,66 @@
 import { AppImage } from "@/components/app-image";
 import { getProjects } from "@/lib/data/projects";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects - Kenny Tran's Portfolio Showcase",
+  description:
+    "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
+  openGraph: {
+    title: "Projects - Kenny Tran's Portfolio Showcase",
+    description:
+      "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
+    url: "/projects",
+    type: "website",
+    images: [
+      {
+        url: "/projects.png",
+        width: 1200,
+        height: 630,
+        alt: "Kenny Tran's Project Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects - Kenny Tran's Portfolio Showcase",
+    description:
+      "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
+    images: ["/projects.png"],
+    creator: "@itsk3nny_",
+  },
+  alternates: {
+    canonical: "/projects",
+  },
+  other: {
+    "application/ld+json": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "Projects - Kenny Tran's Portfolio Showcase",
+      description:
+        "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
+      url: "https://www.kennyt.me/projects",
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: [],
+      },
+      author: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Kenny Tran",
+        url: "https://www.kennyt.me/about",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://www.kennyt.me/projects",
+      },
+    }),
+  },
+};
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
