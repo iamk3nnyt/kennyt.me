@@ -40,6 +40,39 @@ A modern, feature-rich portfolio template built with Next.js 15+ and TypeScript.
 - **SEO:** Next.js Metadata API, Open Graph, Twitter Card, JSON-LD
 - **Other:** Lucide Icons, Google Favicon API
 
+## 📁 Project Structure
+
+```
+kennyt.me/
+├── app/                    # Next.js App Router directory
+│   ├── api/               # API routes
+│   ├── about/             # About page
+│   ├── blog/              # Blog page
+│   ├── finance/           # Finance page
+│   ├── gaming/            # Gaming page
+│   ├── projects/          # Projects page
+│   ├── workout/           # Workout page
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   ├── loading.tsx        # Landing page loading state
+│   ├── error.tsx          # Error boundary
+│   └── not-found.tsx      # 404 page
+├── components/            # Reusable React components
+├── lib/                   # Core utilities and data layer
+│   ├── data/             # Data methods and operations
+│   ├── db/               # Core database operations layer
+│   │   ├── create.ts     # Generic create operations
+│   │   ├── read.ts       # Generic read operations
+│   │   ├── update.ts     # Generic update operations
+│   │   ├── delete.ts     # Generic delete operations
+│   │   └── types.ts      # Database types and interfaces
+│   └── utils.ts          # Utility functions
+├── types/                # TypeScript type definitions
+├── public/               # Static assets
+├── hooks/                # Custom React hooks
+└── .vscode/             # VS Code configuration
+```
+
 ## 🔍 Code Quality
 
 The project uses lint-staged to automatically format code with Prettier before commits. This ensures consistent code style across the project. The setup is minimal but extensible, allowing you to add more complex code quality checks as needed.
