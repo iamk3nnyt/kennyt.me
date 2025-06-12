@@ -1,6 +1,6 @@
 # kennyt.me
 
-A modern, personal portfolio and blog for Kenny Tran – full stack developer, founder, and writer. Explore projects, articles, and more, all built with Next.js, TypeScript, and Tailwind CSS.
+A modern, personal portfolio and blog developed by Kenny Tran
 
 ---
 
