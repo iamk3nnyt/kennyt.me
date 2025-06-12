@@ -1,5 +1,5 @@
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
+import { getRecentWorkouts } from "@/lib/data/workouts";
+import { cn } from "@/lib/utils";
 import { WorkoutActivity } from "@/types/workout";
 
 function getTypeColor(type: WorkoutActivity["type"]) {
@@ -18,24 +18,7 @@ function getTypeColor(type: WorkoutActivity["type"]) {
 }
 
 export default async function WorkoutPage() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<WorkoutActivity>(db, "workouts");
-
-  const activities = await readOps.findMany(
-    {},
-    {
-      projection: {
-        _id: 1,
-        title: 1,
-        description: 1,
-        type: 1,
-        duration: 1,
-        date: 1,
-        emoji: 1,
-      },
-      sort: { date: -1 },
-    },
-  );
+  const activities = await getRecentWorkouts();
 
   return (
     <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">
@@ -68,8 +51,8 @@ export default async function WorkoutPage() {
           </div>
         ) : (
           <ul className="divide-y divide-[#232326]">
-            {activities.map((activity) => (
-              <li key={activity._id} className="py-4">
+            {activities.map((activity, idx) => (
+              <li key={idx} className="py-4">
                 <div className="flex items-start gap-4">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#18181B] text-xl">
                     {activity.emoji}
@@ -88,7 +71,7 @@ export default async function WorkoutPage() {
                     </p>
                     <div className="mt-2 flex items-center gap-2">
                       <span
-                        className={`text-xs ${getTypeColor(activity.type)}`}
+                        className={cn("text-xs", getTypeColor(activity.type))}
                       >
                         {activity.type.charAt(0).toUpperCase() +
                           activity.type.slice(1)}
