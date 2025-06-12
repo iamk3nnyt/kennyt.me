@@ -1,6 +1,6 @@
 # kennyt.me
 
-A modern, personal portfolio and blog developed by Kenny Tran
+A modern, personal portfolio and blog
 
 ---
 
