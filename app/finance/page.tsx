@@ -1,6 +1,7 @@
+import { BASE_URL } from "@/constants";
 import { getTransactionsByDateRange } from "@/lib/data/finance";
-import { Stats } from "./components";
 import type { Metadata } from "next";
+import { Stats } from "./components";
 
 export const metadata: Metadata = {
   title: "Finance - Kenny Tran's Personal Finance Tracker",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
       name: "Finance - Kenny Tran's Personal Finance Tracker",
       description:
         "Track my personal finances, including monthly budget allocation, spending patterns, and financial goals. I use this to maintain a clear overview of my expenses and income streams.",
-      url: "https://www.kennyt.me/finance",
+      url: BASE_URL + "/finance",
       mainEntity: {
         "@type": "ItemList",
         itemListElement: [],
@@ -47,16 +48,16 @@ export const metadata: Metadata = {
       author: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       publisher: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": "https://www.kennyt.me/finance",
+        "@id": BASE_URL + "/finance",
       },
       about: {
         "@type": "FinancialProduct",
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
         provider: {
           "@type": "Person",
           name: "Kenny Tran",
-          url: "https://www.kennyt.me/about",
+          url: BASE_URL + "/about",
         },
       },
     }),

@@ -1,4 +1,5 @@
 // lib/data/projects.ts
+import { BASE_URL } from "@/constants";
 import { CreateOperations } from "@/lib/db/create";
 import { DeleteOperations } from "@/lib/db/delete";
 import { ReadOperations } from "@/lib/db/read";
@@ -91,7 +92,7 @@ export async function seedProjects() {
     },
     {
       title: "Personal Website",
-      link: "https://www.kennyt.me/",
+      link: BASE_URL,
     },
   ];
 

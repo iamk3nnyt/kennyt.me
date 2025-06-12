@@ -1,4 +1,5 @@
 import { AppImage } from "@/components/app-image";
+import { BASE_URL } from "@/constants";
 import { getBookmarks } from "@/lib/data/bookmarks";
 import { getRoomItems } from "@/lib/data/room";
 import { getSocialLinks } from "@/lib/data/social";
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
       "@context": "https://schema.org",
       "@type": "Person",
       name: "Kenny Tran",
-      url: "https://www.kennyt.me/about",
+      url: BASE_URL + "/about",
       jobTitle: "Full Stack Developer, Designer, Founder",
       description:
         "Full stack developer, designer, and founder passionate about building beautiful, performant web experiences.",
@@ -68,13 +69,13 @@ export const metadata: Metadata = {
       },
       image: {
         "@type": "ImageObject",
-        url: "https://www.kennyt.me/avatar.png",
+        url: BASE_URL + "/avatar.png",
         width: "400",
         height: "400",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": "https://www.kennyt.me/about",
+        "@id": BASE_URL + "/about",
       },
     }),
   },

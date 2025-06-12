@@ -1,4 +1,5 @@
 import { AppImage } from "@/components/app-image";
+import { BASE_URL } from "@/constants";
 import { getArticles } from "@/lib/data/blog";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -43,23 +44,23 @@ export async function generateMetadata(): Promise<Metadata> {
         headline: "Kenny Tran's Blog",
         description:
           "Explore my thoughts, tutorials, and stories on design, development, and the creative process. Here you'll find my latest articles and essays.",
-        url: "https://www.kennyt.me/blog",
+        url: BASE_URL + "/blog",
         inLanguage: "en-US",
         isAccessibleForFree: true,
         isFamilyFriendly: true,
         author: {
           "@type": "Person",
           name: "Kenny Tran",
-          url: "https://www.kennyt.me/about",
+          url: BASE_URL + "/about",
         },
         publisher: {
           "@type": "Person",
           name: "Kenny Tran",
-          url: "https://www.kennyt.me/about",
+          url: BASE_URL + "/about",
         },
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": "https://www.kennyt.me/blog",
+          "@id": BASE_URL + "/blog",
         },
         about: {
           "@type": "Thing",
@@ -69,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         blogPosts: posts.map((post, index) => ({
           "@type": "BlogPosting",
-          "@id": `https://www.kennyt.me/blog/${post.slug}`,
+          "@id": `${BASE_URL}/blog/${post.slug}`,
           headline: post.title,
           description: post.excerpt,
           articleBody: post.content,
@@ -82,16 +83,16 @@ export async function generateMetadata(): Promise<Metadata> {
           author: {
             "@type": "Person",
             name: "Kenny Tran",
-            url: "https://www.kennyt.me/about",
+            url: BASE_URL + "/about",
           },
           publisher: {
             "@type": "Person",
             name: "Kenny Tran",
-            url: "https://www.kennyt.me/about",
+            url: BASE_URL + "/about",
           },
           mainEntityOfPage: {
             "@type": "WebPage",
-            "@id": `https://www.kennyt.me/blog/${post.slug}`,
+            "@id": `${BASE_URL}/blog/${post.slug}`,
           },
           image: post.image
             ? {

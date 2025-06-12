@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/constants";
 import type { MetadataRoute } from "next";
 
 /**
@@ -10,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/_next/static/chunks/", "/api/"],
     },
-    sitemap: "https://www.kennyt.me/sitemap.xml",
-    host: "https://www.kennyt.me",
+    sitemap: BASE_URL + "/sitemap.xml",
+    host: BASE_URL,
   };
 }

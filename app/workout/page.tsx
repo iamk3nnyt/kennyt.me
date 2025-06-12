@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/constants";
 import { getRecentWorkouts } from "@/lib/data/workouts";
 import { cn } from "@/lib/utils";
 import { WorkoutActivity } from "@/types/workout";
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
       name: "Workout Journey - Kenny Tran's Fitness Activities",
       description:
         "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
-      url: "https://www.kennyt.me/workout",
+      url: BASE_URL + "/workout",
       mainEntity: {
         "@type": "ItemList",
         itemListElement: [],
@@ -63,16 +64,16 @@ export const metadata: Metadata = {
       author: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       publisher: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": "https://www.kennyt.me/workout",
+        "@id": BASE_URL + "/workout",
       },
     }),
   },

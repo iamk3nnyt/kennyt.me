@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/constants";
 import { getArticleBySlug } from "@/lib/data/blog";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -45,7 +46,7 @@ export async function generateMetadata({
             },
           ]
         : [],
-      url: `https://www.kennyt.me/blog/${slug}`,
+      url: `${BASE_URL}/blog/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -61,8 +62,8 @@ export async function generateMetadata({
       "application/ld+json": JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "@id": `https://www.kennyt.me/blog/${slug}`,
-        url: `https://www.kennyt.me/blog/${slug}`,
+        "@id": `${BASE_URL}/blog/${slug}`,
+        url: `${BASE_URL}/blog/${slug}`,
         headline: article.title,
         description: article.excerpt,
         articleBody: article.content,
@@ -75,16 +76,16 @@ export async function generateMetadata({
         author: {
           "@type": "Person",
           name: "Kenny Tran",
-          url: "https://www.kennyt.me/about",
+          url: BASE_URL + "/about",
         },
         publisher: {
           "@type": "Person",
           name: "Kenny Tran",
-          url: "https://www.kennyt.me/about",
+          url: BASE_URL + "/about",
         },
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": `https://www.kennyt.me/blog/${slug}`,
+          "@id": `${BASE_URL}/blog/${slug}`,
         },
         image: article.image
           ? {

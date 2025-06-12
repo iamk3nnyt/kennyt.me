@@ -1,4 +1,5 @@
 import { AppImage } from "@/components/app-image";
+import { BASE_URL } from "@/constants";
 import { getProjects } from "@/lib/data/projects";
 import type { Metadata } from "next";
 
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
       name: "Projects - Kenny Tran's Portfolio Showcase",
       description:
         "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
-      url: "https://www.kennyt.me/projects",
+      url: BASE_URL + "/projects",
       mainEntity: {
         "@type": "ItemList",
         itemListElement: [],
@@ -47,16 +48,16 @@ export const metadata: Metadata = {
       author: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       publisher: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": "https://www.kennyt.me/projects",
+        "@id": BASE_URL + "/projects",
       },
     }),
   },

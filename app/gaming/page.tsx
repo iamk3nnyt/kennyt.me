@@ -1,8 +1,9 @@
 import { AppImage } from "@/components/app-image";
+import { BASE_URL } from "@/constants";
 import { getHeroes, getSeasonHistory } from "@/lib/data/gaming";
 import { Crown } from "lucide-react";
-import { Stats } from "./components";
 import type { Metadata } from "next";
+import { Stats } from "./components";
 
 export const metadata: Metadata = {
   title: "Gaming - Kenny Tran's MLBB Journey",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
       name: "Gaming - Kenny Tran's MLBB Journey",
       description:
         "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
-      url: "https://www.kennyt.me/gaming",
+      url: BASE_URL + "/gaming",
       mainEntity: {
         "@type": "ItemList",
         itemListElement: [],
@@ -49,16 +50,16 @@ export const metadata: Metadata = {
       author: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       publisher: {
         "@type": "Person",
         name: "Kenny Tran",
-        url: "https://www.kennyt.me/about",
+        url: BASE_URL + "/about",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": "https://www.kennyt.me/gaming",
+        "@id": BASE_URL + "/gaming",
       },
       about: {
         "@type": "Game",

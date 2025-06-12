@@ -1,5 +1,6 @@
 import { Header } from "@/app/header";
 import { Navigation } from "@/app/navigation";
+import { BASE_URL } from "@/constants";
 import { cn } from "@/lib/utils";
 import type { Metadata, Viewport } from "next";
 import { Sora } from "next/font/google";
@@ -21,11 +22,11 @@ export const metadata: Metadata = {
   title: "Kenny Tran - Full Stack Developer, Founder, Writer",
   description:
     "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
-  metadataBase: new URL("https://www.kennyt.me"),
+  metadataBase: new URL(BASE_URL),
   alternates: {
     canonical: "./",
     languages: {
-      "en-US": "https://www.kennyt.me",
+      "en-US": BASE_URL,
     },
   },
   openGraph: {
@@ -90,12 +91,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Kenny Tran",
-              url: "https://www.kennyt.me",
-              sameAs: [
-                "https://twitter.com/itsk3nny_",
-                "https://github.com/iamk3nnyt",
-                "https://linkedin.com/in/itsk3nny",
-              ],
+              url: BASE_URL,
               jobTitle: "Full Stack Developer, Founder, Writer",
               email: "kenny@ketryon.com",
             }),
