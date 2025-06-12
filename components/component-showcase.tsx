@@ -28,7 +28,7 @@ export function ComponentShowcase({ title, description, demo, code }: Props) {
       </div>
 
       <div className="relative">
-        <pre className="overflow-x-auto rounded-lg bg-[#111113] p-4 text-sm text-[#B0B0B0]">
+        <pre className="max-h-96 overflow-auto rounded-lg bg-[#111113] p-4 text-sm text-[#B0B0B0]">
           <code>{code}</code>
         </pre>
         <button

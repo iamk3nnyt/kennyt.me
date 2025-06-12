@@ -68,6 +68,18 @@ export default function ComponentsPage() {
     <>
       <main className="bg-[#111113] px-4 pt-16 text-[#F3F3F3]">
         <section className="mx-auto mb-16 max-w-2xl">
+          <h1 className="mb-6 text-xl font-semibold text-white">
+            Component Library
+          </h1>
+          <p className="mb-8 text-[#B0B0B0]">
+            A collection of reusable components used throughout kennyt.me. Each
+            component is designed to be modular, accessible, and follows our
+            design system. Feel free to explore, test, and copy the code for
+            your own projects.
+          </p>
+        </section>
+
+        <section className="mx-auto mb-16 max-w-2xl">
           <h2 className="mb-6 text-xl font-semibold text-white">
             UI Components
           </h2>
