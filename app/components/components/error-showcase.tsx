@@ -1,5 +1,3 @@
-"use client";
-
 import { ComponentShowcase } from "@/components/component-showcase";
 import Link from "next/link";
 
