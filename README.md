@@ -65,27 +65,7 @@ The project uses lint-staged to automatically format code with Prettier before c
    }
    ```
 
-3. **Extending the Setup**
-   You can enhance the pre-commit checks by adding more tools to lint-staged. Common additions include:
-
-   - ESLint for code linting
-   - TypeScript type checking
-   - Unit tests
-   - Custom scripts
-
-   Example of an extended configuration:
-
-   ```json
-   {
-     "lint-staged": {
-       "*.{ts,tsx}": ["prettier --write", "eslint --fix", "tsc-files --noEmit"],
-       "*.{js,jsx}": ["prettier --write", "eslint --fix"],
-       "*.{json,md}": "prettier --write"
-     }
-   }
-   ```
-
-4. **Skipping Formatting**
+3. **Skipping Formatting**
    ```bash
    git commit -m "your message" --no-verify
    ```
