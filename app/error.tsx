@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Error({
   error,
@@ -32,7 +32,7 @@ export default function Error({
           <p className="mb-6 text-sm text-[#B0B0B0]">
             {error.message || "An unexpected error occurred"}
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             <button
               onClick={reset}
               className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"

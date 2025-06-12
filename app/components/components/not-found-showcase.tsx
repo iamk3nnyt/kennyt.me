@@ -7,7 +7,7 @@ export function NotFoundShowcase() {
       title="NotFound"
       description="A 404 page component for handling not found routes with home navigation."
       demo={
-        <div className="p-4">
+        <div className="sm:p-4">
           <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
             <div className="mb-4 text-4xl">🔍</div>
             <h3 className="mb-2 text-lg font-medium text-white">404 Error</h3>

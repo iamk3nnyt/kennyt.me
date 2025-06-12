@@ -30,7 +30,7 @@ export function TimelineShowcase() {
       title="Timeline"
       description="A vertical timeline component for displaying chronological entries with dates, titles, and descriptions."
       demo={
-        <div className="p-4">
+        <div className="sm:p-4">
           <ol className="relative border-l border-[#232326]">
             {entries.map((job, idx) => (
               <li key={idx} className="mb-10 ml-4">

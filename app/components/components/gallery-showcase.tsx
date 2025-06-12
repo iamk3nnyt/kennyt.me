@@ -34,7 +34,7 @@ export function GalleryShowcase() {
       title="Gallery"
       description="A responsive photo gallery component that displays images in a grid layout with hover effects."
       demo={
-        <div className="p-4">
+        <div className="sm:p-4">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             {gallery.map((img, idx) => (
               <div

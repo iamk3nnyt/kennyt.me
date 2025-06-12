@@ -9,7 +9,7 @@ export function ErrorShowcase() {
       title="Error"
       description="A reusable error component with retry functionality and home navigation."
       demo={
-        <div className="p-4">
+        <div className="sm:p-4">
           <div className="flex flex-col items-center justify-center rounded-xl border border-[#232326] bg-[#18181B] p-8 text-center">
             <div className="mb-4 text-4xl">⚠️</div>
             <h3 className="mb-2 text-lg font-medium text-white">
@@ -18,7 +18,7 @@ export function ErrorShowcase() {
             <p className="mb-6 text-sm text-[#B0B0B0]">
               An unexpected error occurred
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <button className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600">
                 Try Again
               </button>
@@ -66,7 +66,7 @@ export default function Error({
           <p className="mb-6 text-sm text-[#B0B0B0]">
             {error.message || "An unexpected error occurred"}
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             <button
               onClick={reset}
               className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"
