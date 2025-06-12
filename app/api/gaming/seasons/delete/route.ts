@@ -1,6 +1,4 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { SeasonHistory } from "@/types/gaming";
+import { deleteAllSeasonHistory } from "@/lib/data/gaming";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
@@ -11,10 +9,7 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<SeasonHistory>(db, "mlbb_seasons");
-
-    const result = await deleteOps.deleteMany({});
+    const result = await deleteAllSeasonHistory();
 
     return NextResponse.json({
       message: "Successfully deleted season history",

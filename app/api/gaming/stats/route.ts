@@ -1,20 +1,9 @@
+import { getMLBBStats } from "@/lib/data/gaming";
 import { NextResponse } from "next/server";
-import client from "@/lib/mongodb";
-import { ReadOperations } from "@/lib/db/read";
-import { MLBBStats } from "@/types/gaming";
 
 export async function GET() {
   try {
-    const db = client.db("kennyt");
-    const readOps = new ReadOperations<MLBBStats>(db, "mlbb_stats");
-
-    const stats = await readOps.findOne(
-      {},
-      {
-        projection: { _id: 0, matches: 1, winRate: 1, mvp: 1, lastUpdated: 1 },
-        sort: { lastUpdated: -1 }, // Get the most recent stats
-      },
-    );
+    const stats = await getMLBBStats();
 
     if (!stats) {
       return NextResponse.json(

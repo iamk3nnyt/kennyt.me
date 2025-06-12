@@ -1,6 +1,4 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { Hero } from "@/types/gaming";
+import { deleteAllHeroes } from "@/lib/data/gaming";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
@@ -11,14 +9,11 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<Hero>(db, "mlbb_heroes");
-
-    const count = await deleteOps.deleteMany({});
+    const result = await deleteAllHeroes();
 
     return NextResponse.json({
       message: "Heroes deleted successfully",
-      count,
+      count: result,
     });
   } catch (error) {
     console.error("Error deleting heroes:", error);

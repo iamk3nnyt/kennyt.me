@@ -1,21 +1,10 @@
 import { AppImage } from "@/components/app-image";
-import { ReadOperations } from "@/lib/db/read";
-import client from "@/lib/mongodb";
-import { Hero, SeasonHistory } from "@/types/gaming";
+import { getHeroes, getSeasonHistory } from "@/lib/data/gaming";
 import { Crown } from "lucide-react";
 import { Stats } from "./components";
 
 async function Heroes() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<Hero>(db, "mlbb_heroes");
-
-  const heroes = await readOps.findMany(
-    {},
-    {
-      projection: { _id: 0, name: 1, role: 1, specialty: 1, image: 1 },
-      sort: { order: 1 },
-    },
-  );
+  const heroes = await getHeroes();
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">
@@ -68,16 +57,7 @@ async function Heroes() {
 }
 
 async function History() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<SeasonHistory>(db, "mlbb_seasons");
-
-  const seasons = await readOps.findMany(
-    {},
-    {
-      projection: { _id: 0, period: 1, rank: 1, hero: 1, season: 1 },
-      sort: { period: -1 }, // Sort by period in descending order
-    },
-  );
+  const seasons = await getSeasonHistory();
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">

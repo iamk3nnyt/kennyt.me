@@ -1,34 +1,5 @@
-import { CreateOperations } from "@/lib/db/create";
-import client from "@/lib/mongodb";
-import { SeasonHistory } from "@/types/gaming";
+import { seedSeasonHistory } from "@/lib/data/gaming";
 import { NextResponse } from "next/server";
-
-const seed = [
-  {
-    period: "2025/03 - 2025/06",
-    rank: "Mythical Honor",
-    hero: "Ling",
-    season: "S36",
-  },
-  {
-    period: "2024/12 - 2025/03",
-    rank: "Legend III",
-    hero: "Ling",
-    season: "S35",
-  },
-  {
-    period: "2024/09 - 2024/12",
-    rank: "Mythic",
-    hero: "Ling",
-    season: "S34",
-  },
-  {
-    period: "2024/06 - 2024/09",
-    rank: "Mythical Glory",
-    hero: "Natan",
-    season: "S33",
-  },
-];
 
 export async function POST(request: Request) {
   // Check for secret header
@@ -38,19 +9,13 @@ export async function POST(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const createOps = new CreateOperations<SeasonHistory>(db, "mlbb_seasons");
-
-    // Clear existing seasons
-    await db.collection("mlbb_seasons").deleteMany({});
-
     // Insert new seasons
-    const result = await createOps.createMany(seed);
+    const result = await seedSeasonHistory();
 
     return NextResponse.json({
       message: "Successfully seeded season history",
       count: result.length,
-      seasons: result,
+      items: result,
     });
   } catch (error) {
     console.error("Error seeding season history:", error);

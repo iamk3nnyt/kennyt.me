@@ -153,7 +153,7 @@ export function Stats() {
       <div className="mb-16 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {stats.map((stat, index) => (
           <div
-            key={stat.label}
+            key={index}
             className="flex flex-col items-start gap-2 rounded-2xl border border-[#232326] bg-[#18181B] p-5 shadow-sm"
           >
             <div
@@ -189,9 +189,9 @@ export function Stats() {
           Category Breakdown
         </h3>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {Object.entries(categoryTotals).map(([category, amount]) => (
+          {Object.entries(categoryTotals).map(([category, amount], idx) => (
             <div
-              key={category}
+              key={idx}
               className="flex items-center justify-between rounded-xl border border-[#232326] bg-[#18181B] p-4"
             >
               <span className="text-sm font-medium text-[#B0B0B0] capitalize">

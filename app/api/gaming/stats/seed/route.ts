@@ -1,15 +1,5 @@
-import { CreateOperations } from "@/lib/db/create";
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { MLBBStats } from "@/types/gaming";
+import { seedMLBBStats } from "@/lib/data/gaming";
 import { NextResponse } from "next/server";
-
-const seed = {
-  matches: 3525,
-  winRate: 51.04,
-  mvp: 253,
-  lastUpdated: new Date(),
-};
 
 export async function POST(request: Request) {
   // Check for secret header
@@ -19,19 +9,12 @@ export async function POST(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const createOps = new CreateOperations<MLBBStats>(db, "mlbb_stats");
-    const deleteOps = new DeleteOperations<MLBBStats>(db, "mlbb_stats");
-
-    // Clear existing stats
-    await deleteOps.deleteMany({});
-
     // Insert new stats
-    const result = await createOps.createOne(seed);
+    const result = await seedMLBBStats();
 
     return NextResponse.json({
-      message: "MLBB stats seeded successfully",
-      stats: result,
+      message: "Successfully seeded MLBB stats",
+      items: result,
     });
   } catch (error) {
     console.error("Error seeding MLBB stats:", error);
