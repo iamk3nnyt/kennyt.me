@@ -1,6 +1,4 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { Project } from "@/types/project";
+import { deleteAllProjects } from "@/lib/data/projects";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
@@ -11,10 +9,7 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<Project>(db, "projects");
-
-    const result = await deleteOps.deleteMany({});
+    const result = await deleteAllProjects();
 
     return NextResponse.json({
       message: "Successfully deleted projects",

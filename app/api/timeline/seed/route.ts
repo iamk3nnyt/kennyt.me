@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const result = await seedTimelineEntries();
 
     return NextResponse.json({
-      message: "Timeline seeded successfully",
+      message: "Successfully seeded timeline entries",
       count: result.length,
       entries: result,
     });

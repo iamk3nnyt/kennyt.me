@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const result = await seedWorkouts();
 
     return NextResponse.json({
-      success: true,
+      message: "Successfully seeded workouts",
       count: result.length,
       workouts: result,
     });

@@ -1,19 +1,5 @@
-import { CreateOperations } from "@/lib/db/create";
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { Project } from "@/types/project";
+import { seedProjects } from "@/lib/data/projects";
 import { NextResponse } from "next/server";
-
-const seed = [
-  {
-    title: "Company Website",
-    link: "https://www.ketryon.com/",
-  },
-  {
-    title: "Personal Website",
-    link: "https://www.kennyt.me/",
-  },
-];
 
 export async function POST(request: Request) {
   // Check for secret header
@@ -23,15 +9,8 @@ export async function POST(request: Request) {
   }
 
   try {
-    const db = client.db("kennyt");
-    const createOps = new CreateOperations<Project>(db, "projects");
-    const deleteOps = new DeleteOperations<Project>(db, "projects");
-
-    // Clear existing projects
-    await deleteOps.deleteMany({});
-
     // Insert new projects
-    const result = await createOps.createMany(seed);
+    const result = await seedProjects();
 
     return NextResponse.json({
       message: "Successfully seeded projects",

@@ -12,7 +12,7 @@ export async function DELETE(request: Request) {
     const result = await deleteAllBookmarks();
 
     return NextResponse.json({
-      message: "Successfully deleted all bookmarks",
+      message: "Bookmarks deleted successfully",
       count: result,
     });
   } catch (error) {
