@@ -1,6 +1,7 @@
 import { BASE_URL } from "@/constants";
 import type { Metadata } from "next";
 import { ErrorShowcase } from "./components/error-showcase";
+import { FeaturedShowcase } from "./components/featured-showcase";
 import { GalleryShowcase } from "./components/gallery-showcase";
 import { NotFoundShowcase } from "./components/not-found-showcase";
 import { TimelineShowcase } from "./components/timeline-showcase";
@@ -88,6 +89,7 @@ export default function ComponentsPage() {
           <div className="flex flex-col gap-y-6">
             <GalleryShowcase />
             <TimelineShowcase />
+            <FeaturedShowcase />
             <ErrorShowcase />
             <NotFoundShowcase />
           </div>
