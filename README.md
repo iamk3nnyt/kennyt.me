@@ -42,14 +42,78 @@ A modern, feature-rich portfolio template built with Next.js 15+ and TypeScript.
 
 ## 💾 Data Layer
 
-The application uses a type-safe data layer built with MongoDB and TypeScript. The data layer is organized into the following components:
+The application uses a type-safe data layer built with MongoDB and TypeScript. The data layer is organized into two main components:
 
-### Operations
+### 1. Generic Operations Layer
+
+A reusable, type-safe foundation for database operations:
 
 - **Create:** `CreateOperations<T extends BaseDocument>`
+
+  - Handles single and bulk document creation
+  - Type-safe document insertion
+  - Automatic timestamp handling
+
 - **Read:** `ReadOperations<T extends BaseDocument>`
+
+  - Flexible querying with MongoDB filters
+  - Projection support for optimized queries
+  - Sorting and pagination capabilities
+
 - **Update:** `UpdateOperations<T extends BaseDocument>`
+
+  - Single and bulk document updates
+  - Partial update support
+  - Atomic operations
+
 - **Delete:** `DeleteOperations<T extends BaseDocument>`
+  - Single and bulk document deletion
+  - Filter-based deletion
+  - Safe deletion with type checking
+
+### 2. Domain-Specific Data Methods
+
+Type-safe methods for each domain of the application:
+
+- **Blog:** `lib/data/blog.ts`
+
+  - Article management
+  - Featured articles
+  - Content organization
+
+- **Projects:** `lib/data/projects.ts`
+  - Project showcase
+  - Technology stack
+  - Project metadata
+
+Each data method file:
+
+- Extends the generic operations layer
+- Provides domain-specific functionality
+- Includes helper methods for common queries
+- Implements seed operations for development
+- Maintains type safety throughout
+
+### Usage Example
+
+```typescript
+// Using the generic operations layer
+const createOps = new CreateOperations<Article>(db, "articles");
+await createOps.createOne(newArticle);
+
+// Using domain-specific methods
+const articles = await getArticles();
+const featured = await getFeaturedArticles();
+```
+
+This architecture provides:
+
+- Type safety across the entire data layer
+- Reusable database operations
+- Domain-specific functionality
+- Consistent error handling
+- Easy testing and mocking
+- Clear separation of concerns
 
 ## Loading States
 
