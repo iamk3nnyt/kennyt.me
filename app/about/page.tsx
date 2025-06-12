@@ -1,7 +1,7 @@
 import { AppImage } from "@/components/app-image";
+import { getBookmarks } from "@/lib/data/bookmarks";
 import { ReadOperations } from "@/lib/db/read";
 import client from "@/lib/mongodb";
-import { Bookmark } from "@/types/bookmark";
 import { RoomItem } from "@/types/room";
 import { SocialLink } from "@/types/social";
 import {
@@ -84,16 +84,7 @@ async function Connect() {
 }
 
 async function Bookmarks() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<Bookmark>(db, "bookmarks");
-
-  const bookmarks = await readOps.findMany(
-    {},
-    {
-      projection: { _id: 0, name: 1, url: 1, icon: 1 },
-      sort: { name: 1 }, // Sort alphabetically by name
-    },
-  );
+  const bookmarks = await getBookmarks();
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">

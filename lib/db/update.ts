@@ -1,10 +1,12 @@
 import {
   Collection,
   Db,
+  Filter,
   FindOneAndUpdateOptions,
+  UpdateFilter,
   UpdateOptions,
 } from "mongodb";
-import { BaseDocument, QueryFilter, UpdateData } from "./types";
+import { BaseDocument } from "./types";
 
 export class UpdateOperations<T extends BaseDocument> {
   private collection: Collection<T>;
@@ -14,8 +16,8 @@ export class UpdateOperations<T extends BaseDocument> {
   }
 
   async updateOne(
-    filter: QueryFilter<T>,
-    update: UpdateData<T>,
+    filter: Filter<T>,
+    update: UpdateFilter<T>,
     options?: UpdateOptions,
   ): Promise<boolean> {
     const now = new Date();
@@ -24,7 +26,7 @@ export class UpdateOperations<T extends BaseDocument> {
         ...(update.$set || {}),
         updatedAt: now,
       },
-    } as UpdateData<T>;
+    } as UpdateFilter<T>;
 
     const result = await this.collection.updateOne(
       filter,
@@ -36,15 +38,15 @@ export class UpdateOperations<T extends BaseDocument> {
 
   async updateById(
     id: string,
-    update: UpdateData<T>,
+    update: UpdateFilter<T>,
     options?: UpdateOptions,
   ): Promise<boolean> {
-    return this.updateOne({ _id: id } as QueryFilter<T>, update, options);
+    return this.updateOne({ _id: id } as Filter<T>, update, options);
   }
 
   async updateMany(
-    filter: QueryFilter<T>,
-    update: UpdateData<T>,
+    filter: Filter<T>,
+    update: UpdateFilter<T>,
     options?: UpdateOptions,
   ): Promise<number> {
     const now = new Date();
@@ -53,7 +55,7 @@ export class UpdateOperations<T extends BaseDocument> {
         ...(update.$set || {}),
         updatedAt: now,
       },
-    } as UpdateData<T>;
+    } as UpdateFilter<T>;
 
     const result = await this.collection.updateMany(
       filter,
@@ -64,8 +66,8 @@ export class UpdateOperations<T extends BaseDocument> {
   }
 
   async findOneAndUpdate(
-    filter: QueryFilter<T>,
-    update: UpdateData<T>,
+    filter: Filter<T>,
+    update: UpdateFilter<T>,
     options: FindOneAndUpdateOptions = {},
   ): Promise<T | null> {
     const now = new Date();
@@ -74,7 +76,7 @@ export class UpdateOperations<T extends BaseDocument> {
         ...(update.$set || {}),
         updatedAt: now,
       },
-    } as UpdateData<T>;
+    } as UpdateFilter<T>;
 
     const result = await this.collection.findOneAndUpdate(
       filter,

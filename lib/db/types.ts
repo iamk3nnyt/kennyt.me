@@ -1,15 +1,9 @@
-import { Document, Filter, UpdateFilter } from "mongodb";
+import { Document } from "mongodb";
 
 export interface BaseDocument extends Document {
   _id: string;
   createdAt: Date;
   updatedAt: Date;
-}
-
-export interface ReadOptions {
-  projection?: Record<string, 0 | 1>;
-  sort?: Record<string, 1 | -1>;
-  limit?: number;
 }
 
 export interface PaginationOptions {
@@ -25,6 +19,3 @@ export interface PaginatedResult<T> {
   totalPages: number;
   hasMore: boolean;
 }
-
-export type QueryFilter<T> = Filter<T>;
-export type UpdateData<T> = UpdateFilter<T>;

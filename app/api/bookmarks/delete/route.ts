@@ -1,24 +1,19 @@
-import { DeleteOperations } from "@/lib/db/delete";
-import client from "@/lib/mongodb";
-import { Bookmark } from "@/types/bookmark";
+import { deleteAllBookmarks } from "@/lib/data/bookmarks";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
+  // Check for secret header
+  const secret = request.headers.get("x-secret");
+  if (secret !== process.env.SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  }
+
   try {
-    // Check for secret header
-    const secret = request.headers.get("x-secret");
-    if (secret !== process.env.SECRET) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-    }
-
-    const db = client.db("kennyt");
-    const deleteOps = new DeleteOperations<Bookmark>(db, "bookmarks");
-
-    const deletedCount = await deleteOps.deleteMany({});
+    const result = await deleteAllBookmarks();
 
     return NextResponse.json({
       message: "Successfully deleted all bookmarks",
-      deletedCount,
+      count: result,
     });
   } catch (error) {
     console.error("Error deleting bookmarks:", error);
