@@ -1,10 +1,10 @@
 import { AppImage } from "@/components/app-image";
+import { getTechStack } from "@/lib/data/tech";
 import { getTimelineEntries } from "@/lib/data/timeline";
 import { ReadOperations } from "@/lib/db/read";
 import client from "@/lib/mongodb";
 import { cn } from "@/lib/utils";
 import { FeaturedArticle } from "@/types/blog";
-import { TechStack } from "@/types/tech";
 import Link from "next/link";
 
 function Gallery() {
@@ -163,16 +163,7 @@ async function Featured() {
 }
 
 async function Techstack() {
-  const db = client.db("kennyt");
-  const readOps = new ReadOperations<TechStack>(db, "tech_stack");
-
-  const techstack = await readOps.findMany(
-    {},
-    {
-      projection: { _id: 0, name: 1, value: 1 },
-      sort: { order: 1 },
-    },
-  );
+  const techstack = await getTechStack();
 
   return (
     <section className="mx-auto mb-16 max-w-2xl">
