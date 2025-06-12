@@ -83,6 +83,39 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Script id="gtm-consent" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            // Set default consent to 'denied' as a placeholder
+            // Determine actual values based on customer's own requirements
+            gtag('consent', 'default', {
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+              'analytics_storage': 'denied',
+              'wait_for_update': 500
+            });
+            gtag('set', 'ads_data_redaction', true);
+            gtag('set', 'url_passthrough', true);
+          `}
+        </Script>
+        {/* Google Tag Manager (only in production) */}
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            id="google-tag-manager"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer', '${process.env.NEXT_PUBLIC_GTM_TRACKER}');
+              `,
+            }}
+          />
+        )}
         <Script
           id="organization-schema"
           type="application/ld+json"
@@ -98,7 +131,26 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={cn("bg-[#111113] text-[#F3F3F3]", sora.className)}>
+      <body
+        className={cn(
+          "bg-[#111113] text-[#F3F3F3] antialiased",
+          sora.className,
+        )}
+      >
+        {process.env.NODE_ENV === "production" && (
+          <noscript>
+            <iframe
+              title="gtm"
+              src={
+                "https://www.googletagmanager.com/ns.html?id=" +
+                process.env.NEXT_PUBLIC_GTM_TRACKER
+              }
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
+        )}
         <div className="flex flex-col gap-y-6 px-4 pt-12">
           <Header />
           <Navigation />
