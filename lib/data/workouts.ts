@@ -10,7 +10,7 @@ import { Filter } from "mongodb";
 
 // Read operations
 export async function getWorkouts(filter: Filter<WorkoutActivity> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<WorkoutActivity>(db, "workouts");
 
   return readOps.findMany(filter, {
@@ -28,7 +28,7 @@ export async function getWorkouts(filter: Filter<WorkoutActivity> = {}) {
 }
 
 export async function getWorkoutById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<WorkoutActivity>(db, "workouts");
 
   return readOps.findById(id, {
@@ -48,7 +48,7 @@ export async function getWorkoutById(id: string) {
 export async function createWorkout(
   data: Omit<WorkoutActivity, keyof BaseDocument>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<WorkoutActivity>(db, "workouts");
 
   return createOps.createOne(data);
@@ -57,7 +57,7 @@ export async function createWorkout(
 export async function createManyWorkouts(
   data: Array<Omit<WorkoutActivity, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<WorkoutActivity>(db, "workouts");
 
   return createOps.createMany(data);
@@ -68,7 +68,7 @@ export async function updateWorkout(
   id: string,
   data: Partial<Omit<WorkoutActivity, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<WorkoutActivity>(db, "workouts");
 
   return updateOps.updateById(id, { $set: data });
@@ -76,14 +76,14 @@ export async function updateWorkout(
 
 // Delete operations
 export async function deleteWorkout(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<WorkoutActivity>(db, "workouts");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllWorkouts() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<WorkoutActivity>(db, "workouts");
 
   return deleteOps.deleteMany({});
@@ -91,7 +91,7 @@ export async function deleteAllWorkouts() {
 
 // Seed operation
 export async function seedWorkouts() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<WorkoutActivity>(db, "workouts");
   const deleteOps = new DeleteOperations<WorkoutActivity>(db, "workouts");
 
@@ -153,7 +153,7 @@ export async function getWorkoutsByDateRange(startDate: Date, endDate: Date) {
 }
 
 export async function getRecentWorkouts(limit: number = 5) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<WorkoutActivity>(db, "workouts");
 
   return readOps.findMany(

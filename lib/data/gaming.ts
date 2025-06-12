@@ -9,7 +9,7 @@ import { Filter } from "mongodb";
 
 // Hero operations
 export async function getHeroes(filter: Filter<Hero> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Hero>(db, "heroes");
 
   return readOps.findMany(filter, {
@@ -26,7 +26,7 @@ export async function getHeroes(filter: Filter<Hero> = {}) {
 }
 
 export async function getHeroById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Hero>(db, "heroes");
 
   return readOps.findById(id, {
@@ -42,7 +42,7 @@ export async function getHeroById(id: string) {
 }
 
 export async function createHero(data: Omit<Hero, keyof BaseDocument>) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Hero>(db, "heroes");
 
   return createOps.createOne(data);
@@ -51,7 +51,7 @@ export async function createHero(data: Omit<Hero, keyof BaseDocument>) {
 export async function createManyHeroes(
   data: Array<Omit<Hero, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Hero>(db, "heroes");
 
   return createOps.createMany(data);
@@ -61,21 +61,21 @@ export async function updateHero(
   id: string,
   data: Partial<Omit<Hero, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<Hero>(db, "heroes");
 
   return updateOps.updateById(id, { $set: data });
 }
 
 export async function deleteHero(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Hero>(db, "heroes");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllHeroes() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Hero>(db, "heroes");
 
   return deleteOps.deleteMany({});
@@ -83,7 +83,7 @@ export async function deleteAllHeroes() {
 
 // Season History operations
 export async function getSeasonHistory(filter: Filter<SeasonHistory> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<SeasonHistory>(db, "mlbb_seasons");
 
   return readOps.findMany(filter, {
@@ -99,7 +99,7 @@ export async function getSeasonHistory(filter: Filter<SeasonHistory> = {}) {
 }
 
 export async function getSeasonHistoryById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<SeasonHistory>(db, "mlbb_seasons");
 
   return readOps.findById(id, {
@@ -116,7 +116,7 @@ export async function getSeasonHistoryById(id: string) {
 export async function createSeasonHistory(
   data: Omit<SeasonHistory, keyof BaseDocument>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<SeasonHistory>(db, "mlbb_seasons");
 
   return createOps.createOne(data);
@@ -125,7 +125,7 @@ export async function createSeasonHistory(
 export async function createManySeasonHistory(
   data: Array<Omit<SeasonHistory, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<SeasonHistory>(db, "mlbb_seasons");
 
   return createOps.createMany(data);
@@ -135,21 +135,21 @@ export async function updateSeasonHistory(
   id: string,
   data: Partial<Omit<SeasonHistory, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<SeasonHistory>(db, "mlbb_seasons");
 
   return updateOps.updateById(id, { $set: data });
 }
 
 export async function deleteSeasonHistory(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<SeasonHistory>(db, "mlbb_seasons");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllSeasonHistory() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<SeasonHistory>(db, "mlbb_seasons");
 
   return deleteOps.deleteMany({});
@@ -157,7 +157,7 @@ export async function deleteAllSeasonHistory() {
 
 // MLBB Stats operations
 export async function getMLBBStats() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<MLBBStats>(db, "mlbb_stats");
 
   return readOps.findOne(
@@ -177,7 +177,7 @@ export async function getMLBBStats() {
 export async function updateMLBBStats(
   data: Partial<Omit<MLBBStats, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<MLBBStats>(db, "mlbb_stats");
 
   // Update or create if doesn't exist
@@ -213,7 +213,7 @@ export async function getSeasonHistoryByRank(rank: string) {
 
 // Seed operations
 export async function seedHeroes() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Hero>(db, "heroes");
   const deleteOps = new DeleteOperations<Hero>(db, "heroes");
 
@@ -276,7 +276,7 @@ export async function seedHeroes() {
 }
 
 export async function seedSeasonHistory() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<SeasonHistory>(db, "mlbb_seasons");
   const deleteOps = new DeleteOperations<SeasonHistory>(db, "mlbb_seasons");
 
@@ -315,7 +315,7 @@ export async function seedSeasonHistory() {
 }
 
 export async function seedMLBBStats() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<MLBBStats>(db, "mlbb_stats");
 
   const seed = {

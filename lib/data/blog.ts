@@ -9,7 +9,7 @@ import { Filter } from "mongodb";
 
 // Article operations
 export async function getArticles(filter: Filter<Article> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Article>(db, "articles");
 
   return readOps.findMany(filter, {
@@ -27,7 +27,7 @@ export async function getArticles(filter: Filter<Article> = {}) {
 }
 
 export async function getArticleBySlug(slug: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Article>(db, "articles");
 
   return readOps.findOne(
@@ -47,7 +47,7 @@ export async function getArticleBySlug(slug: string) {
 }
 
 export async function createArticle(data: Omit<Article, keyof BaseDocument>) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Article>(db, "articles");
 
   return createOps.createOne(data);
@@ -56,7 +56,7 @@ export async function createArticle(data: Omit<Article, keyof BaseDocument>) {
 export async function createManyArticles(
   data: Array<Omit<Article, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Article>(db, "articles");
 
   return createOps.createMany(data);
@@ -66,21 +66,21 @@ export async function updateArticle(
   slug: string,
   data: Partial<Omit<Article, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<Article>(db, "articles");
 
   return updateOps.updateOne({ slug }, { $set: data });
 }
 
 export async function deleteArticle(slug: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Article>(db, "articles");
 
   return deleteOps.deleteOne({ slug });
 }
 
 export async function deleteAllArticles() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Article>(db, "articles");
 
   return deleteOps.deleteMany({});
@@ -90,7 +90,7 @@ export async function deleteAllArticles() {
 export async function getFeaturedArticles(
   filter: Filter<Article> = { featured: true },
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Article>(db, "articles");
 
   return readOps.findMany(filter, {
@@ -106,7 +106,7 @@ export async function getFeaturedArticles(
 }
 
 export async function getFeaturedArticleBySlug(slug: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Article>(db, "articles");
 
   return readOps.findOne(
@@ -126,7 +126,7 @@ export async function getFeaturedArticleBySlug(slug: string) {
 export async function createFeaturedArticle(
   data: Omit<Article, keyof BaseDocument>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Article>(db, "articles");
 
   return createOps.createOne(data);
@@ -135,7 +135,7 @@ export async function createFeaturedArticle(
 export async function createManyFeaturedArticles(
   data: Array<Omit<Article, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Article>(db, "articles");
 
   return createOps.createMany(data);
@@ -145,28 +145,28 @@ export async function updateFeaturedArticle(
   slug: string,
   data: Partial<Omit<Article, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<Article>(db, "articles");
 
   return updateOps.updateOne({ slug }, { $set: data });
 }
 
 export async function deleteFeaturedArticle(slug: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Article>(db, "articles");
 
   return deleteOps.deleteOne({ slug });
 }
 
 export async function deleteAllFeaturedArticles() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Article>(db, "articles");
 
   return deleteOps.deleteMany({});
 }
 
 export async function getPaginatedArticles(page: number, limit: number) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Article>(db, "articles");
 
   return readOps.findPaginated(
@@ -190,7 +190,7 @@ export async function getPaginatedArticles(page: number, limit: number) {
 }
 
 export async function getArticleCount() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Article>(db, "articles");
 
   return readOps.count({});
@@ -215,7 +215,7 @@ export async function getArticlesByTitle(title: string) {
 }
 
 export async function getRecentArticles(limit: number = 5) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Article>(db, "articles");
 
   return readOps.findMany(
@@ -237,7 +237,7 @@ export async function getRecentArticles(limit: number = 5) {
 
 // Seed operations
 export async function seedArticles() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Article>(db, "articles");
   const deleteOps = new DeleteOperations<Article>(db, "articles");
 
@@ -293,7 +293,7 @@ export async function seedArticles() {
 }
 
 export async function seedFeaturedArticles() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Article>(db, "articles");
   const deleteOps = new DeleteOperations<Article>(db, "articles");
 

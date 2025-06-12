@@ -10,7 +10,7 @@ import { Filter } from "mongodb";
 
 // Read operations
 export async function getRoomItems(filter: Filter<RoomItem> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<RoomItem>(db, "room_items");
 
   return readOps.findMany(filter, {
@@ -25,7 +25,7 @@ export async function getRoomItems(filter: Filter<RoomItem> = {}) {
 }
 
 export async function getRoomItemById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<RoomItem>(db, "room_items");
 
   return readOps.findById(id, {
@@ -40,7 +40,7 @@ export async function getRoomItemById(id: string) {
 
 // Create operations
 export async function createRoomItem(data: Omit<RoomItem, keyof BaseDocument>) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<RoomItem>(db, "room_items");
 
   return createOps.createOne(data);
@@ -49,7 +49,7 @@ export async function createRoomItem(data: Omit<RoomItem, keyof BaseDocument>) {
 export async function createManyRoomItems(
   data: Array<Omit<RoomItem, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<RoomItem>(db, "room_items");
 
   return createOps.createMany(data);
@@ -60,7 +60,7 @@ export async function updateRoomItem(
   id: string,
   data: Partial<Omit<RoomItem, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<RoomItem>(db, "room_items");
 
   return updateOps.updateById(id, { $set: data });
@@ -68,14 +68,14 @@ export async function updateRoomItem(
 
 // Delete operations
 export async function deleteRoomItem(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<RoomItem>(db, "room_items");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllRoomItems() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<RoomItem>(db, "room_items");
 
   return deleteOps.deleteMany({});
@@ -83,7 +83,7 @@ export async function deleteAllRoomItems() {
 
 // Seed operation
 export async function seedRoomItems() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<RoomItem>(db, "room_items");
   const deleteOps = new DeleteOperations<RoomItem>(db, "room_items");
 

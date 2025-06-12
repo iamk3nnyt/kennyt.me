@@ -10,7 +10,7 @@ import { Filter } from "mongodb";
 
 // Read operations
 export async function getTransactions(filter: Filter<Transaction> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Transaction>(db, "transactions");
 
   return readOps.findMany(filter, {
@@ -29,7 +29,7 @@ export async function getTransactions(filter: Filter<Transaction> = {}) {
 }
 
 export async function getTransactionById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Transaction>(db, "transactions");
 
   return readOps.findById(id, {
@@ -50,7 +50,7 @@ export async function getTransactionById(id: string) {
 export async function createTransaction(
   data: Omit<Transaction, keyof BaseDocument>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Transaction>(db, "transactions");
 
   return createOps.createOne(data);
@@ -59,7 +59,7 @@ export async function createTransaction(
 export async function createManyTransactions(
   data: Array<Omit<Transaction, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Transaction>(db, "transactions");
 
   return createOps.createMany(data);
@@ -70,7 +70,7 @@ export async function updateTransaction(
   id: string,
   data: Partial<Omit<Transaction, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<Transaction>(db, "transactions");
 
   return updateOps.updateById(id, { $set: data });
@@ -78,14 +78,14 @@ export async function updateTransaction(
 
 // Delete operations
 export async function deleteTransaction(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Transaction>(db, "transactions");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllTransactions() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Transaction>(db, "transactions");
 
   return deleteOps.deleteMany({});
@@ -93,7 +93,7 @@ export async function deleteAllTransactions() {
 
 // Seed operation
 export async function seedTransactions() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Transaction>(db, "transactions");
   const deleteOps = new DeleteOperations<Transaction>(db, "transactions");
 
@@ -200,7 +200,7 @@ export async function getTransactionsByAmountRange(
 
 // Aggregation functions
 export async function getTotalIncome(startDate?: string, endDate?: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Transaction>(db, "transactions");
 
   const filter: Filter<Transaction> = { type: "income" };
@@ -216,7 +216,7 @@ export async function getTotalIncome(startDate?: string, endDate?: string) {
 }
 
 export async function getTotalExpenses(startDate?: string, endDate?: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Transaction>(db, "transactions");
 
   const filter: Filter<Transaction> = { type: "expense" };
@@ -242,7 +242,7 @@ export async function getNetIncome(startDate?: string, endDate?: string) {
 }
 
 export async function getCategoryTotals(startDate?: string, endDate?: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Transaction>(db, "transactions");
 
   const filter: Filter<Transaction> = {};

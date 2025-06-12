@@ -10,7 +10,7 @@ import { Filter } from "mongodb";
 
 // Read operations
 export async function getBookmarks(filter: Filter<Bookmark> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Bookmark>(db, "bookmarks");
 
   return readOps.findMany(filter, {
@@ -24,7 +24,7 @@ export async function getBookmarks(filter: Filter<Bookmark> = {}) {
 }
 
 export async function getBookmarkById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<Bookmark>(db, "bookmarks");
 
   return readOps.findById(id, {
@@ -39,7 +39,7 @@ export async function getBookmarkById(id: string) {
 
 // Create operations
 export async function createBookmark(data: Omit<Bookmark, keyof BaseDocument>) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Bookmark>(db, "bookmarks");
 
   return createOps.createOne(data);
@@ -48,7 +48,7 @@ export async function createBookmark(data: Omit<Bookmark, keyof BaseDocument>) {
 export async function createManyBookmarks(
   data: Array<Omit<Bookmark, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Bookmark>(db, "bookmarks");
 
   return createOps.createMany(data);
@@ -59,7 +59,7 @@ export async function updateBookmark(
   id: string,
   data: Partial<Omit<Bookmark, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<Bookmark>(db, "bookmarks");
 
   return updateOps.updateById(id, { $set: data });
@@ -67,14 +67,14 @@ export async function updateBookmark(
 
 // Delete operations
 export async function deleteBookmark(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Bookmark>(db, "bookmarks");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllBookmarks() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<Bookmark>(db, "bookmarks");
 
   return deleteOps.deleteMany({});
@@ -82,7 +82,7 @@ export async function deleteAllBookmarks() {
 
 // Seed operation
 export async function seedBookmarks() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<Bookmark>(db, "bookmarks");
   const deleteOps = new DeleteOperations<Bookmark>(db, "bookmarks");
 

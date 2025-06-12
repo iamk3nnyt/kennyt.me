@@ -10,7 +10,7 @@ import { Filter } from "mongodb";
 
 // Read operations
 export async function getTimelineEntries(filter: Filter<TimelineEntry> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<TimelineEntry>(db, "timeline");
 
   return readOps.findMany(filter, {
@@ -28,7 +28,7 @@ export async function getTimelineEntries(filter: Filter<TimelineEntry> = {}) {
 }
 
 export async function getTimelineEntryById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<TimelineEntry>(db, "timeline");
 
   return readOps.findById(id, {
@@ -48,7 +48,7 @@ export async function getTimelineEntryById(id: string) {
 export async function createTimelineEntry(
   data: Omit<TimelineEntry, keyof BaseDocument>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<TimelineEntry>(db, "timeline");
 
   return createOps.createOne(data);
@@ -57,7 +57,7 @@ export async function createTimelineEntry(
 export async function createManyTimelineEntries(
   data: Array<Omit<TimelineEntry, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<TimelineEntry>(db, "timeline");
 
   return createOps.createMany(data);
@@ -68,7 +68,7 @@ export async function updateTimelineEntry(
   id: string,
   data: Partial<Omit<TimelineEntry, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<TimelineEntry>(db, "timeline");
 
   return updateOps.updateById(id, { $set: data });
@@ -76,14 +76,14 @@ export async function updateTimelineEntry(
 
 // Delete operations
 export async function deleteTimelineEntry(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<TimelineEntry>(db, "timeline");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllTimelineEntries() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<TimelineEntry>(db, "timeline");
 
   return deleteOps.deleteMany({});
@@ -91,7 +91,7 @@ export async function deleteAllTimelineEntries() {
 
 // Seed operation
 export async function seedTimelineEntries() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<TimelineEntry>(db, "timeline");
   const deleteOps = new DeleteOperations<TimelineEntry>(db, "timeline");
 

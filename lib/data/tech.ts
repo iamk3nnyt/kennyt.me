@@ -10,7 +10,7 @@ import { Filter } from "mongodb";
 
 // Read operations
 export async function getTechStack(filter: Filter<TechStack> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<TechStack>(db, "tech_stack");
 
   return readOps.findMany(filter, {
@@ -25,7 +25,7 @@ export async function getTechStack(filter: Filter<TechStack> = {}) {
 }
 
 export async function getTechStackById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<TechStack>(db, "tech_stack");
 
   return readOps.findById(id, {
@@ -42,7 +42,7 @@ export async function getTechStackById(id: string) {
 export async function createTechStack(
   data: Omit<TechStack, keyof BaseDocument>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<TechStack>(db, "tech_stack");
 
   return createOps.createOne(data);
@@ -51,7 +51,7 @@ export async function createTechStack(
 export async function createManyTechStack(
   data: Array<Omit<TechStack, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<TechStack>(db, "tech_stack");
 
   return createOps.createMany(data);
@@ -62,7 +62,7 @@ export async function updateTechStack(
   id: string,
   data: Partial<Omit<TechStack, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<TechStack>(db, "tech_stack");
 
   return updateOps.updateById(id, { $set: data });
@@ -70,14 +70,14 @@ export async function updateTechStack(
 
 // Delete operations
 export async function deleteTechStack(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<TechStack>(db, "tech_stack");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllTechStack() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<TechStack>(db, "tech_stack");
 
   return deleteOps.deleteMany({});
@@ -85,7 +85,7 @@ export async function deleteAllTechStack() {
 
 // Seed operation
 export async function seedTechStack() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<TechStack>(db, "tech_stack");
   const deleteOps = new DeleteOperations<TechStack>(db, "tech_stack");
 

@@ -10,7 +10,7 @@ import { Filter } from "mongodb";
 
 // Read operations
 export async function getSocialLinks(filter: Filter<SocialLink> = {}) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<SocialLink>(db, "social_links");
 
   return readOps.findMany(filter, {
@@ -27,7 +27,7 @@ export async function getSocialLinks(filter: Filter<SocialLink> = {}) {
 }
 
 export async function getSocialLinkById(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const readOps = new ReadOperations<SocialLink>(db, "social_links");
 
   return readOps.findById(id, {
@@ -46,7 +46,7 @@ export async function getSocialLinkById(id: string) {
 export async function createSocialLink(
   data: Omit<SocialLink, keyof BaseDocument>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<SocialLink>(db, "social_links");
 
   return createOps.createOne(data);
@@ -55,7 +55,7 @@ export async function createSocialLink(
 export async function createManySocialLinks(
   data: Array<Omit<SocialLink, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<SocialLink>(db, "social_links");
 
   return createOps.createMany(data);
@@ -66,7 +66,7 @@ export async function updateSocialLink(
   id: string,
   data: Partial<Omit<SocialLink, keyof BaseDocument>>,
 ) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const updateOps = new UpdateOperations<SocialLink>(db, "social_links");
 
   return updateOps.updateById(id, { $set: data });
@@ -74,14 +74,14 @@ export async function updateSocialLink(
 
 // Delete operations
 export async function deleteSocialLink(id: string) {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<SocialLink>(db, "social_links");
 
   return deleteOps.deleteById(id);
 }
 
 export async function deleteAllSocialLinks() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const deleteOps = new DeleteOperations<SocialLink>(db, "social_links");
 
   return deleteOps.deleteMany({});
@@ -89,7 +89,7 @@ export async function deleteAllSocialLinks() {
 
 // Seed operation
 export async function seedSocialLinks() {
-  const db = client.db("kennyt");
+  const db = client.db(process.env.DB);
   const createOps = new CreateOperations<SocialLink>(db, "social_links");
   const deleteOps = new DeleteOperations<SocialLink>(db, "social_links");
 
