@@ -112,36 +112,6 @@ For more information about Next.js error handling, refer to the [official docume
 
 ## API Security
 
-You can generate a secure secret using Node.js's crypto module. Here are a few methods:
-
-1. **Using Node.js (Recommended)**
-
-   ```bash
-   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-   ```
-
-   This generates a 32-byte (256-bit) random hex string.
-
-2. **Using OpenSSL**
-
-   ```bash
-   openssl rand -hex 32
-   ```
-
-   This also generates a 32-byte random hex string.
-
-3. **Using Python**
-   ```bash
-   python3 -c "import secrets; print(secrets.token_hex(32))"
-   ```
-   This generates a 32-byte random hex string using Python's secrets module.
-
-The generated secret should be stored in your `.env.local` file:
-
-```env
-SECRET=your-generated-secret-here
-```
-
 ### Protected Endpoints
 
 Certain API endpoints require a secret header for security. These endpoints are used for seeding and deleting data, and should only be accessible in development or through secure means.
@@ -153,19 +123,6 @@ x-secret: <your-secret>
 ```
 
 The secret value should match the `SECRET` environment variable.
-
-#### Protected Endpoints
-
-1. **Seed Endpoints**
-
-   - `POST /api/gaming/heroes/seed`
-   - `POST /api/room/seed`
-   - `POST /api/tech/seed`
-
-2. **Delete Endpoints**
-   - `DELETE /api/gaming/heroes/delete`
-   - `DELETE /api/room/delete`
-   - `DELETE /api/tech/delete`
 
 #### Example Usage
 
