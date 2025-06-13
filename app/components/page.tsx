@@ -12,6 +12,9 @@ import { RoomShowcase } from "./components/room-showcase";
 import { FinanceStatsShowcase } from "./components/finance-stats-showcase";
 import { FinanceCategoriesShowcase } from "./components/finance-categories-showcase";
 import { FinanceTimelineShowcase } from "./components/finance-timeline-showcase";
+import { WorkoutTimelineShowcase } from "./components/workout-timeline-showcase";
+import { GamingStatsShowcase } from "./components/gaming-stats-showcase";
+import { GamingHeroesShowcase } from "./components/gaming-heroes-showcase";
 
 export const metadata: Metadata = {
   title: "Components - Kenny Tran's Component Library",
@@ -104,6 +107,9 @@ export default function ComponentsPage() {
             <FinanceStatsShowcase />
             <FinanceCategoriesShowcase />
             <FinanceTimelineShowcase />
+            <WorkoutTimelineShowcase />
+            <GamingStatsShowcase />
+            <GamingHeroesShowcase />
             <ErrorShowcase />
             <NotFoundShowcase />
           </div>

@@ -120,7 +120,7 @@ export default async function WorkoutPage() {
                     {activity.emoji}
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between">
                       <h3 className="font-medium text-white">
                         {activity.title}
                       </h3>
