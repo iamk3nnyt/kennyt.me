@@ -125,7 +125,7 @@ async function Featured() {
           {posts.map((post, index) => (
             <article key={post.slug} className={cn(index ? "py-6" : "pb-6")}>
               {post.tag && (
-                <div className="mb-3 inline-block rounded-md bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+                <div className="mb-3 inline-block rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
                   {post.tag}
                 </div>
               )}
