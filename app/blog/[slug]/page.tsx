@@ -1,6 +1,6 @@
 import { AppImage } from "@/components/app-image";
-import { BASE_URL } from "@/constants";
 import { getArticleBySlug, getRelatedArticles } from "@/lib/data/blog";
+import { buildMetadata, extractKeywords } from "@/lib/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,110 +20,29 @@ export async function generateMetadata({
   }
 
   const wordCount = article.content.split(/\s+/).length;
-  const readingTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute
-  const readingTimeISO = `PT${readingTime}M`; // ISO 8601 duration format
+  // Convert "2 min read" to ISO 8601 duration format "PT2M"
+  const readingTimeISO = `PT${article.readTime.split(" ")[0]}M`;
 
-  return {
+  return buildMetadata({
+    type: "article",
     title: `${article.title} - Kenny Tran's Blog`,
     description: article.excerpt,
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      type: "article",
-      publishedTime: article.date,
-      modifiedTime: article.date,
-      authors: ["Kenny Tran"],
-      images: article.image
-        ? [
-            {
-              url: article.image,
-              width: 1200,
-              height: 630,
-              alt: article.title,
-            },
-          ]
-        : [],
-      url: `${BASE_URL}/blog/${slug}`,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.title,
-      description: article.excerpt,
-      images: article.image ? [article.image] : [],
-      creator: "@itsk3nny_",
-    },
-    alternates: {
-      canonical: `/blog/${slug}`,
-    },
-    other: {
-      "application/ld+json": JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "@id": `${BASE_URL}/blog/${slug}`,
-        url: `${BASE_URL}/blog/${slug}`,
-        headline: article.title,
-        description: article.excerpt,
-        articleBody: article.content,
-        wordCount: wordCount,
-        datePublished: article.date,
-        dateModified: article.date,
-        inLanguage: "en-US",
-        isAccessibleForFree: true,
-        isFamilyFriendly: true,
-        author: {
-          "@type": "Person",
-          name: "Kenny Tran",
-          url: BASE_URL + "/about",
-        },
-        publisher: {
-          "@type": "Person",
-          name: "Kenny Tran",
-          url: BASE_URL + "/about",
-        },
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": `${BASE_URL}/blog/${slug}`,
-        },
-        image: article.image
-          ? {
-              "@type": "ImageObject",
-              url: article.image,
-              width: "1200",
-              height: "630",
-            }
-          : undefined,
-        keywords: extractKeywords(article.content),
-        timeRequired: readingTimeISO,
-        articleSection: "Design & Development",
-      }),
-    },
-  };
-}
-
-// Helper function to extract keywords from content
-function extractKeywords(content: string): string[] {
-  // Common web development and design terms
-  const commonTerms = ["design", "development", "web", "tutorial", "essay"];
-
-  // Extract words that appear frequently in the content
-  const words = content.toLowerCase().split(/\W+/);
-  const wordFreq = new Map<string, number>();
-
-  words.forEach((word) => {
-    if (word.length > 3) {
-      // Only consider words longer than 3 characters
-      wordFreq.set(word, (wordFreq.get(word) || 0) + 1);
-    }
+    path: `/blog/${slug}`,
+    publishedTime: article.date,
+    modifiedTime: article.date,
+    author: "Kenny Tran",
+    wordCount,
+    readingTime: readingTimeISO,
+    keywords: extractKeywords(article.content),
+    image: article.image
+      ? {
+          url: article.image,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        }
+      : undefined,
   });
-
-  // Get top 5 most frequent words
-  const topWords = Array.from(wordFreq.entries())
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([word]) => word);
-
-  // Combine common terms with content-specific terms
-  return [...new Set([...commonTerms, ...topWords])];
 }
 
 export default async function BlogArticlePage({
