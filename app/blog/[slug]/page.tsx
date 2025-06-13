@@ -20,7 +20,6 @@ export async function generateMetadata({
   }
 
   const wordCount = article.content.split(/\s+/).length;
-  // Convert "2 min read" to ISO 8601 duration format "PT2M"
   const readingTimeISO = `PT${article.readTime.split(" ")[0]}M`;
 
   return buildMetadata({
