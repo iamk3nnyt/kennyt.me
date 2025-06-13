@@ -11,17 +11,6 @@ A modern, feature-rich portfolio template built with Next.js 15+ and TypeScript.
 - **Well-Documented**: Comprehensive documentation and clear code structure
 - **Modern Stack**: Uses Next.js App Router, Tailwind CSS, and MongoDB
 
-## 🚀 Features
-
-- **Personal portfolio** with project showcase and tech stack
-- **Blog** for articles, tutorials, and thoughts
-- **Responsive, accessible UI** with dark mode
-- **SEO optimized** with Open Graph, Twitter Card, and structured data
-- **Bookmark-style lists** for projects and articles
-- **Modern navigation and animated header**
-- **Loading, error, and empty states** for a smooth UX
-- **TypeScript, Next.js App Router, Tailwind CSS**
-
 ---
 
 ## 🖼️ Screenshots
@@ -37,8 +26,11 @@ A modern, feature-rich portfolio template built with Next.js 15+ and TypeScript.
 ## 🛠️ Tech Stack
 
 - **Frontend:** Next.js (App Router), React, TypeScript, Tailwind CSS
+- **UI/UX:** Lucide Icons, Motion, Custom Fonts
+- **Analytics:** Google Analytics
 - **SEO:** Next.js Metadata API, Open Graph, Twitter Card, JSON-LD
-- **Other:** Lucide Icons, Google Favicon API
+- **Tooling:** ESLint, Prettier, pnpm
+- **Other:** Google Favicon API
 
 ## 📁 Project Structure
 
