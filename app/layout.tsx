@@ -1,6 +1,7 @@
 import { Header } from "@/app/header";
 import { Navigation } from "@/app/navigation";
 import { BASE_URL } from "@/constants";
+import { buildMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { MotionConfig } from "motion/react";
 import type { Metadata, Viewport } from "next";
@@ -19,41 +20,31 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export const metadata: Metadata = {
-  title: "Kenny Tran - Full Stack Developer, Founder, Writer",
+const baseMetadata = buildMetadata({
+  type: "profile",
+  title: "Kenny Tran - Software Engineer",
   description:
-    "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
+    "Personal website of Kenny Tran, a software engineer passionate about building innovative solutions and sharing knowledge through writing.",
+  path: "/",
+  jobTitle: "Software Engineer",
+  worksFor: {
+    name: "Ketryon",
+    url: "https://ketryon.com",
+    description:
+      "A technology company focused on building innovative web solutions",
+    sameAs: ["https://twitter.com/ketryon", "https://github.com/ketryon"],
+  },
+  image: {
+    url: "/images/kenny-tran.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Kenny Tran - Software Engineer",
+  },
+});
+
+export const metadata: Metadata = {
+  ...baseMetadata,
   metadataBase: new URL(BASE_URL),
-  alternates: {
-    canonical: "./",
-    languages: {
-      "en-US": BASE_URL,
-    },
-  },
-  openGraph: {
-    title: "Kenny Tran - Full Stack Developer, Founder, Writer",
-    description:
-      "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
-    url: "./",
-    siteName: "kennyt.me",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Kenny Tran - Full Stack Developer, Founder, Writer",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kenny Tran - Full Stack Developer, Founder, Writer",
-    description:
-      "Kenny Tran is a full stack developer, founder, and writer. Explore projects, articles, and more on kennyt.me.",
-    images: ["/og.png"],
-  },
   robots: {
     index: true,
     follow: true,

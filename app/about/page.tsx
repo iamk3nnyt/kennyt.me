@@ -1,8 +1,8 @@
 import { AppImage } from "@/components/app-image";
-import { BASE_URL } from "@/constants";
 import { getBookmarks } from "@/lib/data/bookmarks";
 import { getRoomItems } from "@/lib/data/room";
 import { getSocialLinks } from "@/lib/data/social";
+import { buildMetadata } from "@/lib/metadata";
 import { RoomItem } from "@/types/room";
 import {
   Gamepad2,
@@ -15,71 +15,27 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "About Kenny Tran - Full Stack Developer & Designer",
+export const metadata: Metadata = buildMetadata({
+  type: "profile",
+  title: "About Me - Kenny Tran",
   description:
-    "Learn more about Kenny Tran, a full stack developer, designer, and founder passionate about building beautiful, performant web experiences. Explore my workspace setup, social links, and bookmarks.",
-  openGraph: {
-    title: "About Kenny Tran - Full Stack Developer & Designer",
+    "Learn more about Kenny Tran, a software engineer passionate about building innovative solutions and sharing knowledge through writing.",
+  path: "/about",
+  jobTitle: "Software Engineer",
+  worksFor: {
+    name: "Ketryon",
+    url: "https://ketryon.com",
     description:
-      "Learn more about Kenny Tran, a full stack developer, designer, and founder passionate about building beautiful, performant web experiences. Explore my workspace setup, social links, and bookmarks.",
-    url: "/about",
-    type: "profile",
-    images: [
-      {
-        url: "/about.png",
-        width: 1200,
-        height: 630,
-        alt: "Kenny Tran - Full Stack Developer & Designer",
-      },
-    ],
+      "A technology company focused on building innovative web solutions",
+    sameAs: ["https://twitter.com/ketryon", "https://github.com/ketryon"],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "About Kenny Tran - Full Stack Developer & Designer",
-    description:
-      "Learn more about Kenny Tran, a full stack developer, designer, and founder passionate about building beautiful, performant web experiences. Explore my workspace setup, social links, and bookmarks.",
-    images: ["/og.png"],
-    creator: "@itsk3nny_",
+  image: {
+    url: "/images/about/kenny-tran.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Kenny Tran - Software Engineer",
   },
-  alternates: {
-    canonical: "/about",
-  },
-  other: {
-    "application/ld+json": JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Kenny Tran",
-      url: BASE_URL + "/about",
-      jobTitle: "Full Stack Developer, Designer, Founder",
-      description:
-        "Full stack developer, designer, and founder passionate about building beautiful, performant web experiences.",
-      worksFor: {
-        "@type": "Organization",
-        name: "Ketryon",
-        url: "https://ketryon.com",
-        description:
-          "A technology company focused on building innovative web solutions",
-        sameAs: ["https://twitter.com/ketryon", "https://github.com/ketryon"],
-      },
-      alumniOf: {
-        "@type": "Organization",
-        name: "Ketryon",
-        url: "https://ketryon.com",
-      },
-      image: {
-        "@type": "ImageObject",
-        url: BASE_URL + "/avatar.png",
-        width: "400",
-        height: "400",
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": BASE_URL + "/about",
-      },
-    }),
-  },
-};
+});
 
 function Intro() {
   return (

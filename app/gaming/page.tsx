@@ -1,76 +1,29 @@
 import { AppImage } from "@/components/app-image";
-import { BASE_URL } from "@/constants";
 import { getHeroes, getSeasonHistory } from "@/lib/data/gaming";
+import { buildMetadata } from "@/lib/metadata";
 import { Crown } from "lucide-react";
 import type { Metadata } from "next";
 import { Stats } from "./components";
 
-export const metadata: Metadata = {
-  title: "Gaming - Kenny Tran's MLBB Journey",
+export const metadata: Metadata = buildMetadata({
+  type: "gaming",
+  title: "Gaming - Kenny Tran",
   description:
-    "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
-  openGraph: {
-    title: "Gaming - Kenny Tran's MLBB Journey",
-    description:
-      "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
-    url: "/gaming",
-    type: "website",
-    images: [
-      {
-        url: "/gaming.png",
-        width: 1200,
-        height: 630,
-        alt: "Kenny Tran's Mobile Legends: Bang Bang Journey",
-      },
-    ],
+    "Explore my gaming journey, achievements, and statistics. Track my progress across different games and seasons.",
+  path: "/gaming",
+  game: {
+    name: "Overwatch 2",
+    genre: "First-Person Shooter",
+    publisher: "Blizzard Entertainment",
+    url: "https://overwatch.blizzard.com",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Gaming - Kenny Tran's MLBB Journey",
-    description:
-      "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
-    images: ["/gaming.png"],
-    creator: "@itsk3nny_",
+  image: {
+    url: "/images/gaming/overwatch.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Gaming Stats - Kenny Tran",
   },
-  alternates: {
-    canonical: "/gaming",
-  },
-  other: {
-    "application/ld+json": JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: "Gaming - Kenny Tran's MLBB Journey",
-      description:
-        "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
-      url: BASE_URL + "/gaming",
-      mainEntity: {
-        "@type": "ItemList",
-        itemListElement: [],
-      },
-      author: {
-        "@type": "Person",
-        name: "Kenny Tran",
-        url: BASE_URL + "/about",
-      },
-      publisher: {
-        "@type": "Person",
-        name: "Kenny Tran",
-        url: BASE_URL + "/about",
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": BASE_URL + "/gaming",
-      },
-      about: {
-        "@type": "Game",
-        name: "Mobile Legends: Bang Bang",
-        genre: "MOBA",
-        publisher: "Moonton",
-        url: "https://m.mobilelegends.com",
-      },
-    }),
-  },
-};
+});
 
 async function Heroes() {
   const heroes = await getHeroes();

@@ -1,67 +1,21 @@
 import { AppImage } from "@/components/app-image";
-import { BASE_URL } from "@/constants";
 import { getProjects } from "@/lib/data/projects";
+import { buildMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Projects - Kenny Tran's Portfolio Showcase",
+export const metadata: Metadata = buildMetadata({
+  type: "project",
+  title: "Projects - Kenny Tran",
   description:
-    "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
-  openGraph: {
-    title: "Projects - Kenny Tran's Portfolio Showcase",
-    description:
-      "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
-    url: "/projects",
-    type: "website",
-    images: [
-      {
-        url: "/projects.png",
-        width: 1200,
-        height: 630,
-        alt: "Kenny Tran's Project Portfolio",
-      },
-    ],
+    "Explore my portfolio of projects, from web applications to design work. Each project showcases my skills in development, design, and problem-solving.",
+  path: "/projects",
+  image: {
+    url: "/images/projects/portfolio.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Projects Portfolio - Kenny Tran",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Projects - Kenny Tran's Portfolio Showcase",
-    description:
-      "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
-    images: ["/projects.png"],
-    creator: "@itsk3nny_",
-  },
-  alternates: {
-    canonical: "/projects",
-  },
-  other: {
-    "application/ld+json": JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      name: "Projects - Kenny Tran's Portfolio Showcase",
-      description:
-        "Explore my portfolio of projects and products I've designed, built, or contributed to. Each project reflects my passion for clean design, robust engineering, and modern web technologies.",
-      url: BASE_URL + "/projects",
-      mainEntity: {
-        "@type": "ItemList",
-        itemListElement: [],
-      },
-      author: {
-        "@type": "Person",
-        name: "Kenny Tran",
-        url: BASE_URL + "/about",
-      },
-      publisher: {
-        "@type": "Person",
-        name: "Kenny Tran",
-        url: BASE_URL + "/about",
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": BASE_URL + "/projects",
-      },
-    }),
-  },
-};
+});
 
 export default async function ProjectsPage() {
   const projects = await getProjects();

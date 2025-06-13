@@ -1,5 +1,5 @@
-import { BASE_URL } from "@/constants";
 import { getRecentWorkouts } from "@/lib/data/workouts";
+import { buildMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { WorkoutActivity } from "@/types/workout";
 import type { Metadata } from "next";
@@ -19,65 +19,19 @@ function getTypeColor(type: WorkoutActivity["type"]) {
   }
 }
 
-export const metadata: Metadata = {
-  title: "Workout - Kenny Tran's Fitness Activities",
+export const metadata: Metadata = buildMetadata({
+  type: "workout",
+  title: "Workout - Kenny Tran",
   description:
-    "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
-  openGraph: {
-    title: "Workout - Kenny Tran's Fitness Activities",
-    description:
-      "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
-    url: "/workout",
-    type: "website",
-    images: [
-      {
-        url: "/workout.png",
-        width: 1200,
-        height: 630,
-        alt: "Kenny Tran's Workout",
-      },
-    ],
+    "Track my fitness journey, workout routines, and progress. Monitor exercises, sets, reps, and overall performance over time.",
+  path: "/workout",
+  image: {
+    url: "/images/workout/dashboard.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Workout Tracker - Kenny Tran",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Workout - Kenny Tran's Fitness Activities",
-    description:
-      "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
-    images: ["/workout.png"],
-    creator: "@itsk3nny_",
-  },
-  alternates: {
-    canonical: "/workout",
-  },
-  other: {
-    "application/ld+json": JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: "Workout - Kenny Tran's Fitness Activities",
-      description:
-        "Track my fitness journey through various activities, from strength training to cardio and flexibility work. Each session is a step towards better health and well-being.",
-      url: BASE_URL + "/workout",
-      mainEntity: {
-        "@type": "ItemList",
-        itemListElement: [],
-      },
-      author: {
-        "@type": "Person",
-        name: "Kenny Tran",
-        url: BASE_URL + "/about",
-      },
-      publisher: {
-        "@type": "Person",
-        name: "Kenny Tran",
-        url: BASE_URL + "/about",
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": BASE_URL + "/workout",
-      },
-    }),
-  },
-};
+});
 
 export default async function WorkoutPage() {
   const activities = await getRecentWorkouts();
