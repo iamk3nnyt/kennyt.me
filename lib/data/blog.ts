@@ -15,6 +15,12 @@ export async function getArticles(filter: Filter<Article> = {}) {
   return readOps.findMany(filter, {
     projection: {
       _id: 0,
+      slug: 1,
+      title: 1,
+      excerpt: 1,
+      date: 1,
+      image: 1,
+      content: 1,
     },
     sort: { date: -1 },
   });
@@ -29,6 +35,12 @@ export async function getArticleBySlug(slug: string) {
     {
       projection: {
         _id: 0,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
+        content: 1,
+        image: 1,
       },
     },
   );
@@ -84,6 +96,10 @@ export async function getFeaturedArticles(
   return readOps.findMany(filter, {
     projection: {
       _id: 0,
+      slug: 1,
+      title: 1,
+      excerpt: 1,
+      date: 1,
     },
     sort: { date: -1 },
   });
@@ -98,6 +114,10 @@ export async function getFeaturedArticleBySlug(slug: string) {
     {
       projection: {
         _id: 0,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
       },
     },
   );
@@ -159,6 +179,11 @@ export async function getPaginatedArticles(page: number, limit: number) {
     {
       projection: {
         _id: 0,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
+        image: 1,
       },
     },
   );
@@ -198,6 +223,11 @@ export async function getRecentArticles(limit: number = 5) {
     {
       projection: {
         _id: 0,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
+        image: 1,
       },
       sort: { date: -1 },
       limit,
