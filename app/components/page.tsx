@@ -15,6 +15,7 @@ import { FinanceTimelineShowcase } from "./components/finance-timeline-showcase"
 import { WorkoutTimelineShowcase } from "./components/workout-timeline-showcase";
 import { GamingStatsShowcase } from "./components/gaming-stats-showcase";
 import { GamingHeroesShowcase } from "./components/gaming-heroes-showcase";
+import { GamingHistoryShowcase } from "./components/gaming-history-showcase";
 
 export const metadata: Metadata = {
   title: "Components - Kenny Tran's Component Library",
@@ -110,6 +111,7 @@ export default function ComponentsPage() {
             <WorkoutTimelineShowcase />
             <GamingStatsShowcase />
             <GamingHeroesShowcase />
+            <GamingHistoryShowcase />
             <ErrorShowcase />
             <NotFoundShowcase />
           </div>
