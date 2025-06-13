@@ -5,18 +5,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-async function getArticle(slug: string) {
-  const article = await getArticleBySlug(slug);
-  return article;
-}
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const slug = (await params).slug;
-  const article = await getArticle(slug);
+  const article = await getArticleBySlug(slug);
   if (!article) {
     return {
       title: "Article Not Found",
@@ -138,7 +133,7 @@ export default async function BlogArticlePage({
 }) {
   const slug = (await params).slug;
 
-  const article = await getArticle(slug);
+  const article = await getArticleBySlug(slug);
   const relatedArticles = await getRelatedArticles(slug);
   if (!article) return notFound();
 
