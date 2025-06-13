@@ -43,6 +43,8 @@ export async function getArticleBySlug(slug: string) {
         content: 1,
         image: 1,
         author: 1,
+        tag: 1,
+        readTime: 1,
       },
     },
   );
@@ -345,6 +347,7 @@ export async function seedFeaturedArticles() {
         image: "/avatar.png",
         bio: "A passionate developer and designer crafting digital experiences. I write about web development, design systems, and the creative process.",
       },
+      readTime: "2 min read",
       related: ["building-ai-applications-featured"],
     },
     {
@@ -374,6 +377,7 @@ export async function seedFeaturedArticles() {
         image: "/avatar.png",
         bio: "A passionate developer and designer crafting digital experiences. I write about web development, design systems, and the creative process.",
       },
+      readTime: "3 min read",
       related: ["crafting-design-system-featured"],
     },
   ];

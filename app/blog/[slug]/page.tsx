@@ -154,8 +154,17 @@ export default async function BlogArticlePage({
             />
           </div>
         )}
+        {article.tag && (
+          <div className="mb-4 inline-block rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+            {article.tag}
+          </div>
+        )}
         <h1 className="mb-2 text-3xl font-bold text-white">{article.title}</h1>
-        <div className="mb-8 text-xs text-[#88888C]">{article.date}</div>
+        <div className="mb-8 flex items-center gap-2 text-xs text-[#88888C]">
+          <time>{article.date}</time>
+          <span>·</span>
+          <span>{article.readTime}</span>
+        </div>
         <div
           className="prose prose-invert prose-headings:text-white prose-p:text-[#B0B0B0] prose-li:text-[#B0B0B0] prose-ul:marker:text-[#88888C]"
           dangerouslySetInnerHTML={{ __html: article.content }}

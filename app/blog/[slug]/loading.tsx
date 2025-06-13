@@ -12,9 +12,16 @@ export default function ArticleLoading() {
           <div className="shimmer h-10 w-3/4 rounded-lg" />
         </div>
 
-        {/* Date shimmer */}
-        <div className="mb-8">
+        {/* Tag shimmer */}
+        <div className="mb-3">
+          <div className="shimmer h-5 w-24 rounded-full" />
+        </div>
+
+        {/* Date and Read Time shimmer */}
+        <div className="mb-8 flex items-center gap-2">
           <div className="shimmer h-4 w-32 rounded-lg" />
+          <div className="shimmer h-4 w-2 rounded-lg" />
+          <div className="shimmer h-4 w-20 rounded-lg" />
         </div>
 
         {/* Content shimmer */}
