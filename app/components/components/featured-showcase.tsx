@@ -10,6 +10,7 @@ export function FeaturedShowcase() {
       date: "2024-03-15",
       excerpt:
         "A comprehensive guide to building modern web applications using Next.js, React, and TypeScript. Learn about best practices, performance optimization, and deployment strategies.",
+      tag: "Web Development",
     },
     {
       title: "The Art of UI Design",
@@ -17,6 +18,7 @@ export function FeaturedShowcase() {
       date: "2024-03-10",
       excerpt:
         "Exploring the principles of UI design and how to create beautiful, functional interfaces that users love. From color theory to typography and layout.",
+      tag: "UI Design",
     },
     {
       title: "Mastering TypeScript",
@@ -24,6 +26,7 @@ export function FeaturedShowcase() {
       date: "2024-03-05",
       excerpt:
         "Deep dive into TypeScript features and how to leverage them to write more maintainable and type-safe code. Advanced patterns and real-world examples.",
+      tag: "TypeScript",
     },
   ];
 
@@ -36,6 +39,11 @@ export function FeaturedShowcase() {
           <div className="divide-y divide-[#232326]">
             {posts.map((post, index) => (
               <article key={post.slug} className={cn(index ? "py-6" : "pb-6")}>
+                {post.tag && (
+                  <div className="mb-3 inline-block rounded-md bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+                    {post.tag}
+                  </div>
+                )}
                 <h3 className="mb-1 text-2xl font-semibold text-white">
                   <Link href={`/blog/${post.slug}`} className="hover:underline">
                     {post.title}

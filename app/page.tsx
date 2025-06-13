@@ -124,6 +124,11 @@ async function Featured() {
         <div className="divide-y divide-[#232326]">
           {posts.map((post, index) => (
             <article key={post.slug} className={cn(index ? "py-6" : "pb-6")}>
+              {post.tag && (
+                <div className="mb-3 inline-block rounded-md bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+                  {post.tag}
+                </div>
+              )}
               <h3 className="mb-1 text-2xl font-semibold text-white">
                 <Link href={`/blog/${post.slug}`} className="hover:underline">
                   {post.title}

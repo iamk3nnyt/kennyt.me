@@ -21,6 +21,7 @@ export async function getArticles(filter: Filter<Article> = {}) {
       date: 1,
       image: 1,
       content: 1,
+      tag: 1,
     },
     sort: { date: -1 },
   });
@@ -41,6 +42,7 @@ export async function getArticleBySlug(slug: string) {
         date: 1,
         content: 1,
         image: 1,
+        author: 1,
       },
     },
   );
@@ -100,6 +102,7 @@ export async function getFeaturedArticles(
       title: 1,
       excerpt: 1,
       date: 1,
+      tag: 1,
     },
     sort: { date: -1 },
   });
@@ -259,8 +262,17 @@ export async function seedArticles() {
       </ul>
       <p>By investing in a robust design system, we ensure our products are ready for the challenges of tomorrow.</p>
     `,
-      image: "https://example.com/nextjs.jpg",
+      image:
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=3540&auto=format&fit=crop",
       featured: false,
+      tag: "Design System",
+      author: {
+        name: "Kenny Tran",
+        image: "/avatar.png",
+        bio: "A passionate developer and designer crafting digital experiences. I write about web development, design systems, and the creative process.",
+      },
+      readTime: "2 min read",
+      related: ["building-ai-applications"],
     },
     {
       slug: "building-ai-applications",
@@ -280,8 +292,17 @@ export async function seedArticles() {
       </ul>
       <p>By following these steps, you'll have a solid foundation for building AI-powered applications.</p>
     `,
-      image: "https://example.com/nextjs.jpg",
+      image:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=3540&auto=format&fit=crop",
       featured: false,
+      tag: "AI Development",
+      author: {
+        name: "Kenny Tran",
+        image: "/avatar.png",
+        bio: "A passionate developer and designer crafting digital experiences. I write about web development, design systems, and the creative process.",
+      },
+      readTime: "3 min read",
+      related: ["crafting-design-system"],
     },
   ];
 
@@ -315,8 +336,16 @@ export async function seedFeaturedArticles() {
       </ul>
       <p>By investing in a robust design system, we ensure our products are ready for the challenges of tomorrow.</p>
     `,
-      image: "https://example.com/nextjs.jpg",
+      image:
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=3540&auto=format&fit=crop",
       featured: true,
+      tag: "Design System",
+      author: {
+        name: "Kenny Tran",
+        image: "/avatar.png",
+        bio: "A passionate developer and designer crafting digital experiences. I write about web development, design systems, and the creative process.",
+      },
+      related: ["building-ai-applications-featured"],
     },
     {
       slug: "building-ai-applications-featured",
@@ -336,8 +365,16 @@ export async function seedFeaturedArticles() {
       </ul>
       <p>By following these steps, you'll have a solid foundation for building AI-powered applications.</p>
     `,
-      image: "https://example.com/nextjs.jpg",
+      image:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=3540&auto=format&fit=crop",
       featured: true,
+      tag: "AI Development",
+      author: {
+        name: "Kenny Tran",
+        image: "/avatar.png",
+        bio: "A passionate developer and designer crafting digital experiences. I write about web development, design systems, and the creative process.",
+      },
+      related: ["crafting-design-system-featured"],
     },
   ];
 
@@ -346,4 +383,89 @@ export async function seedFeaturedArticles() {
 
   // Insert new featured articles
   return createOps.createMany(seed);
+}
+
+export async function getRelatedArticles(slug: string, limit: number = 3) {
+  const db = client.db(process.env.DB);
+  const readOps = new ReadOperations<Article>(db, "articles");
+
+  // First get the current article to find its tag
+  const currentArticle = await readOps.findOne(
+    { slug },
+    {
+      projection: {
+        _id: 0,
+        tag: 1,
+        related: 1,
+      },
+    },
+  );
+
+  if (!currentArticle) return [];
+
+  // If the article has explicitly defined related articles, use those
+  if (currentArticle.related?.length) {
+    return readOps.findMany(
+      {
+        $and: [
+          { slug: { $in: currentArticle.related } },
+          { slug: { $ne: slug } }, // Exclude current article
+        ],
+      },
+      {
+        projection: {
+          _id: 0,
+          slug: 1,
+          title: 1,
+          excerpt: 1,
+          date: 1,
+          image: 1,
+        },
+        limit,
+      },
+    );
+  }
+
+  // Otherwise, find articles with the same tag
+  if (currentArticle.tag) {
+    return readOps.findMany(
+      {
+        $and: [
+          { tag: currentArticle.tag },
+          { slug: { $ne: slug } }, // Exclude current article
+        ],
+      },
+      {
+        projection: {
+          _id: 0,
+          slug: 1,
+          title: 1,
+          excerpt: 1,
+          date: 1,
+          image: 1,
+        },
+        sort: { date: -1 },
+        limit,
+      },
+    );
+  }
+
+  // If no tag or related articles, return most recent articles
+  return readOps.findMany(
+    {
+      slug: { $ne: slug }, // Exclude current article
+    },
+    {
+      projection: {
+        _id: 0,
+        slug: 1,
+        title: 1,
+        excerpt: 1,
+        date: 1,
+        image: 1,
+      },
+      sort: { date: -1 },
+      limit,
+    },
+  );
 }

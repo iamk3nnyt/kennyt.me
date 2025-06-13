@@ -4,8 +4,16 @@ export interface Article extends BaseDocument {
   slug: string;
   title: string;
   excerpt: string;
-  date: string;
   content: string;
-  image?: string;
+  date: string;
+  author: {
+    name: string;
+    image: string;
+    bio: string;
+  };
+  tag: string;
+  readTime: string;
+  image: string;
   featured: boolean;
+  related: string[];
 }
