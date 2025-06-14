@@ -9,16 +9,16 @@ export const metadata: Metadata = buildMetadata({
   type: "gaming",
   title: "Gaming - Kenny Tran",
   description:
-    "Explore my gaming journey, achievements, and statistics. Track my progress across different games and seasons.",
+    "Explore my journey in Mobile Legends: Bang Bang, showcasing my progression through the ranks, favorite heroes, and key statistics. From strategic gameplay to team coordination, each season brings new challenges and achievements.",
   path: "/gaming",
   game: {
-    name: "Overwatch 2",
-    genre: "First-Person Shooter",
-    publisher: "Blizzard Entertainment",
-    url: "https://overwatch.blizzard.com",
+    name: "Mobile Legends: Bang Bang",
+    genre: "MOBA",
+    publisher: "Moonton",
+    url: "https://m.mobilelegends.com",
   },
   image: {
-    url: "/images/gaming/overwatch.jpg",
+    url: "/gaming.png",
     width: 1200,
     height: 630,
     alt: "Gaming Stats - Kenny Tran",

@@ -26,7 +26,7 @@ export const metadata: Metadata = buildMetadata({
     "Track my fitness journey, workout routines, and progress. Monitor exercises, sets, reps, and overall performance over time.",
   path: "/workout",
   image: {
-    url: "/images/workout/dashboard.jpg",
+    url: "/workout.png",
     width: 1200,
     height: 630,
     alt: "Workout Tracker - Kenny Tran",

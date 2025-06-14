@@ -10,7 +10,7 @@ export const metadata: Metadata = buildMetadata({
     "Explore my portfolio of projects, from web applications to design work. Each project showcases my skills in development, design, and problem-solving.",
   path: "/projects",
   image: {
-    url: "/images/projects/portfolio.jpg",
+    url: "/projects.png",
     width: 1200,
     height: 630,
     alt: "Projects Portfolio - Kenny Tran",

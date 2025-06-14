@@ -7,11 +7,11 @@ export const metadata: Metadata = buildMetadata({
   type: "finance",
   title: "Finance - Kenny Tran",
   description:
-    "Track and manage your personal finances with my finance dashboard. Monitor expenses, set budgets, and analyze spending patterns.",
+    "Track my personal finances, including monthly budget allocation, spending patterns, and financial goals. I use this to maintain a clear overview of my expenses and income streams.",
   path: "/finance",
   category: "Personal Finance Management",
   image: {
-    url: "/images/finance/dashboard.png",
+    url: "/finance.png",
     width: 1200,
     height: 630,
     alt: "Finance Dashboard - Kenny Tran",

@@ -27,10 +27,10 @@ export const metadata: Metadata = buildMetadata({
     url: "https://ketryon.com",
     description:
       "A technology company focused on building innovative web solutions",
-    sameAs: ["https://twitter.com/ketryon", "https://github.com/ketryon"],
+    sameAs: [],
   },
   image: {
-    url: "/images/about/kenny-tran.jpg",
+    url: "/about.png",
     width: 1200,
     height: 630,
     alt: "Kenny Tran - Full Stack Developer",

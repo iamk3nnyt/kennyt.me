@@ -32,10 +32,10 @@ const baseMetadata = buildMetadata({
     url: "https://ketryon.com",
     description:
       "A technology company focused on building innovative web solutions",
-    sameAs: ["https://twitter.com/ketryon", "https://github.com/ketryon"],
+    sameAs: [],
   },
   image: {
-    url: "/images/kenny-tran.jpg",
+    url: "/og.png",
     width: 1200,
     height: 630,
     alt: "Kenny Tran - Full stack developer",
