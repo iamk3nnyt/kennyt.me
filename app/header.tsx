@@ -7,7 +7,7 @@ import { AppImage } from "../components/app-image";
 const header = {
   "/": {
     title: "Kenny Tran",
-    subtitle: "Full stack developer, founder, and writer.",
+    subtitle: "Full stack developer, designer, and writer.",
   },
   "/about": {
     title: "About",

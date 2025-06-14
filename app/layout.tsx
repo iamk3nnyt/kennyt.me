@@ -22,11 +22,11 @@ export const viewport: Viewport = {
 
 const baseMetadata = buildMetadata({
   type: "profile",
-  title: "Kenny Tran - Software Engineer",
+  title: "Kenny Tran - Full Stack Developer",
   description:
-    "Personal website of Kenny Tran, a software engineer passionate about building innovative solutions and sharing knowledge through writing.",
+    "Personal website of Kenny Tran, a full stack developer passionate about building innovative solutions and sharing knowledge through writing.",
   path: "/",
-  jobTitle: "Software Engineer",
+  jobTitle: "Full Stack Developer",
   worksFor: {
     name: "Ketryon",
     url: "https://ketryon.com",
@@ -38,7 +38,7 @@ const baseMetadata = buildMetadata({
     url: "/images/kenny-tran.jpg",
     width: 1200,
     height: 630,
-    alt: "Kenny Tran - Software Engineer",
+    alt: "Kenny Tran - Full stack developer",
   },
 });
 
@@ -117,7 +117,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Kenny Tran",
               url: BASE_URL,
-              jobTitle: "Full Stack Developer, Founder, Writer",
+              jobTitle: "Full Stack Developer, Designer, Writer",
               email: "kenny@ketryon.com",
             }),
           }}

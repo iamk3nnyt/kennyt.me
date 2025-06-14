@@ -19,9 +19,9 @@ export const metadata: Metadata = buildMetadata({
   type: "profile",
   title: "About Me - Kenny Tran",
   description:
-    "Learn more about Kenny Tran, a software engineer passionate about building innovative solutions and sharing knowledge through writing.",
+    "Learn more about Kenny Tran, a full stack developer passionate about building innovative solutions and sharing knowledge through writing.",
   path: "/about",
-  jobTitle: "Software Engineer",
+  jobTitle: "Full Stack Developer",
   worksFor: {
     name: "Ketryon",
     url: "https://ketryon.com",
@@ -33,7 +33,7 @@ export const metadata: Metadata = buildMetadata({
     url: "/images/about/kenny-tran.jpg",
     width: 1200,
     height: 630,
-    alt: "Kenny Tran - Software Engineer",
+    alt: "Kenny Tran - Full Stack Developer",
   },
 });
 
