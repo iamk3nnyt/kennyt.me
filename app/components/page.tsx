@@ -24,7 +24,7 @@ export const metadata: Metadata = buildMetadata({
     "Explore my collection of reusable UI components, from navigation bars to data visualizations. Each component is designed with performance and accessibility in mind.",
   path: "/components",
   image: {
-    url: "/images/components/dashboard.jpg",
+    url: "/components.png",
     width: 1200,
     height: 630,
     alt: "UI Components - Kenny Tran",
