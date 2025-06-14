@@ -31,7 +31,7 @@ export async function generateMetadata({
     path: `/blog/${slug}`,
     publishedTime: article.date,
     modifiedTime: article.date,
-    author: "Kenny Tran",
+    author: article.author.name,
     wordCount,
     readingTime: readingTimeISO,
     keywords: extractKeywords(article.content),

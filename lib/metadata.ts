@@ -103,20 +103,6 @@ function generateSchemaOrg(metadata: PageMetadata) {
     inLanguage: "en-US",
     isAccessibleForFree: true,
     isFamilyFriendly: true,
-    author: {
-      "@type": "Person",
-      name: "Kenny Tran",
-      url: BASE_URL + "/about",
-    },
-    publisher: {
-      "@type": "Person",
-      name: "Kenny Tran",
-      url: BASE_URL + "/about",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${BASE_URL}${metadata.path}`,
-    },
   };
 
   // Add type-specific schema properties
