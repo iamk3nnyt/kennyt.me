@@ -33,7 +33,7 @@ export function Navigation() {
 
   return (
     <nav className="relative mx-auto flex w-full max-w-2xl gap-4 text-sm text-[#B0B0B0]">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         {isBlogArticle ? (
           <motion.div
             key="back-button"

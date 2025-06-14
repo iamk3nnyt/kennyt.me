@@ -13,7 +13,7 @@ export default function Loading() {
         <h2 className="mb-6 text-xl font-semibold text-white">Articles</h2>
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="flex items-center gap-2 py-2">
+            <div key={i} className="flex gap-2 py-2">
               <div className="shimmer size-5 shrink-0 rounded" />
               <div className="shimmer h-5 w-full rounded" />
             </div>

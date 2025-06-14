@@ -48,7 +48,7 @@ export default async function ProjectsPage() {
         ) : (
           <ul className="divide-y divide-[#232326]">
             {projects.map((project) => (
-              <li key={project.title} className="flex items-center gap-2 py-2">
+              <li key={project.title} className="flex gap-2 py-2">
                 <span className="relative size-5 shrink-0">
                   <AppImage
                     src={`https://www.google.com/s2/favicons?domain=${project.link}&sz=64`}

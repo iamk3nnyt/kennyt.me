@@ -59,7 +59,7 @@ export default async function BlogPage() {
         ) : (
           <ul className="divide-y divide-[#232326]">
             {posts.map((post) => (
-              <li key={post.slug} className="flex items-center gap-2 py-2">
+              <li key={post.slug} className="flex gap-2 py-2">
                 <span className="relative size-5 shrink-0">
                   <AppImage
                     src="https://www.google.com/s2/favicons?domain=kennyt.me&sz=64"

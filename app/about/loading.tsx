@@ -37,7 +37,7 @@ function Bookmarks() {
       <h2 className="mb-6 text-xl font-semibold text-white">Bookmarks</h2>
       <div className="space-y-4">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="flex items-center gap-2 py-2">
+          <div key={i} className="flex gap-2 py-2">
             <div className="shimmer size-5 shrink-0 rounded" />
             <div className="shimmer h-5 w-full rounded" />
           </div>

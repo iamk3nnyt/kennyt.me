@@ -32,7 +32,7 @@ export function BookmarksShowcase() {
       demo={
         <ul className="divide-y divide-[#232326] sm:p-4">
           {bookmarks.map((item) => (
-            <li key={item.url} className="flex items-center gap-2 py-2">
+            <li key={item.url} className="flex gap-2 py-2">
               <div className="relative size-5 shrink-0">
                 <AppImage
                   src={item.icon}

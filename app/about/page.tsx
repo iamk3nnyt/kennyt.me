@@ -118,7 +118,7 @@ async function Bookmarks() {
       ) : (
         <ul className="mb-8 divide-y divide-[#232326]">
           {bookmarks.map((item) => (
-            <li key={item.url} className="flex items-center gap-2 py-2">
+            <li key={item.url} className="flex gap-2 py-2">
               <div className="relative size-5 shrink-0">
                 <AppImage
                   src={item.icon}
