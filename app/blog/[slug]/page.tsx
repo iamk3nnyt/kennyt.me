@@ -1,6 +1,8 @@
 import { AppImage } from "@/components/app-image";
+import { BASE_URL } from "@/constants";
 import { getArticleBySlug, getRelatedArticles } from "@/lib/data/blog";
 import { buildMetadata, extractKeywords } from "@/lib/metadata";
+import { Share2 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -44,6 +46,44 @@ export async function generateMetadata({
   });
 }
 
+function ShareArticle({ title, slug }: { title: string; slug: string }) {
+  const shareUrl = `${BASE_URL}/blog/${slug}`;
+  const encodedTitle = encodeURIComponent(title);
+  const encodedUrl = encodeURIComponent(shareUrl);
+
+  const shareLinks = {
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+  };
+
+  return (
+    <div className="mt-8 flex flex-col gap-4 border-t border-gray-200 pt-8 sm:flex-row sm:items-center dark:border-gray-800">
+      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+        <Share2 className="h-4 w-4" />
+        <span>Share this article:</span>
+      </div>
+      <div className="flex gap-3">
+        <a
+          href={shareLinks.linkedin}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="rounded-md bg-[#0A66C2] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#004182]"
+        >
+          LinkedIn
+        </a>
+        <a
+          href={shareLinks.twitter}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+        >
+          X (Twitter)
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default async function BlogArticlePage({
   params,
 }: {
@@ -52,8 +92,9 @@ export default async function BlogArticlePage({
   const slug = (await params).slug;
 
   const article = await getArticleBySlug(slug);
-  const relatedArticles = await getRelatedArticles(slug);
   if (!article) return notFound();
+
+  const relatedArticles = await getRelatedArticles(slug);
 
   return (
     <main className="bg-[#111113] px-4 py-16 text-[#F3F3F3]">
@@ -85,7 +126,7 @@ export default async function BlogArticlePage({
 
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
-          <div className="mt-16 border-t border-[#232326] pt-8">
+          <div className="mt-8 border-t border-[#232326] pt-8">
             <h2 className="mb-6 text-xl font-semibold text-white">
               Related Articles
             </h2>
@@ -119,7 +160,7 @@ export default async function BlogArticlePage({
         )}
 
         {/* Author Bio */}
-        <div className="mt-16 border-t border-[#232326] pt-8">
+        <div className="mt-8 border-t border-[#232326] pt-8">
           <div className="flex items-start gap-4">
             <div className="relative size-12 shrink-0">
               <AppImage
@@ -138,6 +179,8 @@ export default async function BlogArticlePage({
             </div>
           </div>
         </div>
+
+        <ShareArticle slug={slug} title={article.title} />
       </article>
     </main>
   );
